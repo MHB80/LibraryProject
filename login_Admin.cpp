@@ -29,11 +29,11 @@ private:
 	}
 	bool Let_Username(string Username)
 	{
-		if (Username.length() < 4)
+		if (Username.length() < 2)
 		{
 			return false;
 		}
-		for (auto achar : Username)
+		for (auto achar : Username)//for(int i=0;i<username.lengh;i++)
 		{
 			if (!((achar >= 'A' && achar <= 'Z') || (achar >= 'a' && achar <= 'z')))
 			{
@@ -135,38 +135,74 @@ public:
 		Set_Lname(Lname);
 		Setgender(gender);
 	}
+	//users.push_back(User);
 };
 struct  Login
 {
 private:
-	vector<User> users;
 	unique_ptr<User> Currentuser;
+	vector<User> users;
 	bool Is_Login;
 public:
 	bool Login_Usernamepass(string Username, string password)
 	{
-		for (int i = 0; i < users.size();i++)
+		for (int i = 0; i < users.size(); i++)
 		{
+
+		//here:
 			if (users[i].Get_username() == Username)
 			{
 				if (users[i].Get_password() == password)
 				{
-					Is_Login = true;
-					cout << "wellcome";
+					//Is_Login = true;
+					//cout << "wellcome";
 					return true;
 				}
-				else
+				//flag Here;
+			/*	else
 				{
 					cout << "Password is incorrect";
-					return false;
-				}
+					//flag Here;
+					//return false;
+					goto here;
+				}*/
 			}
+
 		}
-		throw("there is not this username");
+		//throw("there is not this username");
 		return false;
+	}
+	void  Register(string username, string Password, string Fname,
+		string Lname, Gender gender)
+	{
+
+		User newuser(username, Password, Fname, Lname, gender);
+		users.push_back(newuser);
+	}
+	void Login1(string username, string password)
+	{
+		here:
+		if ( Login_Usernamepass(username,password))
+		{
+			cout << "conecting....";
+		}
+		else
+		{
+			//throw("there is not this username");
+			cout << "disconnect"<<endl;
+			cout << "your password ";
+			cin >> password;
+			goto here;
+		}
 	}
 };
 int main()
 {
+	Login al;
+	al.Register("Amir", "12345678", "amir", "mehraban", Male);
+	al.Register("ferizirki", "12345678", "fariborz", "baghmisheh", Male);
+	Login a;
+	al.Login1("Amir", "12345678");
+	//users.push_back(abbas);
 	return 0;
 }
