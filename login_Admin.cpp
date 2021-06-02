@@ -137,13 +137,14 @@ public:
 	}
 	//users.push_back(User);
 };
-struct  Login
+class  Login
 {
 private:
 	unique_ptr<User> Currentuser;
 	vector<User> users;
 	bool Is_Login;
 public:
+	int j;
 	bool Login_Usernamepass(string Username, string password)
 	{
 		for (int i = 0; i < users.size(); i++)
@@ -156,6 +157,7 @@ public:
 				{
 					//Is_Login = true;
 					//cout << "wellcome";
+					j = i;
 					return true;
 				}
 				//flag Here;
@@ -181,16 +183,26 @@ public:
 	}
 	void Login1(string username, string password)
 	{
-		here:
+	here:
+	there:
 		if ( Login_Usernamepass(username,password))
 		{
 			cout << "conecting....";
+		}
+		else if (users[j].Get_username() != username)
+		{
+			cout << "There is not this username"<<endl;
+			cout << "Username : ";
+			cin >> username;
+			cout << "Password : ";
+			cin >> password;
+			goto there;
 		}
 		else
 		{
 			//throw("there is not this username");
 			cout << "disconnect"<<endl;
-			cout << "your password ";
+			cout << "Password : ";
 			cin >> password;
 			goto here;
 		}
