@@ -33,7 +33,7 @@ private:
 	string Publication_year;
 	Type_book type;
 public:
-	Book(string Name, string Writer, Genre genre, string Edition, string Publication_year, Type_book type)
+	Book(string Name, string Writer, Genre genre, string Edition, string Publication_year, Type_book type,string price)
 	{
 		this->Name = Name;
 		this->Writer = Writer;
@@ -41,6 +41,7 @@ public:
 		this->Publication_year = Publication_year;
 		this->Edition = Edition;
 		this->type = type;
+		this->Price = price;
 	}
 	string Get_Name()
 	{
@@ -66,6 +67,10 @@ public:
 	{
 		return type;
 	}
+	string Get_price()
+	{
+		return Price;
+	}
 };
 class Book_Shop
 {
@@ -73,9 +78,9 @@ private:
 	//unique_ptr<Book> Currentuser;
 	vector<Book> books;
 public:
-	void Regist(string Name, string Writer, Genre genre, string Edition, string Publication_year, Type_book type)
+	void Regist(string Name, string Writer, Genre genre, string Edition, string Publication_year, Type_book type,string price)
 	{
-		Book newbook(Name, Writer,genre, Edition, Publication_year, type);
+		Book newbook(Name, Writer,genre, Edition, Publication_year, type,price);
 		books.push_back(newbook);
 	}
 	string Genre_name(int a)
@@ -139,6 +144,7 @@ public:
 				cout << "Edition : " << books[i].Get_Edition()<<endl;
 				cout << "Publication_year : " << books[i].Get_Publication_year()<<endl;
 				cout << "Type : " << Type_name(books[i].Get_Type())<<endl;
+				cout << "Price : " << books[i].Get_price()<<endl;
 				return;
 			}
 		}
@@ -190,12 +196,13 @@ public:
 int main()
 {
 	Book_Shop a;
-	a.Regist("bookname1", "Amir", Comedy, "2", "1399", Digital);
-	a.Regist("Bookname2", "Amir", Fantasy, "1", "1400", Printed);
-	a.Regist("Bookname3", "Amir", Comedy, "100", "1398", Printed);
+	a.Regist("bookname1", "Amir", Comedy, "2", "1399", Digital,"1$");
+	a.Regist("Bookname2", "Amir", Fantasy, "1", "1400", Printed,"1$");
+	a.Regist("Bookname3", "Amir", Comedy, "100", "1398", Printed,"5$");
 	a.Search_Book("bookname12");
 	a.Search_Book("bookname1");
 	a.search_Genre(Comedy);
 	a.Search_writer("Asef");
 	a.search_Genre(Historical);
+	return 0;
 }
