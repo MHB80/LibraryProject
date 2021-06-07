@@ -1,5 +1,5 @@
 #pragma once
-
+#include"MainForm.h"
 namespace WinFormServer {
 
 	using namespace System;
@@ -49,6 +49,7 @@ namespace WinFormServer {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Panel^ panel1;
 
 
 
@@ -90,6 +91,7 @@ namespace WinFormServer {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -227,6 +229,7 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->TabIndex = 20;
 			this->gunaAdvenceButton1->Text = L"Login";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &MyForm::gunaAdvenceButton1_Click);
 			// 
 			// label2
 			// 
@@ -265,6 +268,15 @@ namespace WinFormServer {
 			this->button4->TabIndex = 23;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
+			// panel1
+			// 
+			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel1->Location = System::Drawing::Point(0, 0);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(834, 562);
+			this->panel1->TabIndex = 24;
+			this->panel1->Visible = false;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -272,6 +284,7 @@ namespace WinFormServer {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(834, 562);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label2);
@@ -288,6 +301,7 @@ namespace WinFormServer {
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -315,6 +329,13 @@ private: System::Void gunaMediumCheckBox1_CheckedChanged(System::Object^ sender,
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	
+}
+private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
 }
 };
 }
