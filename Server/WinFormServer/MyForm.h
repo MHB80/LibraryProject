@@ -1,5 +1,6 @@
 #pragma once
 #include"MainForm.h"
+#include <string>
 namespace WinFormServer {
 
 	using namespace System;
@@ -8,12 +9,63 @@ namespace WinFormServer {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Threading;
+	using namespace System::IO;
+	using namespace System::Runtime::InteropServices;
+
+
+
+
+
+	delegate void DelADDCLIENT(String^, bool);
+	delegate void DelADDQUEUE(array< String^>^);
+	delegate void DelProgressBar(int, int);
+	delegate void DelCompelete(int);
+
+
+	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
+	delegate void UIChangeProgress(int queueid, int value);
+	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
+	delegate void UINewClient(std::string, bool flag);
+	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
+	delegate void UINewRecieve(int Queueid, std::string Name, std::string Extention);
+
+
+	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	void  Startup(std::string, int, UIChangeProgress^, UINewClient^, UINewRecieve^);
+
+	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	int SendFile(std::string path, std::string username);
+
+	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	void StartDownload(int queueid);
+
+
+
+
 
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+
+		DelADDCLIENT^ Event_ADDCLIENT;
+		DelADDQUEUE^ Event_ADDQUEUE;
+		DelProgressBar^ Event_Progress;
+		UIChangeProgress^ Event_UIChangeProgress;
+		UINewClient^ Event_UINewClient;
+		UINewRecieve^ Event_UINewRecieve;
+		DelCompelete^ Event_Compelete;
+		bool IsRunning;
+		bool IsTransfer;
+
+
+
+
+
+
+
 	public:
 		MyForm(void)
 		{

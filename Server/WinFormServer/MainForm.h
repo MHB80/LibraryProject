@@ -82,7 +82,7 @@ namespace WinFormServer {
 
 	private: Guna::UI::WinForms::GunaCircleButton^ BTN_Hide;
 	private: Guna::UI::WinForms::GunaTransition^ gunaTransition1;
-	private: Bunifu::UI::WinForms::BunifuTransition^ bunifuTransition1;
+
 
 
 
@@ -132,7 +132,7 @@ namespace WinFormServer {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
-			Bunifu::UI::WinForms::BunifuAnimatorNS::Animation^ animation1 = (gcnew Bunifu::UI::WinForms::BunifuAnimatorNS::Animation());
+	
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->gunaElipse1 = (gcnew Guna::UI::WinForms::GunaElipse(this->components));
 			this->gunaControlBox1 = (gcnew Guna::UI::WinForms::GunaControlBox());
@@ -150,7 +150,7 @@ namespace WinFormServer {
 			this->BTN_Hide = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->BTN_Show = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->gunaTransition1 = (gcnew Guna::UI::WinForms::GunaTransition(this->components));
-			this->bunifuTransition1 = (gcnew Bunifu::UI::WinForms::BunifuTransition(this->components));
+		
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->gunaPictureBox1))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->Main_Panel->SuspendLayout();
@@ -166,7 +166,7 @@ namespace WinFormServer {
 			this->gunaControlBox1->AnimationHoverSpeed = 0.07F;
 			this->gunaControlBox1->AnimationSpeed = 0.03F;
 			this->gunaControlBox1->BackColor = System::Drawing::Color::Transparent;
-			this->bunifuTransition1->SetDecoration(this->gunaControlBox1, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+
 			this->gunaTransition1->SetDecoration(this->gunaControlBox1, Guna::UI::Animation::DecorationType::None);
 			this->gunaControlBox1->IconColor = System::Drawing::Color::Black;
 			this->gunaControlBox1->IconSize = 15;
@@ -182,7 +182,7 @@ namespace WinFormServer {
 			// gunaPictureBox1
 			// 
 			this->gunaPictureBox1->BaseColor = System::Drawing::Color::White;
-			this->bunifuTransition1->SetDecoration(this->gunaPictureBox1, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+
 			this->gunaTransition1->SetDecoration(this->gunaPictureBox1, Guna::UI::Animation::DecorationType::None);
 			this->gunaPictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaPictureBox1.Image")));
 			this->gunaPictureBox1->Location = System::Drawing::Point(-640, 311);
@@ -202,7 +202,7 @@ namespace WinFormServer {
 			this->gunaGradientButton6->BaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(102)), static_cast<System::Int32>(static_cast<System::Byte>(204)));
 			this->gunaGradientButton6->BorderColor = System::Drawing::Color::White;
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton6, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+		
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton6, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton6->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton6->FocusedColor = System::Drawing::Color::Empty;
@@ -238,7 +238,7 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(252)));
 			this->gunaGradientButton1->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(138)),
 				static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(252)));
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton1, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+	
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton1, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton1->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton1->FocusedColor = System::Drawing::Color::White;
@@ -274,7 +274,7 @@ namespace WinFormServer {
 			this->gunaGradientButton2->BaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(102)), static_cast<System::Int32>(static_cast<System::Byte>(204)));
 			this->gunaGradientButton2->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton2, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+	
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton2, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton2->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton2->FocusedColor = System::Drawing::Color::Empty;
@@ -308,7 +308,7 @@ namespace WinFormServer {
 			this->gunaGradientButton4->BaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(102)), static_cast<System::Int32>(static_cast<System::Byte>(204)));
 			this->gunaGradientButton4->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton4, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton4, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton4->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton4->FocusedColor = System::Drawing::Color::Empty;
@@ -342,7 +342,7 @@ namespace WinFormServer {
 			this->gunaGradientButton3->BaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(102)), static_cast<System::Int32>(static_cast<System::Byte>(204)));
 			this->gunaGradientButton3->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton3, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+	
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton3, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton3->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton3->FocusedColor = System::Drawing::Color::Empty;
@@ -376,7 +376,7 @@ namespace WinFormServer {
 			this->gunaGradientButton5->BaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(138)),
 				static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(252)));
 			this->gunaGradientButton5->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->gunaGradientButton5, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+		
 			this->gunaTransition1->SetDecoration(this->gunaGradientButton5, Guna::UI::Animation::DecorationType::None);
 			this->gunaGradientButton5->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaGradientButton5->FocusedColor = System::Drawing::Color::Empty;
@@ -416,7 +416,7 @@ namespace WinFormServer {
 			this->panel1->Controls->Add(this->gunaGradientButton4);
 			this->panel1->Controls->Add(this->gunaSeparator2);
 			this->panel1->Controls->Add(this->gunaGradientButton6);
-			this->bunifuTransition1->SetDecoration(this->panel1, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+		
 			this->gunaTransition1->SetDecoration(this->panel1, Guna::UI::Animation::DecorationType::None);
 			this->panel1->Location = System::Drawing::Point(-218, 3);
 			this->panel1->Name = L"panel1";
@@ -426,7 +426,7 @@ namespace WinFormServer {
 			// 
 			// gunaSeparator2
 			// 
-			this->bunifuTransition1->SetDecoration(this->gunaSeparator2, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+		
 			this->gunaTransition1->SetDecoration(this->gunaSeparator2, Guna::UI::Animation::DecorationType::None);
 			this->gunaSeparator2->LineColor = System::Drawing::Color::DimGray;
 			this->gunaSeparator2->Location = System::Drawing::Point(0, 405);
@@ -441,7 +441,7 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(252)));
 			this->Main_Panel->Controls->Add(this->panel1);
 			this->gunaTransition1->SetDecoration(this->Main_Panel, Guna::UI::Animation::DecorationType::None);
-			this->bunifuTransition1->SetDecoration(this->Main_Panel, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+		
 			this->Main_Panel->Dock = System::Windows::Forms::DockStyle::Right;
 			this->Main_Panel->Location = System::Drawing::Point(962, 0);
 			this->Main_Panel->Name = L"Main_Panel";
@@ -458,7 +458,7 @@ namespace WinFormServer {
 			this->BTN_Hide->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
 			this->BTN_Hide->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->BTN_Hide, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+
 			this->gunaTransition1->SetDecoration(this->BTN_Hide, Guna::UI::Animation::DecorationType::None);
 			this->BTN_Hide->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->BTN_Hide->FocusedColor = System::Drawing::Color::Empty;
@@ -488,7 +488,7 @@ namespace WinFormServer {
 			this->BTN_Show->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
 			this->BTN_Show->BorderColor = System::Drawing::Color::Black;
-			this->bunifuTransition1->SetDecoration(this->BTN_Show, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+	
 			this->gunaTransition1->SetDecoration(this->BTN_Show, Guna::UI::Animation::DecorationType::None);
 			this->BTN_Show->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->BTN_Show->FocusedColor = System::Drawing::Color::Empty;
@@ -528,27 +528,7 @@ namespace WinFormServer {
 			animation2->TimeCoeff = 0;
 			animation2->TransparencyCoeff = 0;
 			this->gunaTransition1->DefaultAnimation = animation2;
-			// 
-			// bunifuTransition1
-			// 
-			this->bunifuTransition1->AnimationType = Bunifu::UI::WinForms::BunifuAnimatorNS::AnimationType::VertSlide;
-			this->bunifuTransition1->Cursor = nullptr;
-			animation1->AnimateOnlyDifferences = true;
-			animation1->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.BlindCoeff")));
-			animation1->LeafCoeff = 0;
-			animation1->MaxTime = 1;
-			animation1->MinTime = 0;
-			animation1->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicCoeff")));
-			animation1->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicShift")));
-			animation1->MosaicSize = 0;
-			animation1->Padding = System::Windows::Forms::Padding(0);
-			animation1->RotateCoeff = 0;
-			animation1->RotateLimit = 0;
-			animation1->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.ScaleCoeff")));
-			animation1->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.SlideCoeff")));
-			animation1->TimeCoeff = 0;
-			animation1->TransparencyCoeff = 0;
-			this->bunifuTransition1->DefaultAnimation = animation1;
+			
 			// 
 			// MainForm
 			// 
@@ -564,7 +544,7 @@ namespace WinFormServer {
 			this->Controls->Add(this->gunaControlBox1);
 			this->Controls->Add(this->Main_Panel);
 			this->gunaTransition1->SetDecoration(this, Guna::UI::Animation::DecorationType::None);
-			this->bunifuTransition1->SetDecoration(this, Bunifu::UI::WinForms::BunifuTransition::DecorationType::None);
+	
 			this->DoubleBuffered = true;
 			this->Name = L"MainForm";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
