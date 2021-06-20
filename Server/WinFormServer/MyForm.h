@@ -1,6 +1,5 @@
 #pragma once
-#include"MainForm.h"
-#include <string>
+
 namespace WinFormServer {
 
 	using namespace System;
@@ -9,63 +8,12 @@ namespace WinFormServer {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Threading;
-	using namespace System::IO;
-	using namespace System::Runtime::InteropServices;
-
-
-
-
-
-	delegate void DelADDCLIENT(String^, bool);
-	delegate void DelADDQUEUE(array< String^>^);
-	delegate void DelProgressBar(int, int);
-	delegate void DelCompelete(int);
-
-
-	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
-	delegate void UIChangeProgress(int queueid, int value);
-	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
-	delegate void UINewClient(std::string, bool flag);
-	[UnmanagedFunctionPointerAttribute(CallingConvention::Cdecl)]
-	delegate void UINewRecieve(int Queueid, std::string Name, std::string Extention);
-
-
-	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	void  Startup(std::string, int, UIChangeProgress^, UINewClient^, UINewRecieve^);
-
-	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	int SendFile(std::string path, std::string username);
-
-	[DllImport("ServerDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	void StartDownload(int queueid);
-
-
-
-
 
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
-
-		DelADDCLIENT^ Event_ADDCLIENT;
-		DelADDQUEUE^ Event_ADDQUEUE;
-		DelProgressBar^ Event_Progress;
-		UIChangeProgress^ Event_UIChangeProgress;
-		UINewClient^ Event_UINewClient;
-		UINewRecieve^ Event_UINewRecieve;
-		DelCompelete^ Event_Compelete;
-		bool IsRunning;
-		bool IsTransfer;
-
-
-
-
-
-
-
 	public:
 		MyForm(void)
 		{
@@ -101,7 +49,6 @@ namespace WinFormServer {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Panel^ panel1;
 
 
 
@@ -143,7 +90,6 @@ namespace WinFormServer {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -281,7 +227,6 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->TabIndex = 20;
 			this->gunaAdvenceButton1->Text = L"Login";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &MyForm::gunaAdvenceButton1_Click);
 			// 
 			// label2
 			// 
@@ -320,15 +265,6 @@ namespace WinFormServer {
 			this->button4->TabIndex = 23;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
-			// panel1
-			// 
-			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel1->Location = System::Drawing::Point(0, 0);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(834, 562);
-			this->panel1->TabIndex = 24;
-			this->panel1->Visible = false;
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -336,7 +272,6 @@ namespace WinFormServer {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(834, 562);
-			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label2);
@@ -353,7 +288,6 @@ namespace WinFormServer {
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -381,13 +315,6 @@ private: System::Void gunaMediumCheckBox1_CheckedChanged(System::Object^ sender,
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	
-}
-private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e)
-{
 }
 };
 }
