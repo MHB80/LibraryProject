@@ -1,0 +1,5 @@
+﻿  Source.cpp
+Source.obj : error LNK2005: "void __cdecl resetStmt(struct sqlite3_stmt *)" (?resetStmt@@YAXPAUsqlite3_stmt@@@Z) already defined in Databaseclas.obj
+Source.obj : error LNK2005: "void __cdecl searchArtst(struct sqlite3 *,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?searchArtst@@YAXPAUsqlite3@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Databaseclas.obj
+LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
+E:\project\database\Debug\database.exe : fatal error LNK1169: one or more multiply defined symbols found
