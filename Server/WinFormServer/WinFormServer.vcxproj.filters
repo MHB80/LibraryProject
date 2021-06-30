@@ -24,6 +24,9 @@
     <ClCompile Include="Insertbook.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeBookForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Insertbook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBookForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

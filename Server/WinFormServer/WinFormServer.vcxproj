@@ -133,11 +133,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChangeBookForm.cpp" />
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChangeBookForm.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
     <ClInclude Include="Insertbook.h">
       <FileType>CppControl</FileType>
     </ClInclude>
@@ -149,6 +153,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChangeBookForm.resx">
+      <DependentUpon>ChangeBookForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Insertbook.resx">
       <DependentUpon>Insertbook.h</DependentUpon>
     </EmbeddedResource>
