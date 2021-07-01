@@ -1,5 +1,6 @@
 #pragma once
-
+#include "MainForm.h"
+#include "setting.h"
 namespace WinFormServer {
 
 	using namespace System;
@@ -97,9 +98,10 @@ namespace WinFormServer {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(93, 392);
+			this->label1->Location = System::Drawing::Point(124, 482);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(126, 13);
+			this->label1->Size = System::Drawing::Size(170, 17);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Remmber your Username";
 			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
@@ -113,9 +115,10 @@ namespace WinFormServer {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(84)), static_cast<System::Int32>(static_cast<System::Byte>(172)),
 				static_cast<System::Int32>(static_cast<System::Byte>(231)));
-			this->button1->Location = System::Drawing::Point(795, 0);
+			this->button1->Location = System::Drawing::Point(1060, 0);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(40, 43);
+			this->button1->Size = System::Drawing::Size(53, 53);
 			this->button1->TabIndex = 7;
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
@@ -127,18 +130,20 @@ namespace WinFormServer {
 			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(244, 464);
+			this->button2->Location = System::Drawing::Point(325, 571);
+			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(43, 45);
+			this->button2->Size = System::Drawing::Size(57, 55);
 			this->button2->TabIndex = 10;
 			this->button2->UseVisualStyleBackColor = false;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(369, 62);
+			this->pictureBox1->Location = System::Drawing::Point(492, 76);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(412, 396);
+			this->pictureBox1->Size = System::Drawing::Size(549, 487);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 11;
 			this->pictureBox1->TabStop = false;
@@ -154,11 +159,12 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->gunaTextBox1->FocusedForeColor = System::Drawing::SystemColors::ControlText;
 			this->gunaTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaTextBox1->Location = System::Drawing::Point(69, 238);
+			this->gunaTextBox1->Location = System::Drawing::Point(92, 293);
+			this->gunaTextBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->gunaTextBox1->Name = L"gunaTextBox1";
 			this->gunaTextBox1->PasswordChar = '\0';
 			this->gunaTextBox1->SelectedText = L"";
-			this->gunaTextBox1->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox1->Size = System::Drawing::Size(268, 43);
 			this->gunaTextBox1->TabIndex = 12;
 			this->gunaTextBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::gunaTextBox1_TextChanged);
 			// 
@@ -173,11 +179,12 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->gunaTextBox3->FocusedForeColor = System::Drawing::SystemColors::ControlText;
 			this->gunaTextBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaTextBox3->Location = System::Drawing::Point(69, 323);
+			this->gunaTextBox3->Location = System::Drawing::Point(92, 398);
+			this->gunaTextBox3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->gunaTextBox3->Name = L"gunaTextBox3";
 			this->gunaTextBox3->PasswordChar = '\0';
 			this->gunaTextBox3->SelectedText = L"";
-			this->gunaTextBox3->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox3->Size = System::Drawing::Size(268, 43);
 			this->gunaTextBox3->TabIndex = 14;
 			// 
 			// gunaMediumCheckBox1
@@ -187,7 +194,8 @@ namespace WinFormServer {
 			this->gunaMediumCheckBox1->CheckedOnColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)), static_cast<System::Int32>(static_cast<System::Byte>(128)));
 			this->gunaMediumCheckBox1->FillColor = System::Drawing::Color::White;
-			this->gunaMediumCheckBox1->Location = System::Drawing::Point(69, 388);
+			this->gunaMediumCheckBox1->Location = System::Drawing::Point(92, 478);
+			this->gunaMediumCheckBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->gunaMediumCheckBox1->Name = L"gunaMediumCheckBox1";
 			this->gunaMediumCheckBox1->Size = System::Drawing::Size(20, 20);
 			this->gunaMediumCheckBox1->TabIndex = 15;
@@ -213,7 +221,8 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->ImageSize = System::Drawing::Size(20, 20);
 			this->gunaAdvenceButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceButton1->Location = System::Drawing::Point(157, 416);
+			this->gunaAdvenceButton1->Location = System::Drawing::Point(209, 512);
+			this->gunaAdvenceButton1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->gunaAdvenceButton1->Name = L"gunaAdvenceButton1";
 			this->gunaAdvenceButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -223,18 +232,20 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
 			this->gunaAdvenceButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaAdvenceButton1->Size = System::Drawing::Size(215, 42);
+			this->gunaAdvenceButton1->Size = System::Drawing::Size(287, 52);
 			this->gunaAdvenceButton1->TabIndex = 20;
 			this->gunaAdvenceButton1->Text = L"Login";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &MyForm::gunaAdvenceButton1_Click);
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(72, 365);
+			this->label2->Location = System::Drawing::Point(96, 449);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(108, 13);
+			this->label2->Size = System::Drawing::Size(145, 17);
 			this->label2->TabIndex = 21;
 			this->label2->Text = L"Forgot your password";
 			this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
@@ -246,9 +257,10 @@ namespace WinFormServer {
 			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(157, 464);
+			this->button3->Location = System::Drawing::Point(209, 571);
+			this->button3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(43, 45);
+			this->button3->Size = System::Drawing::Size(57, 55);
 			this->button3->TabIndex = 22;
 			this->button3->UseVisualStyleBackColor = false;
 			// 
@@ -259,19 +271,20 @@ namespace WinFormServer {
 			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button4->ForeColor = System::Drawing::Color::White;
-			this->button4->Location = System::Drawing::Point(329, 464);
+			this->button4->Location = System::Drawing::Point(439, 571);
+			this->button4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(43, 45);
+			this->button4->Size = System::Drawing::Size(57, 55);
 			this->button4->TabIndex = 23;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(834, 562);
+			this->ClientSize = System::Drawing::Size(1112, 692);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label2);
@@ -285,6 +298,7 @@ namespace WinFormServer {
 			this->Controls->Add(this->label1);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
@@ -315,6 +329,11 @@ private: System::Void gunaMediumCheckBox1_CheckedChanged(System::Object^ sender,
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	MainForm^ f1 = gcnew MainForm();
+	f1->Show();
 }
 };
 }

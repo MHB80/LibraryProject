@@ -1,3 +1,7 @@
-﻿  setting.cpp
+﻿  MainForm.cpp
+E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\MainForm.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  MyForm.cpp
+E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\MainForm.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   ChangeBookForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  WinFormServer.vcxproj -> E:\LibraryProject-master_2\LibraryProject-master\Server\WinFormServer\x64\Debug\WinFormServer.exe
+  WinFormServer.vcxproj -> E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\x64\Debug\WinFormServer.exe
