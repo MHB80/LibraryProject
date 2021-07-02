@@ -2,6 +2,8 @@
   WinFormServer.Insertbook.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.MainForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.MyForm.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.MyUserControl.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.registerationcomplete.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.setting.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly WinFormServer, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
@@ -49,6 +51,12 @@ Class WinFormServer.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldI
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class WinFormServer.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class WinFormServer.MyUserControl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class WinFormServer.registerationcomplete: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class WinFormServer.setting: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl

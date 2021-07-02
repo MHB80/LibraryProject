@@ -137,6 +137,8 @@
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="MyUserControl.cpp" />
+    <ClCompile Include="registerationcomplete.cpp" />
     <ClCompile Include="setting.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MyUserControl.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="registerationcomplete.h">
+      <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="setting.h">
       <FileType>CppControl</FileType>
@@ -168,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyUserControl.resx">
+      <DependentUpon>MyUserControl.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="registerationcomplete.resx">
+      <DependentUpon>registerationcomplete.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setting.resx">
       <DependentUpon>setting.h</DependentUpon>

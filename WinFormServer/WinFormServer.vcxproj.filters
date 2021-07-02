@@ -30,6 +30,12 @@
     <ClCompile Include="setting.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyUserControl.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="registerationcomplete.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -45,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="setting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyUserControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="registerationcomplete.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
