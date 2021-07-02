@@ -56,6 +56,7 @@ namespace WinFormServer {
 	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox2;
 	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox1;
 	private: System::Windows::Forms::Panel^ panel2;
+	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton4;
 
 
 	private:
@@ -73,16 +74,17 @@ namespace WinFormServer {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->gunaGradientButton3 = (gcnew Guna::UI::WinForms::GunaGradientButton());
+			this->gunaGradientButton1 = (gcnew Guna::UI::WinForms::GunaGradientButton());
+			this->gunaGradientButton2 = (gcnew Guna::UI::WinForms::GunaGradientButton());
+			this->gunaCircleButton1 = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->gunaCircleButton2 = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->gunaSeparator2 = (gcnew Guna::UI::WinForms::GunaSeparator());
-			this->gunaCircleButton1 = (gcnew Guna::UI::WinForms::GunaCircleButton());
-			this->gunaGradientButton2 = (gcnew Guna::UI::WinForms::GunaGradientButton());
-			this->gunaGradientButton1 = (gcnew Guna::UI::WinForms::GunaGradientButton());
-			this->gunaGradientButton3 = (gcnew Guna::UI::WinForms::GunaGradientButton());
 			this->gunaPictureBox3 = (gcnew Guna::UI::WinForms::GunaPictureBox());
 			this->gunaPictureBox2 = (gcnew Guna::UI::WinForms::GunaPictureBox());
 			this->gunaPictureBox1 = (gcnew Guna::UI::WinForms::GunaPictureBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->gunaGradientButton4 = (gcnew Guna::UI::WinForms::GunaGradientButton());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->gunaPictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->gunaPictureBox2))->BeginInit();
@@ -92,6 +94,7 @@ namespace WinFormServer {
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::MediumSlateBlue;
+			this->panel1->Controls->Add(this->gunaGradientButton4);
 			this->panel1->Controls->Add(this->gunaGradientButton3);
 			this->panel1->Controls->Add(this->gunaGradientButton1);
 			this->panel1->Controls->Add(this->gunaGradientButton2);
@@ -104,6 +107,118 @@ namespace WinFormServer {
 			this->panel1->Size = System::Drawing::Size(213, 597);
 			this->panel1->TabIndex = 2;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel1_Paint);
+			// 
+			// gunaGradientButton3
+			// 
+			this->gunaGradientButton3->AnimationHoverSpeed = 0.07F;
+			this->gunaGradientButton3->AnimationSpeed = 0.03F;
+			this->gunaGradientButton3->BaseColor1 = System::Drawing::Color::MediumBlue;
+			this->gunaGradientButton3->BaseColor2 = System::Drawing::Color::Black;
+			this->gunaGradientButton3->BorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton3->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaGradientButton3->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaGradientButton3->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->gunaGradientButton3->ForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton3.Image")));
+			this->gunaGradientButton3->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->gunaGradientButton3->ImageSize = System::Drawing::Size(50, 50);
+			this->gunaGradientButton3->Location = System::Drawing::Point(0, 191);
+			this->gunaGradientButton3->Name = L"gunaGradientButton3";
+			this->gunaGradientButton3->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
+			this->gunaGradientButton3->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->gunaGradientButton3->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton3->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton3->OnHoverImage = nullptr;
+			this->gunaGradientButton3->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaGradientButton3->Size = System::Drawing::Size(214, 94);
+			this->gunaGradientButton3->TabIndex = 13;
+			this->gunaGradientButton3->Text = L"تنظیمات";
+			// 
+			// gunaGradientButton1
+			// 
+			this->gunaGradientButton1->AnimationHoverSpeed = 0.07F;
+			this->gunaGradientButton1->AnimationSpeed = 0.03F;
+			this->gunaGradientButton1->BaseColor1 = System::Drawing::Color::MediumBlue;
+			this->gunaGradientButton1->BaseColor2 = System::Drawing::Color::Black;
+			this->gunaGradientButton1->BorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton1->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaGradientButton1->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaGradientButton1->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->gunaGradientButton1->ForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton1.Image")));
+			this->gunaGradientButton1->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->gunaGradientButton1->ImageSize = System::Drawing::Size(50, 50);
+			this->gunaGradientButton1->Location = System::Drawing::Point(1, 95);
+			this->gunaGradientButton1->Name = L"gunaGradientButton1";
+			this->gunaGradientButton1->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
+			this->gunaGradientButton1->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->gunaGradientButton1->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton1->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton1->OnHoverImage = nullptr;
+			this->gunaGradientButton1->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaGradientButton1->Size = System::Drawing::Size(214, 90);
+			this->gunaGradientButton1->TabIndex = 12;
+			this->gunaGradientButton1->Text = L"تغییر کتاب";
+			// 
+			// gunaGradientButton2
+			// 
+			this->gunaGradientButton2->AnimationHoverSpeed = 0.07F;
+			this->gunaGradientButton2->AnimationSpeed = 0.03F;
+			this->gunaGradientButton2->BaseColor1 = System::Drawing::Color::MediumBlue;
+			this->gunaGradientButton2->BaseColor2 = System::Drawing::Color::Black;
+			this->gunaGradientButton2->BorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton2->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaGradientButton2->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaGradientButton2->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->gunaGradientButton2->ForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton2.Image")));
+			this->gunaGradientButton2->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->gunaGradientButton2->ImageSize = System::Drawing::Size(50, 50);
+			this->gunaGradientButton2->Location = System::Drawing::Point(1, 0);
+			this->gunaGradientButton2->Name = L"gunaGradientButton2";
+			this->gunaGradientButton2->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
+			this->gunaGradientButton2->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->gunaGradientButton2->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton2->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton2->OnHoverImage = nullptr;
+			this->gunaGradientButton2->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaGradientButton2->Size = System::Drawing::Size(214, 89);
+			this->gunaGradientButton2->TabIndex = 11;
+			this->gunaGradientButton2->Text = L"ثبت کتاب";
+			// 
+			// gunaCircleButton1
+			// 
+			this->gunaCircleButton1->AnimationHoverSpeed = 0.07F;
+			this->gunaCircleButton1->AnimationSpeed = 0.03F;
+			this->gunaCircleButton1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton1.BackgroundImage")));
+			this->gunaCircleButton1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->gunaCircleButton1->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(153)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->gunaCircleButton1->BorderColor = System::Drawing::Color::Black;
+			this->gunaCircleButton1->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaCircleButton1->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaCircleButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaCircleButton1->ForeColor = System::Drawing::Color::White;
+			this->gunaCircleButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton1.Image")));
+			this->gunaCircleButton1->ImageSize = System::Drawing::Size(25, 25);
+			this->gunaCircleButton1->Location = System::Drawing::Point(4, 415);
+			this->gunaCircleButton1->Margin = System::Windows::Forms::Padding(4);
+			this->gunaCircleButton1->Name = L"gunaCircleButton1";
+			this->gunaCircleButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
+				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaCircleButton1->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaCircleButton1->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaCircleButton1->OnHoverImage = nullptr;
+			this->gunaCircleButton1->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaCircleButton1->Size = System::Drawing::Size(40, 37);
+			this->gunaCircleButton1->TabIndex = 10;
+			this->gunaCircleButton1->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton1_Click);
 			// 
 			// gunaCircleButton2
 			// 
@@ -143,118 +258,6 @@ namespace WinFormServer {
 			this->gunaSeparator2->Size = System::Drawing::Size(155, 17);
 			this->gunaSeparator2->TabIndex = 8;
 			// 
-			// gunaCircleButton1
-			// 
-			this->gunaCircleButton1->AnimationHoverSpeed = 0.07F;
-			this->gunaCircleButton1->AnimationSpeed = 0.03F;
-			this->gunaCircleButton1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton1.BackgroundImage")));
-			this->gunaCircleButton1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->gunaCircleButton1->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(153)),
-				static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(140)));
-			this->gunaCircleButton1->BorderColor = System::Drawing::Color::Black;
-			this->gunaCircleButton1->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaCircleButton1->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaCircleButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaCircleButton1->ForeColor = System::Drawing::Color::White;
-			this->gunaCircleButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton1.Image")));
-			this->gunaCircleButton1->ImageSize = System::Drawing::Size(25, 25);
-			this->gunaCircleButton1->Location = System::Drawing::Point(4, 415);
-			this->gunaCircleButton1->Margin = System::Windows::Forms::Padding(4);
-			this->gunaCircleButton1->Name = L"gunaCircleButton1";
-			this->gunaCircleButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
-				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->gunaCircleButton1->OnHoverBorderColor = System::Drawing::Color::Black;
-			this->gunaCircleButton1->OnHoverForeColor = System::Drawing::Color::White;
-			this->gunaCircleButton1->OnHoverImage = nullptr;
-			this->gunaCircleButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaCircleButton1->Size = System::Drawing::Size(40, 37);
-			this->gunaCircleButton1->TabIndex = 10;
-			this->gunaCircleButton1->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton1_Click);
-			// 
-			// gunaGradientButton2
-			// 
-			this->gunaGradientButton2->AnimationHoverSpeed = 0.07F;
-			this->gunaGradientButton2->AnimationSpeed = 0.03F;
-			this->gunaGradientButton2->BaseColor1 = System::Drawing::Color::MediumBlue;
-			this->gunaGradientButton2->BaseColor2 = System::Drawing::Color::Black;
-			this->gunaGradientButton2->BorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton2->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaGradientButton2->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaGradientButton2->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(178)));
-			this->gunaGradientButton2->ForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton2.Image")));
-			this->gunaGradientButton2->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
-			this->gunaGradientButton2->ImageSize = System::Drawing::Size(50, 50);
-			this->gunaGradientButton2->Location = System::Drawing::Point(1, 0);
-			this->gunaGradientButton2->Name = L"gunaGradientButton2";
-			this->gunaGradientButton2->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
-			this->gunaGradientButton2->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->gunaGradientButton2->OnHoverBorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton2->OnHoverForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton2->OnHoverImage = nullptr;
-			this->gunaGradientButton2->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton2->Size = System::Drawing::Size(214, 89);
-			this->gunaGradientButton2->TabIndex = 11;
-			this->gunaGradientButton2->Text = L"ثبت کتاب";
-			// 
-			// gunaGradientButton1
-			// 
-			this->gunaGradientButton1->AnimationHoverSpeed = 0.07F;
-			this->gunaGradientButton1->AnimationSpeed = 0.03F;
-			this->gunaGradientButton1->BaseColor1 = System::Drawing::Color::MediumBlue;
-			this->gunaGradientButton1->BaseColor2 = System::Drawing::Color::Black;
-			this->gunaGradientButton1->BorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton1->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaGradientButton1->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaGradientButton1->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(178)));
-			this->gunaGradientButton1->ForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton1.Image")));
-			this->gunaGradientButton1->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
-			this->gunaGradientButton1->ImageSize = System::Drawing::Size(50, 50);
-			this->gunaGradientButton1->Location = System::Drawing::Point(1, 95);
-			this->gunaGradientButton1->Name = L"gunaGradientButton1";
-			this->gunaGradientButton1->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
-			this->gunaGradientButton1->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->gunaGradientButton1->OnHoverBorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton1->OnHoverForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton1->OnHoverImage = nullptr;
-			this->gunaGradientButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton1->Size = System::Drawing::Size(214, 90);
-			this->gunaGradientButton1->TabIndex = 12;
-			this->gunaGradientButton1->Text = L"تغییر کتاب";
-			// 
-			// gunaGradientButton3
-			// 
-			this->gunaGradientButton3->AnimationHoverSpeed = 0.07F;
-			this->gunaGradientButton3->AnimationSpeed = 0.03F;
-			this->gunaGradientButton3->BaseColor1 = System::Drawing::Color::MediumBlue;
-			this->gunaGradientButton3->BaseColor2 = System::Drawing::Color::Black;
-			this->gunaGradientButton3->BorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton3->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaGradientButton3->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaGradientButton3->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(178)));
-			this->gunaGradientButton3->ForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton3.Image")));
-			this->gunaGradientButton3->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
-			this->gunaGradientButton3->ImageSize = System::Drawing::Size(50, 50);
-			this->gunaGradientButton3->Location = System::Drawing::Point(0, 191);
-			this->gunaGradientButton3->Name = L"gunaGradientButton3";
-			this->gunaGradientButton3->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
-			this->gunaGradientButton3->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->gunaGradientButton3->OnHoverBorderColor = System::Drawing::Color::Black;
-			this->gunaGradientButton3->OnHoverForeColor = System::Drawing::Color::White;
-			this->gunaGradientButton3->OnHoverImage = nullptr;
-			this->gunaGradientButton3->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton3->Size = System::Drawing::Size(214, 94);
-			this->gunaGradientButton3->TabIndex = 13;
-			this->gunaGradientButton3->Text = L"تنظیمات";
-			// 
 			// gunaPictureBox3
 			// 
 			this->gunaPictureBox3->BaseColor = System::Drawing::Color::White;
@@ -293,6 +296,34 @@ namespace WinFormServer {
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(213, 119);
 			this->panel2->TabIndex = 9;
+			// 
+			// gunaGradientButton4
+			// 
+			this->gunaGradientButton4->AnimationHoverSpeed = 0.07F;
+			this->gunaGradientButton4->AnimationSpeed = 0.03F;
+			this->gunaGradientButton4->BaseColor1 = System::Drawing::Color::MediumBlue;
+			this->gunaGradientButton4->BaseColor2 = System::Drawing::Color::Black;
+			this->gunaGradientButton4->BorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaGradientButton4->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaGradientButton4->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->gunaGradientButton4->ForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton4.Image")));
+			this->gunaGradientButton4->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->gunaGradientButton4->ImageSize = System::Drawing::Size(50, 50);
+			this->gunaGradientButton4->Location = System::Drawing::Point(1, 291);
+			this->gunaGradientButton4->Name = L"gunaGradientButton4";
+			this->gunaGradientButton4->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
+			this->gunaGradientButton4->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->gunaGradientButton4->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton4->OnHoverImage = nullptr;
+			this->gunaGradientButton4->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->Size = System::Drawing::Size(213, 94);
+			this->gunaGradientButton4->TabIndex = 15;
+			this->gunaGradientButton4->Text = L"جستجو";
 			// 
 			// MainForm
 			// 

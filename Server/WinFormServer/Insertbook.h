@@ -91,6 +91,7 @@ namespace WinFormServer {
 	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox3;
 	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox2;
 	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox5;
+	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton4;
 
 
 
@@ -146,6 +147,7 @@ namespace WinFormServer {
 			this->gunaPictureBox3 = (gcnew Guna::UI::WinForms::GunaPictureBox());
 			this->gunaPictureBox2 = (gcnew Guna::UI::WinForms::GunaPictureBox());
 			this->gunaPictureBox5 = (gcnew Guna::UI::WinForms::GunaPictureBox());
+			this->gunaGradientButton4 = (gcnew Guna::UI::WinForms::GunaGradientButton());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->tableLayoutPanel2->SuspendLayout();
@@ -563,6 +565,7 @@ namespace WinFormServer {
 			// panel3
 			// 
 			this->panel3->BackColor = System::Drawing::Color::MediumSlateBlue;
+			this->panel3->Controls->Add(this->gunaGradientButton4);
 			this->panel3->Controls->Add(this->gunaGradientButton3);
 			this->panel3->Controls->Add(this->gunaGradientButton1);
 			this->panel3->Controls->Add(this->gunaGradientButton2);
@@ -752,6 +755,34 @@ namespace WinFormServer {
 			this->gunaPictureBox5->Size = System::Drawing::Size(51, 48);
 			this->gunaPictureBox5->TabIndex = 13;
 			this->gunaPictureBox5->TabStop = false;
+			// 
+			// gunaGradientButton4
+			// 
+			this->gunaGradientButton4->AnimationHoverSpeed = 0.07F;
+			this->gunaGradientButton4->AnimationSpeed = 0.03F;
+			this->gunaGradientButton4->BaseColor1 = System::Drawing::Color::MediumBlue;
+			this->gunaGradientButton4->BaseColor2 = System::Drawing::Color::Black;
+			this->gunaGradientButton4->BorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaGradientButton4->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaGradientButton4->Font = (gcnew System::Drawing::Font(L"B Nazanin", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->gunaGradientButton4->ForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaGradientButton4.Image")));
+			this->gunaGradientButton4->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->gunaGradientButton4->ImageSize = System::Drawing::Size(50, 50);
+			this->gunaGradientButton4->Location = System::Drawing::Point(0, 291);
+			this->gunaGradientButton4->Name = L"gunaGradientButton4";
+			this->gunaGradientButton4->OnHoverBaseColor1 = System::Drawing::Color::DarkBlue;
+			this->gunaGradientButton4->OnHoverBaseColor2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->gunaGradientButton4->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaGradientButton4->OnHoverImage = nullptr;
+			this->gunaGradientButton4->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaGradientButton4->Size = System::Drawing::Size(213, 94);
+			this->gunaGradientButton4->TabIndex = 15;
+			this->gunaGradientButton4->Text = L"جستجو";
 			// 
 			// Insertbook
 			// 

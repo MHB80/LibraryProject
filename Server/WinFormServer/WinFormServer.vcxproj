@@ -137,6 +137,7 @@
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="search.cpp" />
     <ClCompile Include="setting.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="search.h">
+      <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="setting.h">
       <FileType>CppControl</FileType>
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="search.resx">
+      <DependentUpon>search.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setting.resx">
       <DependentUpon>setting.h</DependentUpon>
