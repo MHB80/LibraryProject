@@ -393,7 +393,29 @@ private:
 		Marshal::FreeHGlobal(IntPtr((void*)chars));
 	}
 
-
+/*
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			//Sender and reciever email
+			auto mail = gcnew MailMessage("libraryprojectnoreply@gmail.com", "Ahm.mehrabanamirh@gmail.com");
+			auto client = gcnew SmtpClient("smtp.gmail.com");
+			client->Port = 587;
+			//username and password for the sender
+			client->Credentials = gcnew System::Net::NetworkCredential("libraryprojectnoreply@gmail.com", "Leteverythinggo");
+			client->EnableSsl = true;
+			//email subject
+			mail->Subject = "hello";
+			//email Text
+			mail->Body = "يک پيام ديگر هم ميفرستم";
+			client->Send(mail);
+			MessageBox::Show("sent");
+		}
+		catch (Exception^ error)
+		{
+			MessageBox::Show("error sending");
+		}
+	}
+*/
 
 
 };
