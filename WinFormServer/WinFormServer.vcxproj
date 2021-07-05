@@ -89,6 +89,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -137,8 +138,7 @@
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyForm.cpp" />
-    <ClCompile Include="MyUserControl.cpp" />
-    <ClCompile Include="registerationcomplete.cpp" />
+    <ClCompile Include="search.cpp" />
     <ClCompile Include="setting.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,10 +154,8 @@
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MyUserControl.h">
-      <FileType>CppControl</FileType>
-    </ClInclude>
-    <ClInclude Include="registerationcomplete.h">
+    <ClInclude Include="OtherFunctionandClass.h" />
+    <ClInclude Include="search.h">
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="setting.h">
@@ -177,11 +175,8 @@
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyUserControl.resx">
-      <DependentUpon>MyUserControl.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="registerationcomplete.resx">
-      <DependentUpon>registerationcomplete.h</DependentUpon>
+    <EmbeddedResource Include="search.resx">
+      <DependentUpon>search.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setting.resx">
       <DependentUpon>setting.h</DependentUpon>

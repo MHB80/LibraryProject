@@ -1,5 +1,8 @@
 #pragma once
-
+#include "MainForm.h"
+#include "setting.h"
+#include"OtherFunctionandClass.h"
+#include<string>
 namespace WinFormServer {
 
 	using namespace System;
@@ -8,6 +11,50 @@ namespace WinFormServer {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Runtime::InteropServices;
+	using namespace std;
+	
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	IntPtr CreateObject_API();
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	bool InsertAdmin_API(IntPtr, std::string, std::string);
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	int GetUsernametRowId_API(IntPtr, std::string, bool ThrowExc);
+
+#pragma region Update_Server
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	 extern void UpdateServerUsername_API(IntPtr, std::string usernamelast, std::string usernamenew);
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	void  UpdateServerPassword_API(IntPtr, std::string passwordlast, std::string passwordnew, bool ThrowExc);
+#pragma endregion
+#pragma region Server_signup
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	extern bool Signup_Admin_Username_API(IntPtr, std::string username, bool ThrowExc);
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	extern bool Signup_Admin_Password_API(IntPtr, std::string password, bool ThrowExc);
+#pragma endregion
+#pragma region Profile_Picture
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	extern void Set_Profile_Picture_API(IntPtr, std::string path, std::string username, bool ThrowExc, bool readonly);
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	extern void Get_Profile_Picture_API(IntPtr, std::string username, std::string path, bool ThrowExc);
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	extern void Set_Server_FileNmaeProfilePicture_API(IntPtr, std::string username, std::string filenmaeprofilepicture, bool ThrowExc);
+#pragma endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/// <summary>
 	/// Summary for MyForm
@@ -15,12 +62,16 @@ namespace WinFormServer {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
+		IntPtr db;
+	public:
 		MyForm(void)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+
+			db = CreateObject_API();
 		}
 
 	protected:
@@ -102,7 +153,6 @@ namespace WinFormServer {
 			this->label1->Size = System::Drawing::Size(126, 13);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Remmber your Username";
-			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
 			// button1
 			// 
@@ -160,7 +210,6 @@ namespace WinFormServer {
 			this->gunaTextBox1->SelectedText = L"";
 			this->gunaTextBox1->Size = System::Drawing::Size(201, 35);
 			this->gunaTextBox1->TabIndex = 12;
-			this->gunaTextBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::gunaTextBox1_TextChanged);
 			// 
 			// gunaTextBox3
 			// 
@@ -191,7 +240,6 @@ namespace WinFormServer {
 			this->gunaMediumCheckBox1->Name = L"gunaMediumCheckBox1";
 			this->gunaMediumCheckBox1->Size = System::Drawing::Size(20, 20);
 			this->gunaMediumCheckBox1->TabIndex = 15;
-			this->gunaMediumCheckBox1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::gunaMediumCheckBox1_CheckedChanged);
 			// 
 			// gunaAdvenceButton1
 			// 
@@ -227,6 +275,7 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->TabIndex = 20;
 			this->gunaAdvenceButton1->Text = L"Login";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &MyForm::gunaAdvenceButton1_Click);
 			// 
 			// label2
 			// 
@@ -237,7 +286,6 @@ namespace WinFormServer {
 			this->label2->Size = System::Drawing::Size(108, 13);
 			this->label2->TabIndex = 21;
 			this->label2->Text = L"Forgot your password";
-			this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
 			// 
 			// button3
 			// 
@@ -297,8 +345,8 @@ namespace WinFormServer {
 
 
 
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -316,5 +364,37 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 }
+	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		
+	
+		std::string str1;
+		std::string str2;
+		MarshalString(gunaTextBox1->Text, str1);
+		MarshalString(gunaTextBox3->Text, str2);
+
+		InsertAdmin_API(db,str1,str2);
+
+
+	}
+
+private: System::Void gunaButton1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+
+}
+
+private:
+	void MarshalString(String^ s, string& os)
+	{
+		using namespace Runtime::InteropServices;
+		const char* chars =
+			(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
+
+
+
+
 };
 }

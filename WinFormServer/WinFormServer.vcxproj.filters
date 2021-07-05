@@ -30,11 +30,8 @@
     <ClCompile Include="setting.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyUserControl.cpp">
+    <ClCompile Include="search.cpp">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="registerationcomplete.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +50,10 @@
     <ClInclude Include="setting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyUserControl.h">
+    <ClInclude Include="search.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="registerationcomplete.h">
+    <ClInclude Include="OtherFunctionandClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
