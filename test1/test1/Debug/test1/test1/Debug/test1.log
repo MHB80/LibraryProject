@@ -1,5 +1,0 @@
-﻿  MyForm.cpp
-E:\project\test1\test1\MyForm.h(1133,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-E:\project\test1\test1\MyForm.h(1148,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  test1.vcxproj -> E:\project\test1\Debug\test1.exe

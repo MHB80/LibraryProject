@@ -1,5 +1,0 @@
-﻿  search.cpp
-E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\search.h(943,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\search.h(959,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  ChangeBookForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  WinFormServer.vcxproj -> E:\LibraryProject-master_2 (2)\LibraryProject-master\Server\WinFormServer\x64\Debug\WinFormServer.exe
