@@ -1,0 +1,57 @@
+﻿  pch.cpp
+  DataBase.cpp
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(113,70): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(127,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(195,53): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(195,47): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(217,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(218,42): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(335,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(342,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(372,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(396,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(403,85): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(428,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(435,85): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(462,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(500,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(539,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(546,85): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(571,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(578,85): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(602,11): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(652,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(653,42): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(673,105): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(680,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(733,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(756,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  DataBaseDllSource.cpp
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(5,1): warning C4273: 'CreateObject_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(19,29): message : see previous definition of 'CreateObject_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(18,1): warning C4273: 'InsertAdmin_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(22,23): message : see previous definition of 'InsertAdmin_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(22,1): warning C4273: 'GetUsernametRowId_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(23,22): message : see previous definition of 'GetUsernametRowId_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(29,1): warning C4273: 'UpdateServerUsername_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(26,23): message : see previous definition of 'UpdateServerUsername_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(33,1): warning C4273: 'UpdateServerPassword_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(27,24): message : see previous definition of 'UpdateServerPassword_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(39,1): warning C4273: 'Signup_Admin_Username_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(30,23): message : see previous definition of 'Signup_Admin_Username_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(43,1): warning C4273: 'Signup_Admin_Password_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(31,23): message : see previous definition of 'Signup_Admin_Password_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(50,1): warning C4273: 'Set_Profile_Picture_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(34,23): message : see previous definition of 'Set_Profile_Picture_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(54,1): warning C4273: 'Get_Profile_Picture_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(35,23): message : see previous definition of 'Get_Profile_Picture_API'
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.cpp(58,1): warning C4273: 'Set_Server_FileNmaeProfilePicture_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBaseDllSource.h(36,23): message : see previous definition of 'Set_Server_FileNmaeProfilePicture_API'
+  dllmain.cpp
+  Generating Code...
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(486): warning C4715: 'DataBase::Signup_Admin_Username': not all control paths return a value
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(590): warning C4715: 'DataBase::Change_Admin_Password': not all control paths return a value
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(558): warning C4715: 'DataBase::Change_Admin_Username': not all control paths return a value
+C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\DataBaseDLL\DataBase.cpp(524): warning C4715: 'DataBase::Signup_Admin_Password': not all control paths return a value
+     Creating library C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\WinFormServer\x64\Debug\DataBaseDLL.lib and object C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\WinFormServer\x64\Debug\DataBaseDLL.exp
+  DataBaseDLL.vcxproj -> C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\WinFormServer\x64\Debug\DataBaseDLL.dll
