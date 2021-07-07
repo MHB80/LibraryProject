@@ -1,0 +1,13 @@
+﻿  pch.cpp
+  dllmain.cpp
+  regist.cpp
+  Source.cpp
+E:\LibraryProject-master_44\RegistDll\Source.cpp(8,1): warning C4273: 'CreatObject': inconsistent dll linkage
+E:\LibraryProject-master_44\RegistDll\Source.h(15,25): message : see previous definition of 'CreatObject'
+E:\LibraryProject-master_44\RegistDll\Source.cpp(13,1): warning C4273: 'Regist': inconsistent dll linkage
+E:\LibraryProject-master_44\RegistDll\Source.h(16,24): message : see previous definition of 'Regist'
+E:\LibraryProject-master_44\RegistDll\Source.cpp(25,1): warning C4273: 'Start': inconsistent dll linkage
+E:\LibraryProject-master_44\RegistDll\Source.h(17,24): message : see previous definition of 'Start'
+  Generating Code...
+     Creating library E:\LibraryProject-master_44\WinFormServer\x64\Debug\RegistDll.lib and object E:\LibraryProject-master_44\WinFormServer\x64\Debug\RegistDll.exp
+  RegistDll.vcxproj -> E:\LibraryProject-master_44\WinFormServer\x64\Debug\RegistDll.dll
