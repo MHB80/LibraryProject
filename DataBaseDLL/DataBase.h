@@ -57,6 +57,9 @@ public:
 	bool Change_Admin_Username(string usernamelast, string usernamenew, bool ThrowExc);
 	bool Change_Admin_Password(string passwordlast, string passwordnew, bool ThrowExc);
 #pragma endregion
+#pragma region Server_Check
+	bool Check_Admin_Username(string username, string password , bool ThrowExc);
+#pragma endregion
 #pragma region Profile_Picture
 	void Set_Profile_Picture(string path, string username, bool ThrowExc, bool readonly);
 	void Get_Profile_Picture(string username, string path, bool ThrowExc);

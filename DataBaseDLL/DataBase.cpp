@@ -556,6 +556,40 @@ bool DataBase::Change_Admin_Username(string usernamelast,string usernamenew, boo
 	if (res != SQLITE_DONE && ThrowExc)
 		ThrowError(db);
 }
+bool DataBase::Check_Admin_Username(string username,string password ,bool ThrowExc)
+{
+	Lock();
+	sqlite3_stmt* stmt;
+	const char* sql = "Select Password from Server where Username like ? ;";
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, username.c_str(), username.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	if (reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0)) == password)
+	{
+		sqlite3_finalize(stmt);
+		UnLock();
+		return true;
+	}
+	else
+	{
+		sqlite3_finalize(stmt);
+		UnLock();
+			return false;
+		
+	}
+}
 bool DataBase::Change_Admin_Password(string passwordlast, string passwordnew, bool ThrowExc)
 {
 	Lock();

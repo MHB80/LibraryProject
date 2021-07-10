@@ -135,14 +135,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChangeBookForm.cpp" />
+    <ClCompile Include="EmailForm.cpp" />
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="search.cpp" />
     <ClCompile Include="setting.cpp" />
+    <ClCompile Include="SignUpForm.cpp" />
+    <ClCompile Include="SignUpForm1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChangeBookForm.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="EmailForm.h">
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="Insertbook.h">
@@ -161,10 +167,19 @@
     <ClInclude Include="setting.h">
       <FileType>CppControl</FileType>
     </ClInclude>
+    <ClInclude Include="SignUpForm.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="SignUpForm1.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChangeBookForm.resx">
       <DependentUpon>ChangeBookForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmailForm.resx">
+      <DependentUpon>EmailForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Insertbook.resx">
       <DependentUpon>Insertbook.h</DependentUpon>
@@ -180,6 +195,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="setting.resx">
       <DependentUpon>setting.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SignUpForm.resx">
+      <DependentUpon>SignUpForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SignUpForm1.resx">
+      <DependentUpon>SignUpForm1.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

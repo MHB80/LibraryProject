@@ -1,9 +1,12 @@
   WinFormServer.ChangeBookForm.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.EmailForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.Insertbook.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.MainForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.MyForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.search.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.setting.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.SignUpForm.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.SignUpForm1.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly WinFormServer, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -40,6 +43,11 @@ Assembly System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=
 Class WinFormServer.ChangeBookForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class WinFormServer.EmailForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.Panel mainpanel : Public
 Class WinFormServer.Insertbook: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -49,11 +57,19 @@ Class WinFormServer.setting: AutoLayout, AnsiClass, Class, Public, BeforeFieldIn
 Class WinFormServer.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Media.SoundPlayer music : Public
+Class WinFormServer.SignUpForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class WinFormServer.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     IntPtr db : Public
 Class WinFormServer.search: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class WinFormServer.SignUpForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

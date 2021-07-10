@@ -1,2 +1,15 @@
-﻿  ChangeBookForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  WinFormServer.vcxproj -> C:\Users\veniz\Desktop\New folder (6)\LibraryProject-master\Server\WinFormServer\x64\Debug\WinFormServer.exe
+﻿  EmailForm.cpp
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\EmailForm.h(359,22): warning C4101: 'error': unreferenced local variable
+  MainForm.cpp
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\MainForm.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  MyForm.cpp
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\MainForm.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\EmailForm.h(359,22): warning C4101: 'error': unreferenced local variable
+  SignUpForm.cpp
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\MainForm.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\EmailForm.h(359,22): warning C4101: 'error': unreferenced local variable
+  SignUpForm1.cpp
+C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\EmailForm.h(359,22): warning C4101: 'error': unreferenced local variable
+  Generating Code...
+  ChangeBookForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  WinFormServer.vcxproj -> C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\x64\Debug\WinFormServer.exe
