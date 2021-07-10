@@ -6,7 +6,7 @@ using namespace std;
 typedef void(*Result)(std::string res);
 struct User
 {
-private:
+public:
 	string Username;
 	string Password;
 	string Fname;
@@ -24,6 +24,6 @@ public:
 	string Get_username();
 	string Get_Fname();
 	string Get_Lname();
-	User(Result );
+	User();
 	void Regist(string username, string password, string Fname, string Lname);
 };

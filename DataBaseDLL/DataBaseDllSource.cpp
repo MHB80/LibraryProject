@@ -14,9 +14,9 @@ DataBase* CreateObject_API()
 
 
 #pragma region Insertion_server
-bool InsertAdmin_API(DataBase* db, string username, string password, bool ThrowExc)
+bool InsertAdmin_API(DataBase* db, string username, string password)
 {
-	return db->InsertAdmin(username, password, ThrowExc);
+	return db->InsertAdmin(username, password, true);
 }
 int GetUsernametRowId_API(DataBase* db, string username, bool ThrowExc)
 {
@@ -35,28 +35,31 @@ void UpdateServerPassword_API(DataBase* db, string passwordlast, string password
 }
 #pragma endregion
 #pragma region Server_signup
-bool Signup_Admin_Username_API(DataBase* db, string username, bool ThrowExc)
+bool Signup_Admin_Username_Api(DataBase* db, string username)
 {
-	return db->Signup_Admin_Username(username, ThrowExc);
+	return db->Signup_Admin_Username(username, true);
 }
-bool Signup_Admin_Password_API(DataBase* db, string password, bool ThrowExc)
+bool Signup_Admin_Password_API(DataBase* db, string password)
 {
-	return db->Signup_Admin_Password(password, ThrowExc);
+	return db->Signup_Admin_Password(password, true);
 }
 #pragma endregion
-
+bool Check_Admin_Username_API(DataBase* db, string username, string password)
+{
+	return db->Check_Admin_Username(username, password, true);
+}
 #pragma region Profile_Picture
-void Set_Profile_Picture_API(DataBase* db, string path, string username, bool ThrowExc, bool readonly)
+void Set_Profile_Picture_API(DataBase* db, string path, string username, bool readonly)
 {
-	db->Set_Profile_Picture(path, username, ThrowExc, readonly);
+	db->Set_Profile_Picture(path, username, true, readonly);
 }
-void Get_Profile_Picture_API(DataBase* db, string username, string path, bool ThrowExc)
+void Get_Profile_Picture_API(DataBase* db, string username, string path)
 {
-	db->Get_Profile_Picture(username, path, ThrowExc);
+	db->Get_Profile_Picture(username, path, true);
 }
-void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string filenmaeprofilepicture, bool ThrowExc)
+void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string filenmaeprofilepicture)
 {
-	db->Set_Server_FileNmaeProfilePicture(username, filenmaeprofilepicture, ThrowExc);
+	db->Set_Server_FileNmaeProfilePicture(username, filenmaeprofilepicture, true);
 }
 #pragma endregion
 

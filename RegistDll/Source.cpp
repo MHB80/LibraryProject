@@ -4,29 +4,23 @@
 #include <string>
 #include "Source.h"
 using namespace std;
-User* CreatObject(Result res)
+User* CreatObject()
 {
-	User* cal = new User(res);
+	User* cal = new User();
 	return cal;
 }
-void Regist(User* cal, string username, string password, string Fname, string Lname)
+void Regist_API(User* cal, string username, string password, string Fname, string Lname)
 {
 	cal->Set_Username(username);
 	cal->Set_Password(password);
 	cal->Set_Fname(Fname);
 	cal->Set_Lname(Lname);
 }
-int callback()
+bool Let_Username_API(User* cal,string Username)
 {
-	testfunction("hello");
-	return 0;
+	return cal->Let_Username(Username);
 }
-void Start(Testfunction testFunction)
+bool Let_Password_API(User* cal,string Password)
 {
-	testfunction = testFunction;
-	test();
-}
-void test()
-{
-	callback();
+	return cal->Let_Password(Password);
 }

@@ -104,7 +104,7 @@ string  User::Get_Lname()
 {
 	return this->Lname;
 }
-User::User(Result)
+User::User()
 {
 }
 void User::Regist(string username, string password, string Fname, string Lname)
