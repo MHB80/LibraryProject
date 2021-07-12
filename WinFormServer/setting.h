@@ -22,6 +22,7 @@ namespace WinFormServer {
 			//
 			//TODO: Add the constructor code here
 			//
+			
 		}
 
 	protected:

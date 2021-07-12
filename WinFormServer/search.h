@@ -16,12 +16,14 @@ namespace WinFormServer {
 	public ref class search : public System::Windows::Forms::UserControl
 	{
 	public:
-		search(void)
+		Panel ^mainpanel;
+		search(Panel ^mainpanel)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->mainpanel = mainpanel;
 		}
 
 	protected:

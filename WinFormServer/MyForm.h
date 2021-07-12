@@ -1,14 +1,12 @@
 ﻿#pragma once
 #include "MainForm.h"
 #include "setting.h"
-
+#include"search.h"
 #include"OtherFunctionandClass.h"
 #include<string>
 #include"SignUpForm1.h"
 
 namespace WinFormServer {
-
-
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -18,12 +16,8 @@ namespace WinFormServer {
 	using namespace System::Drawing;
 	using namespace System::Runtime::InteropServices;
 	using namespace std;
+	using namespace System::Threading;
 	
-
-
-
-
-
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 	IntPtr CreateObject_API();
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
@@ -56,11 +50,6 @@ namespace WinFormServer {
 
 
 
-
-
-
-
-
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
@@ -68,7 +57,9 @@ namespace WinFormServer {
 	{
 	public:
 		IntPtr db;
-	private: System::Windows::Forms::Panel^ panel3;
+	private: System::Windows::Forms::Panel^ ErrorPanel;
+	public:
+
 	public:
 	private: System::Windows::Forms::Label^ label4;
 	private: Guna::UI::WinForms::GunaTransition^ gunaTransition1;
@@ -122,16 +113,6 @@ namespace WinFormServer {
 
 
 
-
-
-
-
-
-
-
-
-
-
 	protected:
 
 
@@ -149,8 +130,8 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
+			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -164,12 +145,12 @@ namespace WinFormServer {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->ErrorPanel = (gcnew System::Windows::Forms::Panel());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->gunaTransition1 = (gcnew Guna::UI::WinForms::GunaTransition(this->components));
 			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			this->panel3->SuspendLayout();
+			this->ErrorPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -177,9 +158,10 @@ namespace WinFormServer {
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::White;
 			this->gunaTransition1->SetDecoration(this->label1, Guna::UI::Animation::DecorationType::None);
-			this->label1->Location = System::Drawing::Point(93, 392);
+			this->label1->Location = System::Drawing::Point(124, 482);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(126, 13);
+			this->label1->Size = System::Drawing::Size(170, 17);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Remmber your Username";
 			// 
@@ -192,9 +174,10 @@ namespace WinFormServer {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(84)), static_cast<System::Int32>(static_cast<System::Byte>(172)),
 				static_cast<System::Int32>(static_cast<System::Byte>(231)));
-			this->button1->Location = System::Drawing::Point(795, 0);
+			this->button1->Location = System::Drawing::Point(1060, 0);
+			this->button1->Margin = System::Windows::Forms::Padding(4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(40, 43);
+			this->button1->Size = System::Drawing::Size(53, 53);
 			this->button1->TabIndex = 7;
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
@@ -207,9 +190,10 @@ namespace WinFormServer {
 			this->gunaTransition1->SetDecoration(this->button2, Guna::UI::Animation::DecorationType::None);
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(244, 464);
+			this->button2->Location = System::Drawing::Point(325, 571);
+			this->button2->Margin = System::Windows::Forms::Padding(4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(43, 45);
+			this->button2->Size = System::Drawing::Size(57, 55);
 			this->button2->TabIndex = 10;
 			this->button2->UseVisualStyleBackColor = false;
 			// 
@@ -217,9 +201,10 @@ namespace WinFormServer {
 			// 
 			this->gunaTransition1->SetDecoration(this->pictureBox1, Guna::UI::Animation::DecorationType::None);
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(369, 62);
+			this->pictureBox1->Location = System::Drawing::Point(492, 76);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(412, 396);
+			this->pictureBox1->Size = System::Drawing::Size(549, 487);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 11;
 			this->pictureBox1->TabStop = false;
@@ -236,11 +221,12 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->gunaTextBox1->FocusedForeColor = System::Drawing::SystemColors::ControlText;
 			this->gunaTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaTextBox1->Location = System::Drawing::Point(69, 238);
+			this->gunaTextBox1->Location = System::Drawing::Point(92, 293);
+			this->gunaTextBox1->Margin = System::Windows::Forms::Padding(4);
 			this->gunaTextBox1->Name = L"gunaTextBox1";
 			this->gunaTextBox1->PasswordChar = '\0';
 			this->gunaTextBox1->SelectedText = L"";
-			this->gunaTextBox1->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox1->Size = System::Drawing::Size(268, 43);
 			this->gunaTextBox1->TabIndex = 12;
 			// 
 			// gunaTextBox3
@@ -255,11 +241,12 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->gunaTextBox3->FocusedForeColor = System::Drawing::SystemColors::ControlText;
 			this->gunaTextBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaTextBox3->Location = System::Drawing::Point(69, 323);
+			this->gunaTextBox3->Location = System::Drawing::Point(92, 398);
+			this->gunaTextBox3->Margin = System::Windows::Forms::Padding(4);
 			this->gunaTextBox3->Name = L"gunaTextBox3";
 			this->gunaTextBox3->PasswordChar = '\0';
 			this->gunaTextBox3->SelectedText = L"";
-			this->gunaTextBox3->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox3->Size = System::Drawing::Size(268, 43);
 			this->gunaTextBox3->TabIndex = 14;
 			// 
 			// gunaMediumCheckBox1
@@ -270,7 +257,8 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(128)), static_cast<System::Int32>(static_cast<System::Byte>(128)));
 			this->gunaTransition1->SetDecoration(this->gunaMediumCheckBox1, Guna::UI::Animation::DecorationType::None);
 			this->gunaMediumCheckBox1->FillColor = System::Drawing::Color::White;
-			this->gunaMediumCheckBox1->Location = System::Drawing::Point(69, 388);
+			this->gunaMediumCheckBox1->Location = System::Drawing::Point(92, 478);
+			this->gunaMediumCheckBox1->Margin = System::Windows::Forms::Padding(4);
 			this->gunaMediumCheckBox1->Name = L"gunaMediumCheckBox1";
 			this->gunaMediumCheckBox1->Size = System::Drawing::Size(20, 20);
 			this->gunaMediumCheckBox1->TabIndex = 15;
@@ -297,7 +285,8 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->ImageSize = System::Drawing::Size(20, 20);
 			this->gunaAdvenceButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceButton1->Location = System::Drawing::Point(157, 416);
+			this->gunaAdvenceButton1->Location = System::Drawing::Point(151, 511);
+			this->gunaAdvenceButton1->Margin = System::Windows::Forms::Padding(4);
 			this->gunaAdvenceButton1->Name = L"gunaAdvenceButton1";
 			this->gunaAdvenceButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -308,7 +297,7 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
 			this->gunaAdvenceButton1->OnPressedColor = System::Drawing::Color::Black;
 			this->gunaAdvenceButton1->Radius = 15;
-			this->gunaAdvenceButton1->Size = System::Drawing::Size(215, 42);
+			this->gunaAdvenceButton1->Size = System::Drawing::Size(287, 52);
 			this->gunaAdvenceButton1->TabIndex = 20;
 			this->gunaAdvenceButton1->Text = L"Login";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -319,9 +308,10 @@ namespace WinFormServer {
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::White;
 			this->gunaTransition1->SetDecoration(this->label2, Guna::UI::Animation::DecorationType::None);
-			this->label2->Location = System::Drawing::Point(72, 365);
+			this->label2->Location = System::Drawing::Point(96, 449);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(108, 13);
+			this->label2->Size = System::Drawing::Size(145, 17);
 			this->label2->TabIndex = 21;
 			this->label2->Text = L"Forgot your password";
 			// 
@@ -333,9 +323,10 @@ namespace WinFormServer {
 			this->gunaTransition1->SetDecoration(this->button3, Guna::UI::Animation::DecorationType::None);
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(157, 464);
+			this->button3->Location = System::Drawing::Point(209, 571);
+			this->button3->Margin = System::Windows::Forms::Padding(4);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(43, 45);
+			this->button3->Size = System::Drawing::Size(57, 55);
 			this->button3->TabIndex = 22;
 			this->button3->UseVisualStyleBackColor = false;
 			// 
@@ -347,9 +338,10 @@ namespace WinFormServer {
 			this->gunaTransition1->SetDecoration(this->button4, Guna::UI::Animation::DecorationType::None);
 			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button4->ForeColor = System::Drawing::Color::White;
-			this->button4->Location = System::Drawing::Point(329, 464);
+			this->button4->Location = System::Drawing::Point(439, 571);
+			this->button4->Margin = System::Windows::Forms::Padding(4);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(43, 45);
+			this->button4->Size = System::Drawing::Size(57, 55);
 			this->button4->TabIndex = 23;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
@@ -357,8 +349,9 @@ namespace WinFormServer {
 			// 
 			this->gunaTransition1->SetDecoration(this->panel1, Guna::UI::Animation::DecorationType::None);
 			this->panel1->Location = System::Drawing::Point(0, 0);
+			this->panel1->Margin = System::Windows::Forms::Padding(4);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(372, 179);
+			this->panel1->Size = System::Drawing::Size(496, 220);
 			this->panel1->TabIndex = 24;
 			this->panel1->Visible = false;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
@@ -370,23 +363,25 @@ namespace WinFormServer {
 			this->gunaTransition1->SetDecoration(this->label3, Guna::UI::Animation::DecorationType::None);
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(70, 110);
+			this->label3->Location = System::Drawing::Point(93, 135);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(99, 29);
+			this->label3->Size = System::Drawing::Size(123, 36);
 			this->label3->TabIndex = 25;
 			this->label3->Text = L"Sign Up";
 			this->label3->Click += gcnew System::EventHandler(this, &MyForm::label3_Click);
 			// 
-			// panel3
+			// ErrorPanel
 			// 
-			this->panel3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel3.BackgroundImage")));
-			this->panel3->Controls->Add(this->label4);
-			this->gunaTransition1->SetDecoration(this->panel3, Guna::UI::Animation::DecorationType::None);
-			this->panel3->Location = System::Drawing::Point(226, 21);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(374, 98);
-			this->panel3->TabIndex = 26;
-			this->panel3->Visible = false;
+			this->ErrorPanel->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"ErrorPanel.BackgroundImage")));
+			this->ErrorPanel->Controls->Add(this->label4);
+			this->gunaTransition1->SetDecoration(this->ErrorPanel, Guna::UI::Animation::DecorationType::None);
+			this->ErrorPanel->Location = System::Drawing::Point(301, 26);
+			this->ErrorPanel->Margin = System::Windows::Forms::Padding(4);
+			this->ErrorPanel->Name = L"ErrorPanel";
+			this->ErrorPanel->Size = System::Drawing::Size(499, 121);
+			this->ErrorPanel->TabIndex = 26;
+			this->ErrorPanel->Visible = false;
 			// 
 			// label4
 			// 
@@ -397,10 +392,11 @@ namespace WinFormServer {
 				static_cast<System::Byte>(178)));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->label4->Location = System::Drawing::Point(72, 32);
+			this->label4->Location = System::Drawing::Point(96, 39);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
 			this->label4->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
-			this->label4->Size = System::Drawing::Size(80, 35);
+			this->label4->Size = System::Drawing::Size(99, 44);
 			this->label4->TabIndex = 0;
 			this->label4->Text = L"label4";
 			// 
@@ -432,11 +428,11 @@ namespace WinFormServer {
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(834, 562);
+			this->ClientSize = System::Drawing::Size(1112, 692);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -450,24 +446,29 @@ namespace WinFormServer {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->panel3);
+			this->Controls->Add(this->ErrorPanel);
 			this->gunaTransition1->SetDecoration(this, Guna::UI::Animation::DecorationType::None);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			this->panel3->ResumeLayout(false);
-			this->panel3->PerformLayout();
+			this->ErrorPanel->ResumeLayout(false);
+			this->ErrorPanel->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 
+		Thread^ formasli;
+void Open()
+{
+	Application::Run(gcnew MainForm());
 
-
+}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -486,7 +487,11 @@ private: System::Void gunaMediumCheckBox1_CheckedChanged(System::Object^ sender,
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
+	    
+	//implementing functuin to open the dialog and close it by threads
+	 
 	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		
@@ -499,7 +504,7 @@ private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^
 		if (_check == false)
 		{
 			label4->Text = L"نام کاربری وارد شده یافت نشد";
-			gunaTransition1->ShowSync(panel3, true, Guna::UI::Animation::Animation::Leaf);
+			gunaTransition1->ShowSync(ErrorPanel, true, Guna::UI::Animation::Animation::Leaf);
 	
 		}
 		else
@@ -507,17 +512,34 @@ private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^
 			bool h=Check_Admin_Username_API(db, str1, str2);
 			if (h == false)
 			{
+				Thread ^pictureboxThread();
 				label4->Text = L"رمز عبور وارد شده اشتباه است";
-				gunaTransition1->ShowSync(panel3, true, Guna::UI::Animation::Animation::Leaf);
+				gunaTransition1->ShowSync(ErrorPanel, false, Guna::UI::Animation::Animation::Leaf);
+				pictureBox1->Hide();
+				ErrorPanel->BringToFront();
+				pictureBox1->Show();
 			
 			}
 			else
 			{
+				try
+				{
 
+					formasli = gcnew Thread(gcnew ThreadStart(this, &MyForm::Open));
+					formasli->Start();
+					//this here is Myforn.h that is going to be closed after the MainFom is opened
+					//MessageBox::Show("go to next page");
+					this->Close();
+
+				}
+				catch (Exception^ excep)
+				{
+					MessageBox::Show("error not handled");
+				}
 			}
 		}
 		timer2->Start();
-		gunaTransition1->HideSync(panel3, false, Guna::UI::Animation::Animation::Leaf);
+		gunaTransition1->HideSync(ErrorPanel, false, Guna::UI::Animation::Animation::Leaf);
 
 
 	}
@@ -563,19 +585,12 @@ private: System::Void timer2_Tick(System::Object^ sender, System::EventArgs^ e) 
 	if (timer == 5)
 	{
 		timer2->Stop();
+		
 	}
-
+	
 }
+	   
+
 };
-
-
-
-
-
-
-
-
-
-
 
 }
