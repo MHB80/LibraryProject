@@ -13,6 +13,15 @@ DataBase* CreateObject_API()
 
 
 
+void InsertProduct_API(DataBase* db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price)
+{
+	db->InsertProduct(id, name, filesize, filename, bookdescription, writer, genre, score, price, true);
+}
+
+
+
+
+
 #pragma region Insertion_server
 bool InsertAdmin_API(DataBase* db, string username, string password)
 {
@@ -23,15 +32,19 @@ int GetUsernametRowId_API(DataBase* db, string username, bool ThrowExc)
 	
 	return db->GetUsernametRowId(username, ThrowExc);
 }
+void InsertAdmin_Other_API(DataBase* db, string FirstName, string LastName, string mobilenumber, string address, string postcodehome)
+{
+	db->InsertAdmin_Other(FirstName, LastName, mobilenumber, address, postcodehome, true);
+}
 #pragma endregion
 #pragma region Update_Server
 void UpdateServerUsername_API(DataBase* db, string usernamelast, string usernamenew)
 {
 	db->UpdateServerUsername(usernamelast, usernamenew, true);
 }
-void UpdateServerPassword_API(DataBase* db, string passwordlast, string passwordnew, bool ThrowExc)
+void UpdateServerPassword_API(DataBase* db, string passwordlast, string passwordnew)
 {
-	db->UpdateServerPassword(passwordlast, passwordnew, ThrowExc);
+	db->UpdateServerPassword(passwordlast, passwordnew,true);
 }
 #pragma endregion
 #pragma region Server_signup

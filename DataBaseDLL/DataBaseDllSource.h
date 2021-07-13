@@ -18,13 +18,26 @@ using namespace std;
 
 extern "C" UIAPI DataBase * CreateObject_API();
 
+
+
+extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price);
+
+
+
+
+
+
+
+
+
 #pragma region Insertion_server
 extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password);
 extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, string username, bool ThrowExc);
+extern "C" UIAPI void InsertAdmin_Other_API(DataBase * db,string FirstName, string LastName, string mobilenumber, string address, string postcodehome);
 #pragma endregion
 #pragma region Update_Server
 extern "C" UIAPI void UpdateServerUsername_API(DataBase* db, string usernamelast, string usernamenew);
-extern "C" UIAPI void  UpdateServerPassword_API(DataBase* db, string passwordlast, string passwordnew, bool ThrowExc);
+extern "C" UIAPI void  UpdateServerPassword_API(DataBase* db, string passwordlast, string passwordnew);
 #pragma endregion
 #pragma region Server_signup
 extern "C" UIAPI bool Signup_Admin_Username_Api(DataBase* db, string username);

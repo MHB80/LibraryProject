@@ -24,7 +24,7 @@ public:
 #pragma region Insertion-client
 	void InsertCustomer(int username, int listid, bool ThrowExc = true);
 	void InsertList(int productid, int listid, bool ThrowExc = true);
-	void InsertProduct(int id, string name, int filesize, string filename, bool ThrowExc = true);
+	void InsertProduct(int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price, bool ThrowExc);
 	int GetProductRowId(int id, bool ThrowExc = true);
 	sqlite3_blob* OpenProductFile(int rowid, bool readonly, bool ThrowExc = true);
 	void WriteProductFile(sqlite3_blob* file, char* Buffer, long long Size, long long index, bool ThrowExc = true);
@@ -43,6 +43,7 @@ public:
 	#pragma endregion
 #pragma region Insertion_server
 	bool InsertAdmin(string username, string password, bool ThrowExc);
+	void InsertAdmin_Other(string FirstName, string LastName,string mobilenumber,string address,string postcodehome,bool ThrowExc);
 	int GetUsernametRowId(string username, bool ThrowExc);
 #pragma endregion
 #pragma region Update_Server

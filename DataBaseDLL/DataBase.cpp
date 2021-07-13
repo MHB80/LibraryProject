@@ -91,10 +91,10 @@ void DataBase::InsertList(int productid, int listid, bool ThrowExc )
 	if (res != SQLITE_DONE && ThrowExc)
 		ThrowError(db);
 }
-void DataBase::InsertProduct(int id, string name, int filesize, string filename, bool ThrowExc)
+void DataBase::InsertProduct(int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price, bool ThrowExc)
 {
 	Lock();
-	const char* sql = "INSERT INTO Product (Id,Name,File,FileName)VALUES(?, ?, ? ,?);";
+	const char* sql = "INSERT INTO Product (Id,Name,File,FileName,BookDescription,Writer,Genre,Score,Price)VALUES(?, ?, ? ,?,?,?,?,?,?);";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	if (res != SQLITE_OK && ThrowExc)
@@ -125,6 +125,41 @@ void DataBase::InsertProduct(int id, string name, int filesize, string filename,
 		ThrowError(db);
 	}
 	res = sqlite3_bind_text(stmt, 4, filename.c_str() , filename.size(),nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 5, bookdescription.c_str(), bookdescription.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 6, writer.c_str(), writer.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 7, genre.c_str(), genre.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 8, score.c_str(), score.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 9, price.c_str(), price.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -358,6 +393,58 @@ bool  DataBase::InsertAdmin(string username, string password, bool ThrowExc)
 		return false;
 	}
 }
+void  DataBase::InsertAdmin_Other(string FirstName, string LastName, string mobilenumber, string address, string postcodehome, bool ThrowExc)
+{
+	const char* sql = "INSERT INTO Server (FirstName,LastName,MobileNumber,Address, PostcodeHome)VALUES(?, ?,?,?,?);";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, FirstName.c_str(), FirstName.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 2, LastName.c_str(), LastName.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 3, mobilenumber.c_str(), mobilenumber.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 4, address.c_str(), address.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 5, postcodehome.c_str(), postcodehome.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	UnLock();
+	if (res != SQLITE_DONE && ThrowExc)
+		ThrowError(db);
+}
 int  DataBase::GetUsernametRowId(string username, bool ThrowExc)
 {
 	const char* sql = "Select rowid from Server where Username == ?";
@@ -416,7 +503,7 @@ void DataBase::UpdateServerUsername(string usernamelast, string usernamenew, boo
 void  DataBase::UpdateServerPassword(string passwordlast, string passwordnew, bool ThrowExc)
 {
 	Lock();
-	const char* sql = "UPDATE Server set sername = ? where username = ?;";
+	const char* sql = "UPDATE Server set Password = ? where Password = ?;";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	if (res != SQLITE_OK && ThrowExc)
