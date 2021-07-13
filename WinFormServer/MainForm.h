@@ -16,7 +16,7 @@ namespace WinFormServer {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Threading;
-
+	using namespace System::Media;
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
@@ -24,15 +24,25 @@ namespace WinFormServer {
 	{
 	public:
 		Insertbook^ form_insertbook;
+		search^ form_searchpanel;
+		setting^ form_settingpanel;
+		ChangeBookForm^ form_changebookform;
+	public:
+	
 		System::Media::SoundPlayer^ music = gcnew System::Media::SoundPlayer();
 		MainForm(void)
 		{
+		
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
-			form_insertbook = gcnew Insertbook(panel5);
-
+			form_insertbook = gcnew Insertbook(panel5,panel3,label3);
+			this->flowLayoutPanel1->BackgroundImage = nullptr;
+			this->panel5->Dock = System::Windows::Forms::DockStyle::Fill;
+			form_searchpanel = gcnew search(panel5);
+			form_settingpanel = gcnew setting(panel5,panel3,label3);
+			form_changebookform = gcnew ChangeBookForm(panel5);
 		}
 
 	protected:
@@ -88,7 +98,7 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			Guna::UI::Animation::Animation^ animation1 = (gcnew Guna::UI::Animation::Animation());
+			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->gunaCircleButton1 = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
@@ -129,8 +139,7 @@ namespace WinFormServer {
 			this->gunaCircleButton1->ForeColor = System::Drawing::Color::White;
 			this->gunaCircleButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton1.Image")));
 			this->gunaCircleButton1->ImageSize = System::Drawing::Size(25, 25);
-			this->gunaCircleButton1->Location = System::Drawing::Point(813, 485);
-			this->gunaCircleButton1->Margin = System::Windows::Forms::Padding(4);
+			this->gunaCircleButton1->Location = System::Drawing::Point(721, 388);
 			this->gunaCircleButton1->Name = L"gunaCircleButton1";
 			this->gunaCircleButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -138,8 +147,9 @@ namespace WinFormServer {
 			this->gunaCircleButton1->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaCircleButton1->OnHoverImage = nullptr;
 			this->gunaCircleButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaCircleButton1->Size = System::Drawing::Size(40, 37);
+			this->gunaCircleButton1->Size = System::Drawing::Size(30, 30);
 			this->gunaCircleButton1->TabIndex = 10;
+			this->gunaCircleButton1->Visible = false;
 			this->gunaCircleButton1->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton1_Click);
 			// 
 			// flowLayoutPanel1
@@ -154,21 +164,21 @@ namespace WinFormServer {
 			this->flowLayoutPanel1->Controls->Add(this->panel2);
 			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton5);
 			this->gunaTransition1->SetDecoration(this->flowLayoutPanel1, Guna::UI::Animation::DecorationType::None);
-			this->flowLayoutPanel1->FlowDirection = System::Windows::Forms::FlowDirection::RightToLeft;
-			this->flowLayoutPanel1->Location = System::Drawing::Point(977, 155);
-			this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
+			this->flowLayoutPanel1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->flowLayoutPanel1->Location = System::Drawing::Point(870, 128);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(221, 484);
+			this->flowLayoutPanel1->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
+			this->flowLayoutPanel1->Size = System::Drawing::Size(29, 393);
 			this->flowLayoutPanel1->TabIndex = 12;
+			this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::flowLayoutPanel1_Paint);
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
 			this->gunaTransition1->SetDecoration(this->panel1, Guna::UI::Animation::DecorationType::None);
-			this->panel1->Location = System::Drawing::Point(5, 4);
-			this->panel1->Margin = System::Windows::Forms::Padding(4);
+			this->panel1->Location = System::Drawing::Point(-133, 3);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(212, 65);
+			this->panel1->Size = System::Drawing::Size(159, 53);
 			this->panel1->TabIndex = 14;
 			// 
 			// gunaGradientButton7
@@ -189,8 +199,7 @@ namespace WinFormServer {
 			this->gunaGradientButton7->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton7->ImageOffsetX = -7;
 			this->gunaGradientButton7->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton7->Location = System::Drawing::Point(4, 77);
-			this->gunaGradientButton7->Margin = System::Windows::Forms::Padding(4);
+			this->gunaGradientButton7->Location = System::Drawing::Point(-134, 62);
 			this->gunaGradientButton7->Name = L"gunaGradientButton7";
 			this->gunaGradientButton7->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -200,7 +209,7 @@ namespace WinFormServer {
 			this->gunaGradientButton7->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaGradientButton7->OnHoverImage = nullptr;
 			this->gunaGradientButton7->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton7->Size = System::Drawing::Size(213, 52);
+			this->gunaGradientButton7->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton7->TabIndex = 13;
 			this->gunaGradientButton7->Text = L"ثبت کتاب";
 			this->gunaGradientButton7->Click += gcnew System::EventHandler(this, &MainForm::gunaGradientButton7_Click);
@@ -223,8 +232,7 @@ namespace WinFormServer {
 			this->gunaGradientButton2->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton2->ImageOffsetX = -7;
 			this->gunaGradientButton2->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton2->Location = System::Drawing::Point(4, 137);
-			this->gunaGradientButton2->Margin = System::Windows::Forms::Padding(4);
+			this->gunaGradientButton2->Location = System::Drawing::Point(-134, 110);
 			this->gunaGradientButton2->Name = L"gunaGradientButton2";
 			this->gunaGradientButton2->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -234,7 +242,7 @@ namespace WinFormServer {
 			this->gunaGradientButton2->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaGradientButton2->OnHoverImage = nullptr;
 			this->gunaGradientButton2->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton2->Size = System::Drawing::Size(213, 52);
+			this->gunaGradientButton2->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton2->TabIndex = 15;
 			this->gunaGradientButton2->Text = L"تغییر اطلاعات کتاب";
 			this->gunaGradientButton2->Click += gcnew System::EventHandler(this, &MainForm::gunaGradientButton2_Click);
@@ -257,8 +265,7 @@ namespace WinFormServer {
 			this->gunaGradientButton3->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton3->ImageOffsetX = -7;
 			this->gunaGradientButton3->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton3->Location = System::Drawing::Point(4, 197);
-			this->gunaGradientButton3->Margin = System::Windows::Forms::Padding(4);
+			this->gunaGradientButton3->Location = System::Drawing::Point(-134, 158);
 			this->gunaGradientButton3->Name = L"gunaGradientButton3";
 			this->gunaGradientButton3->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -268,7 +275,7 @@ namespace WinFormServer {
 			this->gunaGradientButton3->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaGradientButton3->OnHoverImage = nullptr;
 			this->gunaGradientButton3->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton3->Size = System::Drawing::Size(213, 52);
+			this->gunaGradientButton3->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton3->TabIndex = 16;
 			this->gunaGradientButton3->Text = L"جستوجو";
 			this->gunaGradientButton3->Click += gcnew System::EventHandler(this, &MainForm::gunaGradientButton3_Click);
@@ -290,8 +297,7 @@ namespace WinFormServer {
 			this->gunaGradientButton4->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton4->ImageOffsetX = -7;
 			this->gunaGradientButton4->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton4->Location = System::Drawing::Point(4, 257);
-			this->gunaGradientButton4->Margin = System::Windows::Forms::Padding(4);
+			this->gunaGradientButton4->Location = System::Drawing::Point(-134, 206);
 			this->gunaGradientButton4->Name = L"gunaGradientButton4";
 			this->gunaGradientButton4->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -301,7 +307,7 @@ namespace WinFormServer {
 			this->gunaGradientButton4->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaGradientButton4->OnHoverImage = nullptr;
 			this->gunaGradientButton4->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton4->Size = System::Drawing::Size(213, 52);
+			this->gunaGradientButton4->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton4->TabIndex = 17;
 			this->gunaGradientButton4->Text = L"gunaGradientButton4";
 			// 
@@ -309,11 +315,11 @@ namespace WinFormServer {
 			// 
 			this->panel2->BackColor = System::Drawing::Color::Transparent;
 			this->gunaTransition1->SetDecoration(this->panel2, Guna::UI::Animation::DecorationType::None);
-			this->panel2->Location = System::Drawing::Point(5, 317);
-			this->panel2->Margin = System::Windows::Forms::Padding(4);
+			this->panel2->Location = System::Drawing::Point(-133, 254);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(212, 47);
+			this->panel2->Size = System::Drawing::Size(159, 38);
 			this->panel2->TabIndex = 15;
+			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel2_Paint);
 			// 
 			// gunaGradientButton5
 			// 
@@ -333,8 +339,7 @@ namespace WinFormServer {
 			this->gunaGradientButton5->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton5->ImageOffsetX = -7;
 			this->gunaGradientButton5->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton5->Location = System::Drawing::Point(4, 372);
-			this->gunaGradientButton5->Margin = System::Windows::Forms::Padding(4);
+			this->gunaGradientButton5->Location = System::Drawing::Point(-134, 298);
 			this->gunaGradientButton5->Name = L"gunaGradientButton5";
 			this->gunaGradientButton5->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -344,7 +349,7 @@ namespace WinFormServer {
 			this->gunaGradientButton5->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaGradientButton5->OnHoverImage = nullptr;
 			this->gunaGradientButton5->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaGradientButton5->Size = System::Drawing::Size(213, 52);
+			this->gunaGradientButton5->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton5->TabIndex = 18;
 			this->gunaGradientButton5->Text = L"تنظیمات";
 			this->gunaGradientButton5->Click += gcnew System::EventHandler(this, &MainForm::gunaGradientButton5_Click);
@@ -365,8 +370,7 @@ namespace WinFormServer {
 			this->gunaCircleButton2->ForeColor = System::Drawing::Color::White;
 			this->gunaCircleButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaCircleButton2.Image")));
 			this->gunaCircleButton2->ImageSize = System::Drawing::Size(25, 25);
-			this->gunaCircleButton2->Location = System::Drawing::Point(813, 222);
-			this->gunaCircleButton2->Margin = System::Windows::Forms::Padding(4);
+			this->gunaCircleButton2->Location = System::Drawing::Point(856, 388);
 			this->gunaCircleButton2->Name = L"gunaCircleButton2";
 			this->gunaCircleButton2->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -374,7 +378,7 @@ namespace WinFormServer {
 			this->gunaCircleButton2->OnHoverForeColor = System::Drawing::Color::White;
 			this->gunaCircleButton2->OnHoverImage = nullptr;
 			this->gunaCircleButton2->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaCircleButton2->Size = System::Drawing::Size(40, 37);
+			this->gunaCircleButton2->Size = System::Drawing::Size(30, 30);
 			this->gunaCircleButton2->TabIndex = 11;
 			this->gunaCircleButton2->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton2_Click);
 			// 
@@ -383,11 +387,11 @@ namespace WinFormServer {
 			this->panel3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel3.BackgroundImage")));
 			this->panel3->Controls->Add(this->label3);
 			this->gunaTransition1->SetDecoration(this->panel3, Guna::UI::Animation::DecorationType::None);
-			this->panel3->Location = System::Drawing::Point(327, 10);
-			this->panel3->Margin = System::Windows::Forms::Padding(4);
+			this->panel3->Location = System::Drawing::Point(249, 7);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(499, 121);
+			this->panel3->Size = System::Drawing::Size(374, 98);
 			this->panel3->TabIndex = 23;
+			this->panel3->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel3_Paint);
 			// 
 			// label3
 			// 
@@ -397,10 +401,9 @@ namespace WinFormServer {
 				static_cast<System::Byte>(178)));
 			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->label3->Location = System::Drawing::Point(77, 44);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(58, 36);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(99, 44);
+			this->label3->Size = System::Drawing::Size(80, 35);
 			this->label3->TabIndex = 0;
 			this->label3->Text = L"label3";
 			// 
@@ -408,22 +411,22 @@ namespace WinFormServer {
 			// 
 			this->gunaTransition1->AnimationType = Guna::UI::Animation::AnimationType::Scale;
 			this->gunaTransition1->Cursor = nullptr;
-			animation1->AnimateOnlyDifferences = true;
-			animation1->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.BlindCoeff")));
-			animation1->LeafCoeff = 0;
-			animation1->MaxTime = 1;
-			animation1->MinTime = 0;
-			animation1->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicCoeff")));
-			animation1->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicShift")));
-			animation1->MosaicSize = 0;
-			animation1->Padding = System::Windows::Forms::Padding(0);
-			animation1->RotateCoeff = 0;
-			animation1->RotateLimit = 0;
-			animation1->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.ScaleCoeff")));
-			animation1->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.SlideCoeff")));
-			animation1->TimeCoeff = 0;
-			animation1->TransparencyCoeff = 0;
-			this->gunaTransition1->DefaultAnimation = animation1;
+			animation2->AnimateOnlyDifferences = true;
+			animation2->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.BlindCoeff")));
+			animation2->LeafCoeff = 0;
+			animation2->MaxTime = 1;
+			animation2->MinTime = 0;
+			animation2->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicCoeff")));
+			animation2->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicShift")));
+			animation2->MosaicSize = 0;
+			animation2->Padding = System::Windows::Forms::Padding(0);
+			animation2->RotateCoeff = 0;
+			animation2->RotateLimit = 0;
+			animation2->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.ScaleCoeff")));
+			animation2->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.SlideCoeff")));
+			animation2->TimeCoeff = 0;
+			animation2->TransparencyCoeff = 0;
+			this->gunaTransition1->DefaultAnimation = animation2;
 			// 
 			// gunaAdvenceTileButton1
 			// 
@@ -446,8 +449,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton1->ImageSize = System::Drawing::Size(52, 52);
 			this->gunaAdvenceTileButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton1->Location = System::Drawing::Point(36, 682);
-			this->gunaAdvenceTileButton1->Margin = System::Windows::Forms::Padding(4);
+			this->gunaAdvenceTileButton1->Location = System::Drawing::Point(27, 554);
 			this->gunaAdvenceTileButton1->Name = L"gunaAdvenceTileButton1";
 			this->gunaAdvenceTileButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -457,20 +459,19 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton1->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
 			this->gunaAdvenceTileButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton1->Size = System::Drawing::Size(57, 52);
+			this->gunaAdvenceTileButton1->Size = System::Drawing::Size(43, 42);
 			this->gunaAdvenceTileButton1->TabIndex = 24;
+			this->gunaAdvenceTileButton1->Click += gcnew System::EventHandler(this, &MainForm::gunaAdvenceTileButton1_Click);
 			// 
 			// panel4
 			// 
 			this->panel4->Controls->Add(this->gunaAdvenceTileButton3);
 			this->panel4->Controls->Add(this->gunaAdvenceTileButton2);
 			this->gunaTransition1->SetDecoration(this->panel4, Guna::UI::Animation::DecorationType::None);
-			this->panel4->Location = System::Drawing::Point(39, 560);
-			this->panel4->Margin = System::Windows::Forms::Padding(4);
+			this->panel4->Location = System::Drawing::Point(29, 455);
 			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(55, 127);
+			this->panel4->Size = System::Drawing::Size(41, 103);
 			this->panel4->TabIndex = 25;
-			this->panel4->Visible = false;
 			// 
 			// gunaAdvenceTileButton3
 			// 
@@ -493,8 +494,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton3->ImageSize = System::Drawing::Size(52, 52);
 			this->gunaAdvenceTileButton3->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton3->Location = System::Drawing::Point(0, 11);
-			this->gunaAdvenceTileButton3->Margin = System::Windows::Forms::Padding(4);
+			this->gunaAdvenceTileButton3->Location = System::Drawing::Point(0, 9);
 			this->gunaAdvenceTileButton3->Name = L"gunaAdvenceTileButton3";
 			this->gunaAdvenceTileButton3->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -504,7 +504,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton3->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
 			this->gunaAdvenceTileButton3->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton3->Size = System::Drawing::Size(52, 48);
+			this->gunaAdvenceTileButton3->Size = System::Drawing::Size(39, 39);
 			this->gunaAdvenceTileButton3->TabIndex = 27;
 			this->gunaAdvenceTileButton3->Text = L"gunaAdvenceTileButton3";
 			// 
@@ -529,8 +529,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton2->ImageSize = System::Drawing::Size(52, 52);
 			this->gunaAdvenceTileButton2->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton2->Location = System::Drawing::Point(1, 71);
-			this->gunaAdvenceTileButton2->Margin = System::Windows::Forms::Padding(4);
+			this->gunaAdvenceTileButton2->Location = System::Drawing::Point(1, 58);
 			this->gunaAdvenceTileButton2->Name = L"gunaAdvenceTileButton2";
 			this->gunaAdvenceTileButton2->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -540,7 +539,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton2->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
 			this->gunaAdvenceTileButton2->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton2->Size = System::Drawing::Size(53, 48);
+			this->gunaAdvenceTileButton2->Size = System::Drawing::Size(40, 39);
 			this->gunaAdvenceTileButton2->TabIndex = 26;
 			this->gunaAdvenceTileButton2->Text = L"gunaAdvenceTileButton2";
 			this->gunaAdvenceTileButton2->Click += gcnew System::EventHandler(this, &MainForm::gunaAdvenceTileButton2_Click);
@@ -548,31 +547,31 @@ namespace WinFormServer {
 			// panel5
 			// 
 			this->gunaTransition1->SetDecoration(this->panel5, Guna::UI::Animation::DecorationType::None);
-			this->panel5->Location = System::Drawing::Point(-1, -2);
-			this->panel5->Margin = System::Windows::Forms::Padding(4);
+			this->panel5->Location = System::Drawing::Point(2, 7);
 			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(806, 689);
+			this->panel5->Size = System::Drawing::Size(27, 25);
 			this->panel5->TabIndex = 26;
+			this->panel5->Visible = false;
+			this->panel5->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel5_Paint);
 			// 
 			// MainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1200, 768);
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->ClientSize = System::Drawing::Size(900, 624);
+			this->Controls->Add(this->panel3);
+			this->Controls->Add(this->gunaCircleButton1);
+			this->Controls->Add(this->gunaCircleButton2);
+			this->Controls->Add(this->flowLayoutPanel1);
 			this->Controls->Add(this->panel5);
 			this->Controls->Add(this->panel4);
 			this->Controls->Add(this->gunaAdvenceTileButton1);
-			this->Controls->Add(this->flowLayoutPanel1);
-			this->Controls->Add(this->gunaCircleButton2);
-			this->Controls->Add(this->panel3);
-			this->Controls->Add(this->gunaCircleButton1);
 			this->gunaTransition1->SetDecoration(this, Guna::UI::Animation::DecorationType::None);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
@@ -607,37 +606,35 @@ private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Form
 private: System::Void gunaCircleButton1_Click(System::Object^ sender, System::EventArgs^ e) {
 	gunaCircleButton1->Visible = false;
 	gunaTransition1->HideSync(flowLayoutPanel1, false, Guna::UI::Animation::Animation::Leaf);
-	gunaCircleButton2->Visible = true;
 	flowLayoutPanel1->Width = 32;
+	flowLayoutPanel1->Location = System::Drawing::Point(870,126);
+	flowLayoutPanel1->BackgroundImage = nullptr;
+	gunaTransition1->ShowSync(flowLayoutPanel1, false, Guna::UI::Animation::Animation::Leaf);
+	gunaCircleButton2->Visible = true;
 }
 private: System::Void gunaGradientButton1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void gunaCircleButton2_Click(System::Object^ sender, System::EventArgs^ e) 
 {
+	System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 	gunaCircleButton2->Visible = false;
-	gunaTransition1->ShowSync(flowLayoutPanel1, false, Guna::UI::Animation::Animation::Leaf);
-	gunaCircleButton2->Visible = true;
+	gunaTransition1->HideSync(flowLayoutPanel1, false, Guna::UI::Animation::Animation::Leaf);
 	flowLayoutPanel1->Width = 164;
+	flowLayoutPanel1->Location = System::Drawing::Point(735, 126);
+	flowLayoutPanel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"flowLayoutPanel1.BackgroundImage")));
+	gunaTransition1->ShowSync(flowLayoutPanel1, false, Guna::UI::Animation::Animation::Leaf);
+	gunaCircleButton1->Visible = true;
 }
 private: System::Void gunaGradientButton3_Click(System::Object^ sender, System::EventArgs^ e) {
 	panel5->Controls->Clear();
-	this->Refresh();
-	search ^searchpanel = gcnew search(panel5);
-	panel5->Width = 750;
-	panel5->Height = 689;
-	panel5->Controls->Add(searchpanel);
+	panel5->Controls->Add(form_searchpanel);
+	panel5->Visible = true;
 }
 private: System::Void gunaGradientButton7_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	panel5->Controls->Clear();
-	this->Refresh();
-	Insertbook ^insertbookpanl = gcnew Insertbook(panel5);
 	panel5->Controls->Add(form_insertbook);
-	panel5->Width = 750;
-	panel5->Height = 689;
-	panel5->Controls->Add(insertbookpanl);
-	this->Refresh();
-
+	panel5->Visible = true;
 }
 
 private: System::Void panel1_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
@@ -650,23 +647,36 @@ private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e
 
 private: System::Void gunaAdvenceTileButton2_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	music->SoundLocation = "music1.mp3";
+	music->SoundLocation = "..\\music1.wav";
 	music->Play();
 }
 private: System::Void gunaGradientButton2_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 	panel5->Controls->Clear();
-	ChangeBookForm^ changebookform = gcnew ChangeBookForm();
-	panel5->Controls->Add(changebookform);
-	panel5->Refresh();
+	panel5->Controls->Add(form_changebookform);
+	panel5->Visible = true;
 	
 }
 private: System::Void gunaGradientButton5_Click(System::Object^ sender, System::EventArgs^ e) {
 	panel5->Controls->Clear();
-	panel5->Refresh();
-	setting^ settingpanel = gcnew setting();
-	panel5->Controls->Add(settingpanel);
-	panel5->Refresh();
+	panel5->Controls->Add(form_settingpanel);
+	panel5->Visible = true;
+}
+
+
+private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void panel5_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+
+
+
+
+private: System::Void panel3_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void panel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void gunaAdvenceTileButton1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

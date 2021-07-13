@@ -1,11 +1,47 @@
 ﻿#pragma once
 
+#include<string>
+
+
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
+using namespace System::Runtime::InteropServices;
+using namespace std;
+
+
+
+
+
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+IntPtr CreateObject_API();
+
+
+
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void InsertProduct_API(IntPtr db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 namespace WinFormServer {
@@ -15,14 +51,20 @@ namespace WinFormServer {
 	/// </summary>
 	public ref class Insertbook : public System::Windows::Forms::UserControl
 	{
+		IntPtr db;
 	public:
 		Panel^ mainpanel;
-		Insertbook(Panel^c)
+		Panel^ Error_panel;
+		Label^ ErrorText_panel;
+		Insertbook(Panel^c,Panel^x,Label^ v)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			Error_panel = x;
+			ErrorText_panel = v;
+			db = CreateObject_API();
 			mainpanel = c;
 		}
 
@@ -44,18 +86,35 @@ namespace WinFormServer {
 
 
 
-	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
 
 
-	private: System::Windows::Forms::Label^ BOOKPRICE;
-	private: System::Windows::Forms::Label^ BOOKNAME;
-	private: System::Windows::Forms::Label^ WRITER;
-	private: System::Windows::Forms::Label^ GENRES;
 
 
-	private: System::Windows::Forms::Label^ BOOKINFORMATION;
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ label6;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox1;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox2;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox3;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox4;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox5;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox6;
+	private: System::Windows::Forms::Label^ label7;
+	private: Guna::UI::WinForms::GunaCircleProgressBar^ gunaCircleProgressBar1;
+	private: Guna::UI::WinForms::GunaWinCircleProgressIndicator^ gunaWinCircleProgressIndicator1;
+	private: Guna::UI::WinForms::GunaAdvenceButton^ gunaAdvenceButton1;
 
 
 	protected:
@@ -78,147 +137,321 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Insertbook::typeid));
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->BOOKPRICE = (gcnew System::Windows::Forms::Label());
-			this->BOOKNAME = (gcnew System::Windows::Forms::Label());
-			this->WRITER = (gcnew System::Windows::Forms::Label());
-			this->GENRES = (gcnew System::Windows::Forms::Label());
-			this->BOOKINFORMATION = (gcnew System::Windows::Forms::Label());
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->panel2->SuspendLayout();
-			this->tableLayoutPanel2->SuspendLayout();
-			this->tableLayoutPanel1->SuspendLayout();
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->gunaTextBox1 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->gunaTextBox2 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->gunaTextBox3 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->gunaTextBox4 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->gunaTextBox5 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->gunaTextBox6 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->gunaCircleProgressBar1 = (gcnew Guna::UI::WinForms::GunaCircleProgressBar());
+			this->gunaWinCircleProgressIndicator1 = (gcnew Guna::UI::WinForms::GunaWinCircleProgressIndicator());
+			this->gunaAdvenceButton1 = (gcnew Guna::UI::WinForms::GunaAdvenceButton());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// panel2
+			// pictureBox1
 			// 
-			this->panel2->Controls->Add(this->tableLayoutPanel2);
-			this->panel2->Location = System::Drawing::Point(380, 2);
-			this->panel2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(456, 279);
-			this->panel2->TabIndex = 3;
+			this->pictureBox1->Location = System::Drawing::Point(111, 49);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(159, 178);
+			this->pictureBox1->TabIndex = 1;
+			this->pictureBox1->TabStop = false;
 			// 
-			// tableLayoutPanel2
+			// label1
 			// 
-			this->tableLayoutPanel2->ColumnCount = 2;
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				65.39278F)));
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				34.60722F)));
-			this->tableLayoutPanel2->Controls->Add(this->BOOKPRICE, 1, 2);
-			this->tableLayoutPanel2->Controls->Add(this->BOOKNAME, 1, 1);
-			this->tableLayoutPanel2->Controls->Add(this->WRITER, 1, 3);
-			this->tableLayoutPanel2->Controls->Add(this->GENRES, 1, 4);
-			this->tableLayoutPanel2->Controls->Add(this->BOOKINFORMATION, 1, 0);
-			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 2);
-			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-			this->tableLayoutPanel2->RowCount = 5;
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25.13089F)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 24.60733F)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 84)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(453, 282);
-			this->tableLayoutPanel2->TabIndex = 1;
-			// 
-			// BOOKPRICE
-			// 
-			this->BOOKPRICE->AutoSize = true;
-			this->BOOKPRICE->Dock = System::Windows::Forms::DockStyle::Right;
-			this->BOOKPRICE->Font = (gcnew System::Drawing::Font(L"B Nazanin", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::Transparent;
+			this->label1->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->BOOKPRICE->Location = System::Drawing::Point(385, 97);
-			this->BOOKPRICE->Name = L"BOOKPRICE";
-			this->BOOKPRICE->Size = System::Drawing::Size(65, 49);
-			this->BOOKPRICE->TabIndex = 1;
-			this->BOOKPRICE->Text = L"قیمت کتاب";
+			this->label1->Location = System::Drawing::Point(764, 49);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(68, 31);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L"نام کتاب";
 			// 
-			// BOOKNAME
+			// label2
 			// 
-			this->BOOKNAME->AutoSize = true;
-			this->BOOKNAME->Dock = System::Windows::Forms::DockStyle::Right;
-			this->BOOKNAME->Font = (gcnew System::Drawing::Font(L"B Nazanin", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::Transparent;
+			this->label2->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->BOOKNAME->Location = System::Drawing::Point(398, 49);
-			this->BOOKNAME->Name = L"BOOKNAME";
-			this->BOOKNAME->Size = System::Drawing::Size(52, 48);
-			this->BOOKNAME->TabIndex = 3;
-			this->BOOKNAME->Text = L"نام کتاب";
+			this->label2->Location = System::Drawing::Point(745, 144);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(87, 31);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"قیمت کتاب";
 			// 
-			// WRITER
+			// label3
 			// 
-			this->WRITER->AutoSize = true;
-			this->WRITER->Dock = System::Windows::Forms::DockStyle::Right;
-			this->WRITER->Font = (gcnew System::Drawing::Font(L"B Nazanin", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label3->AutoSize = true;
+			this->label3->BackColor = System::Drawing::Color::Transparent;
+			this->label3->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->WRITER->Location = System::Drawing::Point(399, 146);
-			this->WRITER->Name = L"WRITER";
-			this->WRITER->Size = System::Drawing::Size(51, 49);
-			this->WRITER->TabIndex = 4;
-			this->WRITER->Text = L"نویسنده";
+			this->label3->Location = System::Drawing::Point(720, 310);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(112, 31);
+			this->label3->TabIndex = 4;
+			this->label3->Text = L"توضیحات کتاب";
 			// 
-			// GENRES
+			// label4
 			// 
-			this->GENRES->AutoSize = true;
-			this->GENRES->Dock = System::Windows::Forms::DockStyle::Right;
-			this->GENRES->Font = (gcnew System::Drawing::Font(L"B Nazanin", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label4->AutoSize = true;
+			this->label4->BackColor = System::Drawing::Color::Transparent;
+			this->label4->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->GENRES->Location = System::Drawing::Point(410, 195);
-			this->GENRES->Name = L"GENRES";
-			this->GENRES->Size = System::Drawing::Size(40, 87);
-			this->GENRES->TabIndex = 5;
-			this->GENRES->Text = L"ژانر ها";
+			this->label4->Location = System::Drawing::Point(784, 196);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(48, 31);
+			this->label4->TabIndex = 5;
+			this->label4->Text = L"امتیاز";
 			// 
-			// BOOKINFORMATION
+			// label5
 			// 
-			this->BOOKINFORMATION->AutoSize = true;
-			this->BOOKINFORMATION->Dock = System::Windows::Forms::DockStyle::Right;
-			this->BOOKINFORMATION->Font = (gcnew System::Drawing::Font(L"B Nazanin", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label5->AutoSize = true;
+			this->label5->BackColor = System::Drawing::Color::Transparent;
+			this->label5->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->BOOKINFORMATION->Location = System::Drawing::Point(398, 0);
-			this->BOOKINFORMATION->Name = L"BOOKINFORMATION";
-			this->BOOKINFORMATION->Size = System::Drawing::Size(52, 49);
-			this->BOOKINFORMATION->TabIndex = 11;
-			this->BOOKINFORMATION->Text = L"نام کتاب";
+			this->label5->Location = System::Drawing::Point(797, 248);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(35, 31);
+			this->label5->TabIndex = 6;
+			this->label5->Text = L"ژانر";
 			// 
-			// tableLayoutPanel1
+			// label6
 			// 
-			this->tableLayoutPanel1->BackColor = System::Drawing::Color::White;
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				41.97829F)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				58.02171F)));
-			this->tableLayoutPanel1->Controls->Add(this->panel2, 1, 0);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(211, 122);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 3;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 53.05755F)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.76978F)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 33.99281F)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(900, 537);
-			this->tableLayoutPanel1->TabIndex = 0;
+			this->label6->AutoSize = true;
+			this->label6->BackColor = System::Drawing::Color::Transparent;
+			this->label6->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->label6->Location = System::Drawing::Point(767, 94);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(65, 31);
+			this->label6->TabIndex = 7;
+			this->label6->Text = L"نویسنده";
+			// 
+			// gunaTextBox1
+			// 
+			this->gunaTextBox1->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox1->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox1->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox1->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox1->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox1->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox1->Location = System::Drawing::Point(522, 49);
+			this->gunaTextBox1->Name = L"gunaTextBox1";
+			this->gunaTextBox1->PasswordChar = '\0';
+			this->gunaTextBox1->SelectedText = L"";
+			this->gunaTextBox1->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox1->TabIndex = 13;
+			// 
+			// gunaTextBox2
+			// 
+			this->gunaTextBox2->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox2->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox2->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox2->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox2->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox2->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox2->Location = System::Drawing::Point(522, 94);
+			this->gunaTextBox2->Name = L"gunaTextBox2";
+			this->gunaTextBox2->PasswordChar = '\0';
+			this->gunaTextBox2->SelectedText = L"";
+			this->gunaTextBox2->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox2->TabIndex = 14;
+			// 
+			// gunaTextBox3
+			// 
+			this->gunaTextBox3->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox3->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox3->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox3->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox3->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox3->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox3->Location = System::Drawing::Point(522, 144);
+			this->gunaTextBox3->Name = L"gunaTextBox3";
+			this->gunaTextBox3->PasswordChar = '\0';
+			this->gunaTextBox3->SelectedText = L"";
+			this->gunaTextBox3->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox3->TabIndex = 15;
+			// 
+			// gunaTextBox4
+			// 
+			this->gunaTextBox4->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox4->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox4->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox4->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox4->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox4->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox4->Location = System::Drawing::Point(522, 192);
+			this->gunaTextBox4->Name = L"gunaTextBox4";
+			this->gunaTextBox4->PasswordChar = '\0';
+			this->gunaTextBox4->SelectedText = L"";
+			this->gunaTextBox4->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox4->TabIndex = 16;
+			// 
+			// gunaTextBox5
+			// 
+			this->gunaTextBox5->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox5->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox5->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox5->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox5->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox5->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox5->Location = System::Drawing::Point(522, 244);
+			this->gunaTextBox5->Name = L"gunaTextBox5";
+			this->gunaTextBox5->PasswordChar = '\0';
+			this->gunaTextBox5->SelectedText = L"";
+			this->gunaTextBox5->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox5->TabIndex = 17;
+			// 
+			// gunaTextBox6
+			// 
+			this->gunaTextBox6->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox6->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox6->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox6->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox6->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox6->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox6->Location = System::Drawing::Point(522, 344);
+			this->gunaTextBox6->Name = L"gunaTextBox6";
+			this->gunaTextBox6->PasswordChar = '\0';
+			this->gunaTextBox6->SelectedText = L"";
+			this->gunaTextBox6->Size = System::Drawing::Size(310, 218);
+			this->gunaTextBox6->TabIndex = 18;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->BackColor = System::Drawing::Color::Transparent;
+			this->label7->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->label7->Location = System::Drawing::Point(146, 230);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(90, 31);
+			this->label7->TabIndex = 19;
+			this->label7->Text = L"تصویر کتاب";
+			// 
+			// gunaCircleProgressBar1
+			// 
+			this->gunaCircleProgressBar1->AnimationSpeed = 0.6F;
+			this->gunaCircleProgressBar1->BackColor = System::Drawing::Color::Transparent;
+			this->gunaCircleProgressBar1->BaseColor = System::Drawing::Color::White;
+			this->gunaCircleProgressBar1->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaCircleProgressBar1->IdleOffset = 20;
+			this->gunaCircleProgressBar1->Image = nullptr;
+			this->gunaCircleProgressBar1->ImageSize = System::Drawing::Size(52, 52);
+			this->gunaCircleProgressBar1->Location = System::Drawing::Point(152, 384);
+			this->gunaCircleProgressBar1->Name = L"gunaCircleProgressBar1";
+			this->gunaCircleProgressBar1->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaCircleProgressBar1->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaCircleProgressBar1->ProgressOffset = 20;
+			this->gunaCircleProgressBar1->Size = System::Drawing::Size(130, 130);
+			this->gunaCircleProgressBar1->TabIndex = 20;
+			// 
+			// gunaWinCircleProgressIndicator1
+			// 
+			this->gunaWinCircleProgressIndicator1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->gunaWinCircleProgressIndicator1->Location = System::Drawing::Point(341, 419);
+			this->gunaWinCircleProgressIndicator1->Name = L"gunaWinCircleProgressIndicator1";
+			this->gunaWinCircleProgressIndicator1->ProgressColor = System::Drawing::Color::DodgerBlue;
+			this->gunaWinCircleProgressIndicator1->Size = System::Drawing::Size(64, 64);
+			this->gunaWinCircleProgressIndicator1->TabIndex = 21;
+			// 
+			// gunaAdvenceButton1
+			// 
+			this->gunaAdvenceButton1->AnimationHoverSpeed = 0.07F;
+			this->gunaAdvenceButton1->AnimationSpeed = 0.03F;
+			this->gunaAdvenceButton1->BackColor = System::Drawing::Color::Transparent;
+			this->gunaAdvenceButton1->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(166)), static_cast<System::Int32>(static_cast<System::Byte>(232)));
+			this->gunaAdvenceButton1->BorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton1->CheckedBaseColor = System::Drawing::Color::Gray;
+			this->gunaAdvenceButton1->CheckedBorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton1->CheckedForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton1->CheckedImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceButton1.CheckedImage")));
+			this->gunaAdvenceButton1->CheckedLineColor = System::Drawing::Color::Firebrick;
+			this->gunaAdvenceButton1->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaAdvenceButton1->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaAdvenceButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaAdvenceButton1->ForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceButton1.Image")));
+			this->gunaAdvenceButton1->ImageSize = System::Drawing::Size(20, 20);
+			this->gunaAdvenceButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
+			this->gunaAdvenceButton1->Location = System::Drawing::Point(111, 520);
+			this->gunaAdvenceButton1->Name = L"gunaAdvenceButton1";
+			this->gunaAdvenceButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
+				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaAdvenceButton1->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton1->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton1->OnHoverImage = nullptr;
+			this->gunaAdvenceButton1->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
+			this->gunaAdvenceButton1->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton1->Radius = 15;
+			this->gunaAdvenceButton1->Size = System::Drawing::Size(215, 42);
+			this->gunaAdvenceButton1->TabIndex = 32;
+			this->gunaAdvenceButton1->Text = L"ثبت کتاب";
+			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &Insertbook::gunaAdvenceButton1_Click);
 			// 
 			// Insertbook
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->Controls->Add(this->tableLayoutPanel1);
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Controls->Add(this->gunaAdvenceButton1);
+			this->Controls->Add(this->gunaWinCircleProgressIndicator1);
+			this->Controls->Add(this->gunaCircleProgressBar1);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->gunaTextBox6);
+			this->Controls->Add(this->gunaTextBox5);
+			this->Controls->Add(this->gunaTextBox4);
+			this->Controls->Add(this->gunaTextBox3);
+			this->Controls->Add(this->gunaTextBox2);
+			this->Controls->Add(this->gunaTextBox1);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Insertbook";
-			this->Size = System::Drawing::Size(1200, 768);
+			this->Size = System::Drawing::Size(900, 624);
 			this->Load += gcnew System::EventHandler(this, &Insertbook::Insertbook_Load);
-			this->panel2->ResumeLayout(false);
-			this->tableLayoutPanel2->ResumeLayout(false);
-			this->tableLayoutPanel2->PerformLayout();
-			this->tableLayoutPanel1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -234,5 +467,43 @@ private: System::Void FILESELECT_Click(System::Object^ sender, System::EventArgs
 
 private: System::Void Insertbook_Load(System::Object^ sender, System::EventArgs^ e) {
 }
+
+
+
+
+
+
+
+
+
+	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+		std::string str1;
+		std::string str2;
+		std::string str3;
+		std::string str4;
+		std::string str5;
+		std::string str6;
+		MarshalString(gunaTextBox1->Text, str1);
+		MarshalString(gunaTextBox2->Text, str2);
+		MarshalString(gunaTextBox3->Text, str3);
+		MarshalString(gunaTextBox4->Text, str4);
+		MarshalString(gunaTextBox5->Text, str5);
+		MarshalString(gunaTextBox6->Text, str6);
+		Random^ RandString = gcnew Random();
+		int a = RandString->Next(10000, 999999);
+		InsertProduct_API(db, a, str1, 50, "asda", str6, str2, str5, str4, str3);
+	}
+	private:
+	void MarshalString(String^ s, string& os)
+	{
+	using namespace Runtime::InteropServices;
+	const char* chars =(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+	os = chars;
+	Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
+
+
 };
 }

@@ -16,12 +16,14 @@ namespace WinFormServer {
 	public ref class ChangeBookForm : public System::Windows::Forms::UserControl
 	{
 	public:
-		ChangeBookForm(void)
+		Panel^ mainpanel;
+		ChangeBookForm(Panel^a)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			mainpanel = a;
 		}
 
 	protected:
