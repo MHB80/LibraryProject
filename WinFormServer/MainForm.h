@@ -1,10 +1,9 @@
 ﻿#pragma once
-#include "setting.h";
 #include"Insertbook.h";
 #include"search.h"
 #include"setting.h"
-#include "EmailForm.h"
 #include"ChangeBookForm.h"
+
 //#include"SignUpForm.h"
 //#include"SignUpForm1.h"
 namespace WinFormServer {
@@ -23,10 +22,11 @@ namespace WinFormServer {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		Insertbook^ form_insertbook;
+		//Insertbook^ form_insertbook;
 		search^ form_searchpanel;
 		setting^ form_settingpanel;
 		ChangeBookForm^ form_changebookform;
+		Insertbook^ form_insertbook;
 	public:
 	
 		System::Media::SoundPlayer^ music = gcnew System::Media::SoundPlayer();
@@ -37,12 +37,13 @@ namespace WinFormServer {
 			//
 			//TODO: Add the constructor code here
 			//
-			form_insertbook = gcnew Insertbook(panel5,panel3,label3);
+		//	form_insertbook = gcnew Insertbook(panel5,panel3,label3);
 			this->flowLayoutPanel1->BackgroundImage = nullptr;
 			this->panel5->Dock = System::Windows::Forms::DockStyle::Fill;
 			form_searchpanel = gcnew search(panel5);
 			form_settingpanel = gcnew setting(panel5,panel3,label3);
 			form_changebookform = gcnew ChangeBookForm(panel5);
+			form_insertbook=gcnew Insertbook(panel5, panel3, label3);
 		}
 
 	protected:
@@ -98,8 +99,8 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			this->gunaCircleButton1 = (gcnew Guna::UI::WinForms::GunaCircleButton());
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
@@ -157,15 +158,15 @@ namespace WinFormServer {
 			this->flowLayoutPanel1->BackColor = System::Drawing::Color::Transparent;
 			this->flowLayoutPanel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"flowLayoutPanel1.BackgroundImage")));
 			this->flowLayoutPanel1->Controls->Add(this->panel1);
+			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton4);
 			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton7);
 			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton2);
 			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton3);
-			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton4);
 			this->flowLayoutPanel1->Controls->Add(this->panel2);
 			this->flowLayoutPanel1->Controls->Add(this->gunaGradientButton5);
 			this->gunaTransition1->SetDecoration(this->flowLayoutPanel1, Guna::UI::Animation::DecorationType::None);
 			this->flowLayoutPanel1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->flowLayoutPanel1->Location = System::Drawing::Point(870, 128);
+			this->flowLayoutPanel1->Location = System::Drawing::Point(870, 134);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
 			this->flowLayoutPanel1->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->flowLayoutPanel1->Size = System::Drawing::Size(29, 393);
@@ -199,7 +200,7 @@ namespace WinFormServer {
 			this->gunaGradientButton7->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton7->ImageOffsetX = -7;
 			this->gunaGradientButton7->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton7->Location = System::Drawing::Point(-134, 62);
+			this->gunaGradientButton7->Location = System::Drawing::Point(-134, 110);
 			this->gunaGradientButton7->Name = L"gunaGradientButton7";
 			this->gunaGradientButton7->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -232,7 +233,7 @@ namespace WinFormServer {
 			this->gunaGradientButton2->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton2->ImageOffsetX = -7;
 			this->gunaGradientButton2->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton2->Location = System::Drawing::Point(-134, 110);
+			this->gunaGradientButton2->Location = System::Drawing::Point(-134, 158);
 			this->gunaGradientButton2->Name = L"gunaGradientButton2";
 			this->gunaGradientButton2->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -265,7 +266,7 @@ namespace WinFormServer {
 			this->gunaGradientButton3->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton3->ImageOffsetX = -7;
 			this->gunaGradientButton3->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton3->Location = System::Drawing::Point(-134, 158);
+			this->gunaGradientButton3->Location = System::Drawing::Point(-134, 206);
 			this->gunaGradientButton3->Name = L"gunaGradientButton3";
 			this->gunaGradientButton3->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -297,7 +298,7 @@ namespace WinFormServer {
 			this->gunaGradientButton4->ImageAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->gunaGradientButton4->ImageOffsetX = -7;
 			this->gunaGradientButton4->ImageSize = System::Drawing::Size(20, 20);
-			this->gunaGradientButton4->Location = System::Drawing::Point(-134, 206);
+			this->gunaGradientButton4->Location = System::Drawing::Point(-134, 62);
 			this->gunaGradientButton4->Name = L"gunaGradientButton4";
 			this->gunaGradientButton4->OnHoverBaseColor1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(155)),
 				static_cast<System::Int32>(static_cast<System::Byte>(145)), static_cast<System::Int32>(static_cast<System::Byte>(221)));
@@ -310,6 +311,7 @@ namespace WinFormServer {
 			this->gunaGradientButton4->Size = System::Drawing::Size(160, 42);
 			this->gunaGradientButton4->TabIndex = 17;
 			this->gunaGradientButton4->Text = L"gunaGradientButton4";
+			this->gunaGradientButton4->Click += gcnew System::EventHandler(this, &MainForm::gunaGradientButton4_Click);
 			// 
 			// panel2
 			// 
@@ -391,6 +393,7 @@ namespace WinFormServer {
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(374, 98);
 			this->panel3->TabIndex = 23;
+			this->panel3->Visible = false;
 			this->panel3->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel3_Paint);
 			// 
 			// label3
@@ -677,6 +680,10 @@ private: System::Void panel3_Paint(System::Object^ sender, System::Windows::Form
 private: System::Void panel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 private: System::Void gunaAdvenceTileButton1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void gunaGradientButton4_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	panel5->Visible = false;
 }
 };
 }

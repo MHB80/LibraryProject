@@ -1,11 +1,9 @@
 ﻿#pragma once
-#include "MainForm.h"
-#include "setting.h"
-#include"search.h"
+
 #include"OtherFunctionandClass.h"
 #include<string>
 #include"SignUpForm1.h"
-
+#include"MainForm.h"
 namespace WinFormServer {
 
 	using namespace System;
@@ -40,8 +38,6 @@ namespace WinFormServer {
 	extern bool Check_Admin_Username_API(IntPtr db, string username, string password);
 #pragma endregion
 #pragma region Profile_Picture
-	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	extern void Set_Profile_Picture_API(IntPtr, std::string path, std::string username, bool ThrowExc, bool readonly);
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 	extern void Get_Profile_Picture_API(IntPtr, std::string username, std::string path, bool ThrowExc);
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
@@ -491,10 +487,22 @@ private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^
 			gunaTransition1->ShowSync(ErrorPanel, true, Guna::UI::Animation::Animation::Leaf);
 	
 		}
+		else if (gunaTextBox1->Text == "")
+		{
+			label4->Text = L"نام کاربری را وارد نمایید";
+			gunaTransition1->ShowSync(ErrorPanel, true, Guna::UI::Animation::Animation::Leaf);
+
+		}
+		else if (gunaTextBox3->Text == "")
+		{
+			label4->Text = L"رمز عبور را وارد نمایید";
+			gunaTransition1->ShowSync(ErrorPanel, true, Guna::UI::Animation::Animation::Leaf);
+
+		}
 		else
 		{
 			bool h=Check_Admin_Username_API(db, str1, str2);
-			if (h == true)
+			if (h == false)
 			{
 				
 				label4->Text = L"رمز عبور وارد شده اشتباه است";

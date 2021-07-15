@@ -4,6 +4,7 @@
 
 
 
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -12,7 +13,7 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::Runtime::InteropServices;
 using namespace std;
-
+using namespace System::Threading;
 
 
 
@@ -23,12 +24,11 @@ IntPtr CreateObject_API();
 
 
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-void InsertProduct_API(IntPtr db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price);
-
-
-
-
-
+void InsertProduct_API(IntPtr db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string picturefilename);
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void Set_Profile_Picture_API(IntPtr db, string path, string username);
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+int GetUsernametRowId_API(IntPtr db,string username);
 
 
 
@@ -51,10 +51,21 @@ namespace WinFormServer {
 	/// </summary>
 	public ref class Insertbook : public System::Windows::Forms::UserControl
 	{
-		IntPtr db;
 	public:
+		IntPtr db;
 		Panel^ mainpanel;
 		Panel^ Error_panel;
+		Thread^ Browsfile;
+		Thread^ browsepicture;
+		String^ address_file;
+		String^ address_picture;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+	private: System::Windows::Forms::Label^ label8;
+	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox7;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
+	private: Guna::UI::WinForms::GunaButton^ gunaButton1;
+	public:
+	public:
 		Label^ ErrorText_panel;
 		Insertbook(Panel^c,Panel^x,Label^ v)
 		{
@@ -80,23 +91,6 @@ namespace WinFormServer {
 			}
 		}
 
-	protected:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Label^ label1;
@@ -117,11 +111,6 @@ namespace WinFormServer {
 	private: Guna::UI::WinForms::GunaAdvenceButton^ gunaAdvenceButton1;
 
 
-	protected:
-
-
-
-	protected:
 
 	private:
 		/// <summary>
@@ -154,6 +143,11 @@ namespace WinFormServer {
 			this->gunaCircleProgressBar1 = (gcnew Guna::UI::WinForms::GunaCircleProgressBar());
 			this->gunaWinCircleProgressIndicator1 = (gcnew Guna::UI::WinForms::GunaWinCircleProgressIndicator());
 			this->gunaAdvenceButton1 = (gcnew Guna::UI::WinForms::GunaAdvenceButton());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->gunaTextBox7 = (gcnew Guna::UI::WinForms::GunaTextBox());
+			this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->gunaButton1 = (gcnew Guna::UI::WinForms::GunaButton());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -164,6 +158,7 @@ namespace WinFormServer {
 			this->pictureBox1->Size = System::Drawing::Size(159, 178);
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &Insertbook::pictureBox1_Click);
 			// 
 			// label1
 			// 
@@ -195,7 +190,7 @@ namespace WinFormServer {
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(178)));
-			this->label3->Location = System::Drawing::Point(720, 310);
+			this->label3->Location = System::Drawing::Point(720, 331);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(112, 31);
 			this->label3->TabIndex = 4;
@@ -338,11 +333,11 @@ namespace WinFormServer {
 				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->gunaTextBox6->FocusedForeColor = System::Drawing::SystemColors::ControlText;
 			this->gunaTextBox6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->gunaTextBox6->Location = System::Drawing::Point(522, 344);
+			this->gunaTextBox6->Location = System::Drawing::Point(522, 365);
 			this->gunaTextBox6->Name = L"gunaTextBox6";
 			this->gunaTextBox6->PasswordChar = '\0';
 			this->gunaTextBox6->SelectedText = L"";
-			this->gunaTextBox6->Size = System::Drawing::Size(310, 218);
+			this->gunaTextBox6->Size = System::Drawing::Size(310, 197);
 			this->gunaTextBox6->TabIndex = 18;
 			// 
 			// label7
@@ -423,11 +418,78 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &Insertbook::gunaAdvenceButton1_Click);
 			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"openFileDialog1";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->BackColor = System::Drawing::Color::Transparent;
+			this->label8->Font = (gcnew System::Drawing::Font(L"B Nazanin", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
+			this->label8->Location = System::Drawing::Point(797, 293);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(36, 31);
+			this->label8->TabIndex = 33;
+			this->label8->Text = L"ID";
+			// 
+			// gunaTextBox7
+			// 
+			this->gunaTextBox7->BaseColor = System::Drawing::Color::White;
+			this->gunaTextBox7->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->gunaTextBox7->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->gunaTextBox7->FocusedBaseColor = System::Drawing::Color::White;
+			this->gunaTextBox7->FocusedBorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaTextBox7->FocusedForeColor = System::Drawing::SystemColors::ControlText;
+			this->gunaTextBox7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaTextBox7->Location = System::Drawing::Point(522, 293);
+			this->gunaTextBox7->Name = L"gunaTextBox7";
+			this->gunaTextBox7->PasswordChar = '\0';
+			this->gunaTextBox7->SelectedText = L"";
+			this->gunaTextBox7->Size = System::Drawing::Size(201, 35);
+			this->gunaTextBox7->TabIndex = 34;
+			// 
+			// openFileDialog2
+			// 
+			this->openFileDialog2->FileName = L"openFileDialog2";
+			// 
+			// gunaButton1
+			// 
+			this->gunaButton1->AnimationHoverSpeed = 0.07F;
+			this->gunaButton1->AnimationSpeed = 0.03F;
+			this->gunaButton1->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)), static_cast<System::Int32>(static_cast<System::Byte>(88)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaButton1->BorderColor = System::Drawing::Color::Black;
+			this->gunaButton1->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaButton1->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaButton1->ForeColor = System::Drawing::Color::White;
+			this->gunaButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaButton1.Image")));
+			this->gunaButton1->ImageSize = System::Drawing::Size(20, 20);
+			this->gunaButton1->Location = System::Drawing::Point(110, 264);
+			this->gunaButton1->Name = L"gunaButton1";
+			this->gunaButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
+				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaButton1->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaButton1->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaButton1->OnHoverImage = nullptr;
+			this->gunaButton1->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaButton1->Size = System::Drawing::Size(160, 42);
+			this->gunaButton1->TabIndex = 35;
+			this->gunaButton1->Text = L"gunaButton1";
+			this->gunaButton1->Click += gcnew System::EventHandler(this, &Insertbook::gunaButton1_Click);
+			// 
 			// Insertbook
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->Controls->Add(this->gunaButton1);
+			this->Controls->Add(this->gunaTextBox7);
+			this->Controls->Add(this->label8);
 			this->Controls->Add(this->gunaAdvenceButton1);
 			this->Controls->Add(this->gunaWinCircleProgressIndicator1);
 			this->Controls->Add(this->gunaCircleProgressBar1);
@@ -479,21 +541,64 @@ private: System::Void Insertbook_Load(System::Object^ sender, System::EventArgs^
 	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 
-		std::string str1;
-		std::string str2;
-		std::string str3;
-		std::string str4;
-		std::string str5;
-		std::string str6;
-		MarshalString(gunaTextBox1->Text, str1);
-		MarshalString(gunaTextBox2->Text, str2);
-		MarshalString(gunaTextBox3->Text, str3);
-		MarshalString(gunaTextBox4->Text, str4);
-		MarshalString(gunaTextBox5->Text, str5);
-		MarshalString(gunaTextBox6->Text, str6);
-		Random^ RandString = gcnew Random();
-		int a = RandString->Next(10000, 999999);
-		InsertProduct_API(db, a, str1, 50, "asda", str6, str2, str5, str4, str3);
+		if (gunaTextBox1->Text == "")
+		{
+
+		}
+		else if (gunaTextBox2->Text == "")
+		{
+
+		}
+		else if (gunaTextBox3->Text == "")
+		{
+
+		}
+		else if (gunaTextBox4->Text == "")
+		{
+
+		}
+		else if (gunaTextBox5->Text == "")
+		{
+
+		}
+		else if (gunaTextBox6->Text == "")
+		{
+
+		}
+		else if (gunaTextBox7->Text == "")
+		{
+
+		}
+		else if (address_file == "")
+		{
+
+		}
+		else if (address_picture == "")
+		{
+
+		}
+		else
+		{
+			std::string str1;
+			std::string str2;
+			std::string str3;
+			std::string str4;
+			std::string str5;
+			std::string str6;
+			std::string str7;
+			std::string str8;
+			std::string str9;
+			MarshalString(address_file, str1);
+			MarshalString(gunaTextBox1->Text, str2);
+			MarshalString(gunaTextBox2->Text, str3);
+			MarshalString(gunaTextBox3->Text, str4);
+			MarshalString(gunaTextBox4->Text, str5);
+			MarshalString(gunaTextBox5->Text, str6);
+			MarshalString(gunaTextBox6->Text, str7);
+			MarshalString(gunaTextBox7->Text, str8);
+			MarshalString(address_picture, str9);
+			InsertProduct_API(db, stoi(str8), str2, str1, str7, str3, str6, str5, str4, str9);
+		}
 	}
 	private:
 	void MarshalString(String^ s, string& os)
@@ -503,7 +608,42 @@ private: System::Void Insertbook_Load(System::Object^ sender, System::EventArgs^
 	os = chars;
 	Marshal::FreeHGlobal(IntPtr((void*)chars));
 	}
-
-
+	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		
+		openFileDialog1->Title = "Browse Picture";
+		openFileDialog1->Filter = "png files (*.png)|*.png|jpg files (*jpg)|*.jpg";
+		openFileDialog1->Multiselect = false;
+		openFileDialog1->CheckFileExists = true;
+		openFileDialog1->CheckPathExists = true;
+		browsepicture = gcnew Thread(gcnew ThreadStart(this, &Insertbook::Browspicture));
+		browsepicture->SetApartmentState(ApartmentState::STA);
+		browsepicture->Start();
+		browsepicture->Join();
+		address_picture = openFileDialog1->FileName;
+	
+		
+	}
+	private:void Browspicture()
+	{
+		openFileDialog1->ShowDialog();
+	}
+private: System::Void gunaButton1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	openFileDialog2->Title = "Browse File";
+	openFileDialog2->Filter = "pdf files (*.pdf)|*.pdf";
+	openFileDialog2->Multiselect = false;
+	openFileDialog2->CheckFileExists = true;
+	openFileDialog2->CheckPathExists = true;
+	Browsfile = gcnew Thread(gcnew ThreadStart(this, &Insertbook::BrowsFile));
+	Browsfile->SetApartmentState(ApartmentState::STA);
+	Browsfile->Start();
+	Browsfile->Join();
+	address_file = openFileDialog2->FileName;
+}
+	private:void BrowsFile()
+	{
+		openFileDialog2->ShowDialog();
+	}
 };
 }
