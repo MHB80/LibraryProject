@@ -20,7 +20,7 @@ extern "C" UIAPI DataBase * CreateObject_API();
 
 
 
-extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price);
+extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilepicture);
 
 
 
@@ -32,7 +32,7 @@ extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, int 
 
 #pragma region Insertion_server
 extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password);
-extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, string username, bool ThrowExc);
+extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, string username);
 extern "C" UIAPI void InsertAdmin_Other_API(DataBase * db,string FirstName, string LastName, string mobilenumber, string address, string postcodehome);
 #pragma endregion
 #pragma region Update_Server
@@ -45,7 +45,7 @@ extern "C" UIAPI bool Signup_Admin_Password_API(DataBase* db, string password);
 extern "C" UIAPI bool Check_Admin_Username_API(DataBase * db, string username, string password);
 #pragma endregion
 #pragma region Profile_Picture
-extern "C" UIAPI void Set_Profile_Picture_API(DataBase* db, string path, string username, bool readonly);
+extern "C" UIAPI void Set_Profile_Picture_API(DataBase* db, string path, string username);
 extern "C" UIAPI void Get_Profile_Picture_API(DataBase* db, string username, string path);
 extern "C" UIAPI void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string filenmaeprofilepicture);
 #pragma endregion

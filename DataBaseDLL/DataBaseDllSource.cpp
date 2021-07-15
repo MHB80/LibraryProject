@@ -13,9 +13,9 @@ DataBase* CreateObject_API()
 
 
 
-void InsertProduct_API(DataBase* db, int id, string name, int filesize, string filename, string bookdescription, string writer, string genre, string score, string price)
+void InsertProduct_API(DataBase* db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilpicture)
 {
-	db->InsertProduct(id, name, filesize, filename, bookdescription, writer, genre, score, price, true);
+	db->InsertProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
 }
 
 
@@ -27,10 +27,10 @@ bool InsertAdmin_API(DataBase* db, string username, string password)
 {
 	return db->InsertAdmin(username, password, true);
 }
-int GetUsernametRowId_API(DataBase* db, string username, bool ThrowExc)
+int GetUsernametRowId_API(DataBase* db, string username)
 {
 	
-	return db->GetUsernametRowId(username, ThrowExc);
+	return db->GetUsernametRowId(username, true);
 }
 void InsertAdmin_Other_API(DataBase* db, string FirstName, string LastName, string mobilenumber, string address, string postcodehome)
 {
@@ -62,9 +62,9 @@ bool Check_Admin_Username_API(DataBase* db, string username, string password)
 	return db->Check_Admin_Username(username, password, true);
 }
 #pragma region Profile_Picture
-void Set_Profile_Picture_API(DataBase* db, string path, string username, bool readonly)
+void Set_Profile_Picture_API(DataBase* db, string path, string username)
 {
-	db->Set_Profile_Picture(path, username, true, readonly);
+	db->Set_Profile_Picture(path, username, true, false);
 }
 void Get_Profile_Picture_API(DataBase* db, string username, string path)
 {
