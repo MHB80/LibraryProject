@@ -5,7 +5,6 @@
 #include"DataBase.h"
 
 
-
 #pragma comment(lib,"sqlite3.lib")
 using namespace std;
 
@@ -20,18 +19,19 @@ extern "C" UIAPI DataBase * CreateObject_API();
 
 
 
+
 extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilepicture);
 
+extern "C" UIAPI void Select_Product_API(DataBase * db, string name);
 
+extern "C" UIAPI void GetProductFile(DataBase * db, string name, string path);
 
-
-
-
+extern "C" UIAPI void GetProductFile2(DataBase * db, string name, string path);
 
 
 
 #pragma region Insertion_server
-extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password);
+extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path);
 extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, string username);
 extern "C" UIAPI void InsertAdmin_Other_API(DataBase * db,string FirstName, string LastName, string mobilenumber, string address, string postcodehome);
 #pragma endregion
@@ -55,6 +55,8 @@ extern "C" UIAPI void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string
 
 
 
+//other
+extern "C" UIAPI void send_FW(int a,string &str);
 
 
 

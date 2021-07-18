@@ -154,6 +154,7 @@
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="DataBaseDllSource.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="sqlite3.h" />
   </ItemGroup>

@@ -1,10 +1,39 @@
 #include"pch.h"
 #include "DataBase.h"
 #include <iostream>
+#include"nlohmann/json.hpp"
 #pragma comment(lib,"sqlite3.lib")
+using json = nlohmann::json;
+
+static int my_special_callback(void* unused, int count, char** data, char** columns)
+{
+	int idx;
+
+	printf("There are %d column(s)\n", count);
+
+	for (idx = 0; idx < count; idx++) {
+		printf("The data in column \"%s\" is: %s\n", columns[idx], data[idx]);
+	}
+
+	printf("\n");
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 DataBase::DataBase()
 {
-
+	
 }
 DataBase::~DataBase()
 {
@@ -102,7 +131,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 	size_picture.seekg(0);
 	size_picture.close();
 	Lock();
-	const char* sql = "INSERT INTO Product (ID,Name,File,FileName,BookDescription,Writer,Genre,Score,Price,SizeFile,PictureFile,PictureFileName,SizeFilePicture)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	const char* sql = "Insert INTO Product (ID,Name,File,FileName,BookDescription,Writer,Genre,Score,Price,SizeFile,PictureFile,PictureFileName,SizeFilePicture)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	if (res != SQLITE_OK && ThrowExc)
@@ -337,6 +366,16 @@ string DataBase::GetProductFileName(int id, bool ThrowExc)
 sqlite3_blob* DataBase::OpenProductFile(int rowid,bool readonly , bool ThrowExc )
 {
 	sqlite3_blob* file = nullptr;
+	int res = sqlite3_blob_open(db, "main", "Product", "PictureFile", rowid, readonly ? 0 : 1, &file);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		ThrowError(SQLITE_OK);
+	}
+	return file;
+}
+sqlite3_blob* DataBase::OpenProductFile2(int rowid, bool readonly, bool ThrowExc)
+{
+	sqlite3_blob* file = nullptr;
 	int res = sqlite3_blob_open(db, "main", "Product", "File", rowid, readonly ? 0 : 1, &file);
 	if (res != SQLITE_OK && ThrowExc)
 	{
@@ -355,16 +394,41 @@ void DataBase::WriteProductFile(sqlite3_blob* file, char* Buffer, long long Size
 		throw exception("Error");
 	}
 }
-void DataBase::GetProductFile(int id, string path)
+void DataBase::GetProductFile(string name, string path)
 {
-	int rowid = GetProductRowId(id);
+//	int rowid = GetProductRowId(id);
+	int rowid=GetUsernameProductRowId(name,true);
 	sqlite3_blob* file = OpenProductFile(rowid, 1);
 	long long size = sqlite3_blob_bytes(file);
 	long long index = 0;
 	const int buffersize = 20 * 1024;
 	char Buffer[buffersize];
-	string Path = path + "\\" + GetProductFileName(id);
-	ofstream ofs (Path,ios::binary);
+	
+	ofstream ofs (path,ios::binary);
+	if (ofs.good())
+	{
+		while (index < size)
+		{
+			int read = size - index < buffersize ? size - index : buffersize;
+			sqlite3_blob_read(file, Buffer, read, index);
+			ofs.write(Buffer, read);
+			index += read;
+		}
+	}
+	ofs.close();
+	CloseProductFile(file);
+}
+void DataBase::GetProductFile2(string name, string path)
+{
+	//	int rowid = GetProductRowId(id);
+	int rowid = GetUsernameProductRowId(name, true);
+	sqlite3_blob* file = OpenProductFile2(rowid, 1);
+	long long size = sqlite3_blob_bytes(file);
+	long long index = 0;
+	const int buffersize = 20 * 1024;
+	char Buffer[buffersize];
+
+	ofstream ofs(path, ios::binary);
 	if (ofs.good())
 	{
 		while (index < size)
@@ -389,6 +453,98 @@ void DataBase::CloseProductFile(sqlite3_blob* file, bool ThrowExc )
 		ThrowError(db);
 	}
 }
+int DataBase::GetUsernameProductRowId(string name, bool ThrowExc)
+{
+	const char* sql = "Select rowid from Product where Name == ?";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	return sqlite3_column_int(stmt, 0);
+
+}
+
+
+#pragma region Select-client
+void DataBase::Select_Product(string name)
+{
+
+	bool ThrowExc = true;
+	const char* sql = "Select * from Product Where Name == ?";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	ofstream write("..\\temp.txt");
+	res = sqlite3_step(stmt);
+	write << "1[";
+	write<<reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+	write << "]1";
+	write << "4[";
+	write << reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
+	write << "]4";
+	write << "5[";
+	write << reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5));
+	write << "]5";
+	write << "6[";
+	write << reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6));
+	write << "]6";
+	write << "7[";
+	write << reinterpret_cast<const char*>(sqlite3_column_text(stmt, 7));
+	write << "]7";
+	write << "8[";
+	write << reinterpret_cast<const char*>(sqlite3_column_text(stmt, 8));
+	write << "]8";
+	write.close();
+	
+}
+#pragma endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //#pragma endregion
 //#pragma region Delete
 //void DataBase::DeleteCustomer(int username = 0, int listid = 0, bool ThrowExc = true)
@@ -472,13 +628,18 @@ void  DataBase::UpdateCustomerListId(int listidlast, int listidnew, bool ThrowEx
 #pragma endregion
 
 #pragma region Insertion-server
-bool  DataBase::InsertAdmin(string username, string password, bool ThrowExc)
+bool  DataBase::InsertAdmin(string username, string password,string Email,string path, bool ThrowExc)
 {
+
+	ifstream size_file(path, ios::binary);
+	long long int size = size_file.seekg(0, ios::end).tellg();
+	size_file.seekg(0);
+	size_file.close();
 	bool _is_Username_Exists = Signup_Admin_Username(username, true);
 	if (!_is_Username_Exists)
 	{
 		Lock();
-		const char* sql = "INSERT INTO Server (Username,Password)VALUES(?, ?);";
+		const char* sql = "INSERT INTO Server (Username,Password,pictureprofile,filenamepictureprofile,Email,SizePictureProfile)VALUES(?, ?,?,?,?,?);";
 		sqlite3_stmt* stmt;
 		int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 		if (res != SQLITE_OK && ThrowExc)
@@ -501,11 +662,127 @@ bool  DataBase::InsertAdmin(string username, string password, bool ThrowExc)
 			sqlite3_finalize(stmt);
 			ThrowError(db);
 		}
+		res = sqlite3_bind_zeroblob(stmt, 3, size);
+		if (res != SQLITE_OK && ThrowExc)
+		{
+			UnLock();
+			sqlite3_finalize(stmt);
+			ThrowError(db);
+		}
+		res = sqlite3_bind_text(stmt, 4, path.c_str(), path.size(), nullptr);
+		if (res != SQLITE_OK && ThrowExc)
+		{
+			UnLock();
+			sqlite3_finalize(stmt);
+			ThrowError(db);
+		}
+		res = sqlite3_bind_text(stmt, 5, Email.c_str(), Email.size(), nullptr);
+		if (res != SQLITE_OK && ThrowExc)
+		{
+			UnLock();
+			sqlite3_finalize(stmt);
+			ThrowError(db);
+		}
+		res = sqlite3_bind_int(stmt, 6, size);
+		if (res != SQLITE_OK && ThrowExc)
+		{
+			UnLock();
+			sqlite3_finalize(stmt);
+			ThrowError(db);
+		}
 		res = sqlite3_step(stmt);
 		sqlite3_finalize(stmt);
 		UnLock();
 		if (res != SQLITE_DONE && ThrowExc)
 			ThrowError(db);
+
+
+
+
+
+
+		sqlite3_blob* file = nullptr;
+		res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", GetUsernametRowId(username, true), 1, &file);
+		if (res != SQLITE_OK && ThrowExc)
+		{
+			ThrowError(SQLITE_OK);
+		}
+		ifstream picture_1(path, ios::binary);
+		long long int index = 0;
+		const int Buffer_Size = 20 * 1024;
+		if (picture_1.is_open())
+		{
+			while (index < size)
+			{
+				char Buffer[Buffer_Size];
+				long long int read;
+				if (size - index < Buffer_Size)
+				{
+					read = size - index;
+				}
+				else
+				{
+					read = Buffer_Size;
+				}
+				Lock();
+				picture_1.read(Buffer, read);
+				int res = sqlite3_blob_write(file, Buffer, read, index);
+				UnLock();
+				index += read;
+				if (res != SQLITE_OK && ThrowExc)
+				{
+					CloseProductFile(file);
+					throw exception("Error");
+				}
+			}
+		}
+		picture_1.close();
+		CloseProductFile(file, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		return true;
 	}
 	else
@@ -585,6 +862,16 @@ int  DataBase::GetUsernametRowId(string username, bool ThrowExc)
 	}
 	res = sqlite3_step(stmt);
 	return sqlite3_column_int(stmt, 0);
+}
+sqlite3_blob* DataBase::OpenProductFileforserver(int rowid, bool readonly, bool ThrowExc )
+{
+	sqlite3_blob* file = nullptr;
+	int res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", rowid, readonly ? 0 : 1, &file);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		ThrowError(SQLITE_OK);
+	}
+	return file;
 }
 #pragma endregion
 #pragma region Update_Server
@@ -831,26 +1118,74 @@ bool DataBase::Change_Admin_Password(string passwordlast, string passwordnew, bo
 }
 #pragma endregion
 #pragma region Profile_Picture
-void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc,bool readonly)
+void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc)
 {
+	ifstream size_file(path, ios::binary);
+	long long int size = size_file.seekg(0, ios::end).tellg();
+	size_file.seekg(0);
+	size_file.close();
+	
+	const char* sql = "Replace INTO Server (Username,PictureProfile,FileNamePictureProfile,SizePictureProfile) VALUES(?,?,?,?);";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, username.c_str(), username.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_zeroblob(stmt, 2, size);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 3, path.c_str(), path.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_int(stmt, 4, size);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	if (res != SQLITE_DONE && ThrowExc)
+		ThrowError(db);
+
+
+
+
+
 	sqlite3_blob* file = nullptr;
-	int a = GetUsernametRowId(username, true);
-	int res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", a, readonly ? 0 : 1, &file);
+	res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", GetUsernametRowId(username, true), 1, &file);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		ThrowError(SQLITE_OK);
 	}
 	ifstream picture_1(path, ios::binary);
-	int size = picture_1.seekg(0, ios::end).tellg();
-	picture_1.seekg(0);
-	int index=0;
+	long long int index = 0;
 	const int Buffer_Size = 20 * 1024;
 	if (picture_1.is_open())
 	{
 		while (index < size)
 		{
 			char Buffer[Buffer_Size];
-			int read;
+			long long int read;
 			if (size - index < Buffer_Size)
 			{
 				read = size - index;
@@ -860,8 +1195,10 @@ void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc,
 				read = Buffer_Size;
 			}
 			Lock();
-			int res = sqlite3_blob_write(file, Buffer, size, index);
+			picture_1.read(Buffer, read);
+			int res = sqlite3_blob_write(file, Buffer, read, index);
 			UnLock();
+			index += read;
 			if (res != SQLITE_OK && ThrowExc)
 			{
 				CloseProductFile(file);
@@ -870,7 +1207,16 @@ void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc,
 		}
 	}
 	picture_1.close();
-	
+	CloseProductFile(file, true);
+
+
+
+
+
+
+
+
+
 }
 void  DataBase::Get_Profile_Picture(string username, string path , bool ThrowExc)
 {

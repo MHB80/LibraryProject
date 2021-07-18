@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "DataBaseDllSource.h"
 #pragma comment(lib,"sqlite3.lib")
+
+
 DataBase* CreateObject_API()
 {
 
@@ -18,14 +20,23 @@ void InsertProduct_API(DataBase* db, int id, string name, string filename, strin
 	db->InsertProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
 }
 
-
-
-
+void Select_Product_API(DataBase* db, string name)
+{
+	db->Select_Product(name);
+}
+void GetProductFile(DataBase* db, string name, string path)
+{
+	db->GetProductFile(name, path);
+}
+void GetProductFile2(DataBase* db, string name, string path)
+{
+	db->GetProductFile2(name, path);
+}
 
 #pragma region Insertion_server
-bool InsertAdmin_API(DataBase* db, string username, string password)
+bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path)
 {
-	return db->InsertAdmin(username, password, true);
+	return db->InsertAdmin(username, password,Email,path, true);
 }
 int GetUsernametRowId_API(DataBase* db, string username)
 {
@@ -62,9 +73,9 @@ bool Check_Admin_Username_API(DataBase* db, string username, string password)
 	return db->Check_Admin_Username(username, password, true);
 }
 #pragma region Profile_Picture
-void Set_Profile_Picture_API(DataBase* db, string path, string username)
+void Set_Profile_Picture_API(DataBase* db, string path, string username )
 {
-	db->Set_Profile_Picture(path, username, true, false);
+	db->Set_Profile_Picture(path, username,true);
 }
 void Get_Profile_Picture_API(DataBase* db, string username, string path)
 {
@@ -76,3 +87,23 @@ void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string
 }
 #pragma endregion
 
+//other
+void send_FW(int a,string &str)
+{
+	ifstream read("..\\temp.txt");
+	string text;
+	read >> text;
+	int start;
+	int end;
+	string str1;
+	if (text.find(to_string(a) + "[")!=-1)
+	{
+		start = text.find(to_string(a) + "[");
+		if (text.find("]" + to_string(a)) != -1)
+		{
+			end = text.find("]" + to_string(a));
+			str1 = text.substr(start+2, end - start-2);
+		}
+	}
+	str = str1;
+}
