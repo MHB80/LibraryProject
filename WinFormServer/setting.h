@@ -248,9 +248,9 @@ namespace WinFormServer {
 			this->panel3->Controls->Add(this->gunaTextBox6);
 			this->panel3->Controls->Add(this->gunaTextBox5);
 			this->panel3->Controls->Add(this->label1);
-			this->panel3->Location = System::Drawing::Point(469, 258);
+			this->panel3->Location = System::Drawing::Point(474, 140);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(348, 330);
+			this->panel3->Size = System::Drawing::Size(344, 340);
 			this->panel3->TabIndex = 23;
 			// 
 			// gunaTextBox4
@@ -418,7 +418,7 @@ namespace WinFormServer {
 			this->panel4->Controls->Add(this->label6);
 			this->panel4->Controls->Add(this->label5);
 			this->panel4->Controls->Add(this->gunaTextBox12);
-			this->panel4->Location = System::Drawing::Point(51, 237);
+			this->panel4->Location = System::Drawing::Point(74, 140);
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(330, 340);
 			this->panel4->TabIndex = 24;

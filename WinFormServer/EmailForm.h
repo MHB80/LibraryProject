@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include<string>
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -10,7 +10,30 @@ using namespace System::Net;
 using namespace System::Net::Mail;
 using namespace System::IO;
 using namespace System::Text;
+using namespace System::Runtime::InteropServices;
+using namespace std;
 namespace WinFormServer {
+
+
+
+
+
+
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	IntPtr CreateObject_API();
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	bool InsertAdmin_API(IntPtr, std::string, std::string,std::string,std::string);
+
+	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+	void Set_Profile_Picture_API(IntPtr db, string path, string username);
+
+
+
+
+
+
+
+
 
 	/// <summary>
 	/// Summary for EmailForm
@@ -18,15 +41,22 @@ namespace WinFormServer {
 	public ref class EmailForm : public System::Windows::Forms::UserControl
 	{
 	public:
-		
+		String^ username;
+		String^ password;
 		Panel^ mainpanel;
-		EmailForm(Panel^ b)
+		String^ code1=L"";
+		IntPtr db1;
+		String^ pathpicture;
+		EmailForm(Panel^ b,String^username1,String^password1)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 			mainpanel = b;
+			username = username1;
+			password = password1;
+			db1 = CreateObject_API();
 		}
 
 	protected:
@@ -53,7 +83,7 @@ namespace WinFormServer {
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: Guna::UI::WinForms::GunaTransition^ gunaTransition1;
 	private: System::Windows::Forms::Timer^ timer1;
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -85,7 +115,6 @@ namespace WinFormServer {
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->gunaTransition1 = (gcnew Guna::UI::WinForms::GunaTransition(this->components));
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->panel1->SuspendLayout();
@@ -213,6 +242,7 @@ namespace WinFormServer {
 			this->pictureBox2->Location = System::Drawing::Point(540, 66);
 			this->pictureBox2->Name = L"pictureBox2";
 			this->pictureBox2->Size = System::Drawing::Size(149, 171);
+			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBox2->TabIndex = 23;
 			this->pictureBox2->TabStop = false;
 			this->pictureBox2->Click += gcnew System::EventHandler(this, &EmailForm::pictureBox2_Click);
@@ -269,28 +299,12 @@ namespace WinFormServer {
 			animation1->TransparencyCoeff = 0;
 			this->gunaTransition1->DefaultAnimation = animation1;
 			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
-			this->button1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.BackgroundImage")));
-			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->gunaTransition1->SetDecoration(this->button1, Guna::UI::Animation::DecorationType::None);
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(84)), static_cast<System::Int32>(static_cast<System::Byte>(172)),
-				static_cast<System::Int32>(static_cast<System::Byte>(231)));
-			this->button1->Location = System::Drawing::Point(794, 0);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(40, 43);
-			this->button1->TabIndex = 25;
-			this->button1->UseVisualStyleBackColor = false;
-			// 
 			// EmailForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->gunaAdvenceButton1);
@@ -318,16 +332,33 @@ namespace WinFormServer {
 
 	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		string str;
+		string str1;
+		string str2;
+		MarshalString(username, str);
+		MarshalString(password, str1);
+		string path;
+		MarshalString(pathpicture, path);
+		MarshalString(gunaTextBox1->Text, str2);
 		Random^ RandString = gcnew Random();
 		String^ code=(RandString->Next(10000, 99999)).ToString();
-		String^ code1;
-		if (code1 == gunaTextBox2->Text)
+		if (code1 == gunaTextBox2->Text&&code1!="")
 		{
-			label3->Text = L"ثبت نام با موفقیت انجام شد";
+			if (InsertAdmin_API(db1, str, str1, str2,path))
+			{
+				label3->Text = L"ثبت نام با موفقیت انجام شد";
+				gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+				timer1->Start();
+				mainpanel->Controls->Clear();
+				mainpanel->Visible = false;
+			}
+			
+		}
+		else if (code1 != gunaTextBox2->Text)
+		{
+			label3->Text = L"کد وارد شده نامعتبر است";
 			gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
 			timer1->Start();
-			mainpanel->Controls->Clear();
-			mainpanel->Visible = false;
 		}
 		else if (gunaTextBox1->Text == "")
 		{
@@ -348,20 +379,22 @@ namespace WinFormServer {
 				//email subject
 				mail->Subject =L"سلام";
 				//email Text
-				Random^ RandString = gcnew Random();
-				MessageBox::Show(code);
 				mail->Body = "code : "+code;
+				gunaTextBox2->Visible = true;
+				gunaLabel2->Visible = true;
 				client->Send(mail);
 				label3->Text = L"s";
 				gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
 				timer1->Start();
+				code1 = code;
 			}
 			catch (Exception^ error)
 			{
 				MessageBox::Show("error sending");
 			}
 		}
-		code1 = code;
+	
+	   
 
 
 
@@ -377,9 +410,19 @@ namespace WinFormServer {
 
 		if (dr == System::Windows::Forms::DialogResult::OK)
 		{
-			String^ Str = openFileDialog1->FileName;
+			 pathpicture = openFileDialog1->FileName;
 		}
-	
+		pictureBox2->ImageLocation = pathpicture;
 }
+private:
+	void MarshalString(String^ s, string& os)
+	{
+		using namespace Runtime::InteropServices;
+		const char* chars =
+			(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
+
 };
 }

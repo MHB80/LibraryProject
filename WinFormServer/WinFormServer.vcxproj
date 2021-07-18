@@ -154,12 +154,14 @@
     <ClInclude Include="Insertbook.h">
       <FileType>CppControl</FileType>
     </ClInclude>
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="OtherFunctionandClass.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="search.h">
@@ -204,6 +206,24 @@
     <EmbeddedResource Include="SignUpForm1.resx">
       <DependentUpon>SignUpForm1.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib.1.0.dll">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>05bfd3f1-6319-4f30-b752-c7a22889bcc4</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib.1.0.dll">
+      <WrapperTool>aximp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>05bfd3f1-6319-4f30-b752-c7a22889bcc4</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

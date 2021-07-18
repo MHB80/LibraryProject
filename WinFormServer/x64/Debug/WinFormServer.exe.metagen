@@ -36,6 +36,10 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
+Assembly Interop.AcroPDFLib.1.0, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Assembly AxInterop.AcroPDFLib.1.0, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
 Class WinFormServer.ChangeBookForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -43,9 +47,14 @@ Class WinFormServer.ChangeBookForm: AutoLayout, AnsiClass, Class, Public, Before
     System.Windows.Forms.Panel mainpanel : Public
 Class WinFormServer.EmailForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
+    System.String username : Public
+    System.String password : Public
     System.Windows.Forms.Panel mainpanel : Public
+    System.String code1 : Public
+    IntPtr db1 : Public
+    System.String pathpicture : Public
 Class WinFormServer.Insertbook: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(System.Windows.Forms.Panel, System.Windows.Forms.Panel, System.Windows.Forms.Label): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

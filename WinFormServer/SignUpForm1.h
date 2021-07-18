@@ -9,6 +9,12 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace std;
 using namespace System::Runtime::InteropServices;
+
+
+
+
+
+
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 IntPtr CreateObject_API();
 [DllImport("Registdll.dll", CallingConvention = CallingConvention::Cdecl)]
@@ -21,8 +27,7 @@ bool Let_Password_API(IntPtr, string Password);
 extern bool Signup_Admin_Username_Api(IntPtr, string username);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 extern bool Signup_Admin_Password_API(IntPtr, string password);
-[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-bool InsertAdmin_API(IntPtr, std::string, std::string);
+
 
 
 
@@ -39,7 +44,7 @@ namespace WinFormServer {
 		IntPtr ch;
 		IntPtr db1;
 		Panel^ mainpanel;
-	private: System::Windows::Forms::Button^ button1;
+
 		   EmailForm^ form_email;
 	public:
 		SignUpForm1(Panel^a)
@@ -51,7 +56,7 @@ namespace WinFormServer {
 			ch = CreatObject();
 			db1 = CreateObject_API();
 			mainpanel = a;
-			form_email = gcnew EmailForm(a);
+			form_email = gcnew EmailForm(a,gunaTextBox1->Text,gunaTextBox2->Text);
 		}
 
 	protected:
@@ -110,7 +115,6 @@ namespace WinFormServer {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->gunaTransition1 = (gcnew Guna::UI::WinForms::GunaTransition(this->components));
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -323,28 +327,12 @@ namespace WinFormServer {
 			animation1->TransparencyCoeff = 0;
 			this->gunaTransition1->DefaultAnimation = animation1;
 			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
-			this->button1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.BackgroundImage")));
-			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->gunaTransition1->SetDecoration(this->button1, Guna::UI::Animation::DecorationType::None);
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(84)), static_cast<System::Int32>(static_cast<System::Byte>(172)),
-				static_cast<System::Int32>(static_cast<System::Byte>(231)));
-			this->button1->Location = System::Drawing::Point(794, 0);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(40, 43);
-			this->button1->TabIndex = 34;
-			this->button1->UseVisualStyleBackColor = false;
-			// 
 			// SignUpForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->gunaLabel1);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->gunaAdvenceButton1);
@@ -404,6 +392,7 @@ namespace WinFormServer {
 		}
 		else
 		{
+			form_email = gcnew EmailForm(mainpanel, gunaTextBox1->Text, gunaTextBox2->Text);
 			mainpanel->Controls->Clear();
 			mainpanel->Controls->Add(form_email);
 		}

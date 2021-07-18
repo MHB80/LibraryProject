@@ -77,6 +77,7 @@ namespace WinFormServer {
 			ErrorText_panel = v;
 			db = CreateObject_API();
 			mainpanel = c;
+			
 		}
 
 	protected:

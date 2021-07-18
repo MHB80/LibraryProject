@@ -19,8 +19,6 @@ namespace WinFormServer {
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 	IntPtr CreateObject_API();
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	bool InsertAdmin_API(IntPtr, std::string, std::string);
-	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 	int GetUsernametRowId_API(IntPtr, std::string, bool ThrowExc);
 
 #pragma region Update_Server
@@ -38,8 +36,7 @@ namespace WinFormServer {
 	extern bool Check_Admin_Username_API(IntPtr db, string username, string password);
 #pragma endregion
 #pragma region Profile_Picture
-	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-	extern void Get_Profile_Picture_API(IntPtr, std::string username, std::string path, bool ThrowExc);
+
 	[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 	extern void Set_Server_FileNmaeProfilePicture_API(IntPtr, std::string username, std::string filenmaeprofilepicture, bool ThrowExc);
 #pragma endregion
@@ -126,8 +123,8 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			Guna::UI::Animation::Animation^ animation1 = (gcnew Guna::UI::Animation::Animation());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
-			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -385,22 +382,22 @@ namespace WinFormServer {
 			// 
 			this->gunaTransition1->AnimationType = Guna::UI::Animation::AnimationType::Scale;
 			this->gunaTransition1->Cursor = nullptr;
-			animation2->AnimateOnlyDifferences = true;
-			animation2->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.BlindCoeff")));
-			animation2->LeafCoeff = 0;
-			animation2->MaxTime = 1;
-			animation2->MinTime = 0;
-			animation2->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicCoeff")));
-			animation2->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicShift")));
-			animation2->MosaicSize = 0;
-			animation2->Padding = System::Windows::Forms::Padding(0);
-			animation2->RotateCoeff = 0;
-			animation2->RotateLimit = 0;
-			animation2->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.ScaleCoeff")));
-			animation2->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.SlideCoeff")));
-			animation2->TimeCoeff = 0;
-			animation2->TransparencyCoeff = 0;
-			this->gunaTransition1->DefaultAnimation = animation2;
+			animation1->AnimateOnlyDifferences = true;
+			animation1->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.BlindCoeff")));
+			animation1->LeafCoeff = 0;
+			animation1->MaxTime = 1;
+			animation1->MinTime = 0;
+			animation1->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicCoeff")));
+			animation1->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicShift")));
+			animation1->MosaicSize = 0;
+			animation1->Padding = System::Windows::Forms::Padding(0);
+			animation1->RotateCoeff = 0;
+			animation1->RotateLimit = 0;
+			animation1->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.ScaleCoeff")));
+			animation1->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.SlideCoeff")));
+			animation1->TimeCoeff = 0;
+			animation1->TransparencyCoeff = 0;
+			this->gunaTransition1->DefaultAnimation = animation1;
 			// 
 			// timer2
 			// 
@@ -414,6 +411,8 @@ namespace WinFormServer {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(834, 562);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->ErrorPanel);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -424,10 +423,8 @@ namespace WinFormServer {
 			this->Controls->Add(this->gunaTextBox1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->ErrorPanel);
 			this->gunaTransition1->SetDecoration(this, Guna::UI::Animation::DecorationType::None);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
