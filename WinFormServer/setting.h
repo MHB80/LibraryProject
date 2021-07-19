@@ -39,13 +39,13 @@ namespace WinFormServer {
 		Panel^ mainpanel;
 		Panel^ Error_panel;
 		Label^ ErrorText_panel;
-		setting(Panel^ a,Panel^c,Label^x)
+		setting(Panel^ a,Panel^c,Label^x, IntPtr db_help)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
-			db = CreateObject_API();
+			db = db_help;
 			mainpanel = a;
 			Error_panel = c;
 			ErrorText_panel = x;

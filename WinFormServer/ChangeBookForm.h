@@ -11,44 +11,67 @@ using namespace System::Drawing;
 using namespace std;
 using namespace System::Runtime::InteropServices;
 using json = nlohmann::json;
+using namespace System::Diagnostics;
+using namespace System::Threading;
 
 
 
 
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void InsertProduct_API(IntPtr db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilepicture);
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void ReplaceProduct_API(IntPtr db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilepicture);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 IntPtr CreateObject_API();
-
-
-
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 void Select_Product_API(IntPtr db, string name);
-
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-void send_FW(int a,string &str);
+void send_FW(int a, string& str);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 void GetProductFile(IntPtr db, string name, string path);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 void GetProductFile2(IntPtr db, string name, string path);
-namespace WinFormServer {
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+int GetProductId(IntPtr db, string name);
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void KillObject_API(IntPtr db);
 
+
+
+
+
+
+
+
+
+namespace WinFormServer {
 	/// <summary>
 	/// Summary for ChangeBookForm
 	/// </summary>
 	public ref class ChangeBookForm : public System::Windows::Forms::UserControl
 	{
-		IntPtr db;
-	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox1;
-
 	public:
+		IntPtr db;
+	
 		Panel^ mainpanel;
-		ChangeBookForm(Panel^a)
+		Process proc;
+		String^ pathfile;
+		String^ pathpicture;
+		Thread^ Browsfile;
+		Thread^ browsepicture;
+		DialogResult dr;
+		String^ namebook;
+	public:
+		ChangeBookForm(Panel^ a,IntPtr db_help)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+	
+			db = db_help;
 			mainpanel = a;
-			db=CreateObject_API();
+
 		}
 
 	protected:
@@ -65,31 +88,10 @@ namespace WinFormServer {
 	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox1;
 	protected:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private: Guna::UI::WinForms::GunaImageButton^ gunaImageButton1;
 
-
-
-
-
-
-
-
-
-
-
+	private: Guna::UI::WinForms::GunaAdvenceButton^ gunaAdvenceButton2;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox6;
 	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox5;
 	private: Guna::UI::WinForms::GunaTextBox^ gunaTextBox4;
@@ -103,19 +105,13 @@ namespace WinFormServer {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
 	private: Guna::UI::WinForms::GunaAdvenceButton^ gunaAdvenceButton1;
-
-
-
-
-
-
-
+	private: Guna::UI::WinForms::GunaPictureBox^ gunaPictureBox1;
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -141,6 +137,8 @@ namespace WinFormServer {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->gunaAdvenceButton1 = (gcnew Guna::UI::WinForms::GunaAdvenceButton());
 			this->gunaPictureBox1 = (gcnew Guna::UI::WinForms::GunaPictureBox());
+			this->gunaAdvenceButton2 = (gcnew Guna::UI::WinForms::GunaAdvenceButton());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->gunaPictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -392,6 +390,7 @@ namespace WinFormServer {
 			this->gunaAdvenceButton1->TabIndex = 49;
 			this->gunaAdvenceButton1->Text = L"ثبت کتاب";
 			this->gunaAdvenceButton1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton1->Click += gcnew System::EventHandler(this, &ChangeBookForm::gunaAdvenceButton1_Click);
 			// 
 			// gunaPictureBox1
 			// 
@@ -402,6 +401,48 @@ namespace WinFormServer {
 			this->gunaPictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->gunaPictureBox1->TabIndex = 50;
 			this->gunaPictureBox1->TabStop = false;
+			this->gunaPictureBox1->Click += gcnew System::EventHandler(this, &ChangeBookForm::gunaPictureBox1_Click_1);
+			// 
+			// gunaAdvenceButton2
+			// 
+			this->gunaAdvenceButton2->AnimationHoverSpeed = 0.07F;
+			this->gunaAdvenceButton2->AnimationSpeed = 0.03F;
+			this->gunaAdvenceButton2->BackColor = System::Drawing::Color::Transparent;
+			this->gunaAdvenceButton2->BaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(166)), static_cast<System::Int32>(static_cast<System::Byte>(232)));
+			this->gunaAdvenceButton2->BorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton2->CheckedBaseColor = System::Drawing::Color::Gray;
+			this->gunaAdvenceButton2->CheckedBorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton2->CheckedForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton2->CheckedImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceButton2.CheckedImage")));
+			this->gunaAdvenceButton2->CheckedLineColor = System::Drawing::Color::Firebrick;
+			this->gunaAdvenceButton2->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->gunaAdvenceButton2->FocusedColor = System::Drawing::Color::Empty;
+			this->gunaAdvenceButton2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaAdvenceButton2->ForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceButton2.Image")));
+			this->gunaAdvenceButton2->ImageSize = System::Drawing::Size(20, 20);
+			this->gunaAdvenceButton2->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
+			this->gunaAdvenceButton2->Location = System::Drawing::Point(110, 363);
+			this->gunaAdvenceButton2->Name = L"gunaAdvenceButton2";
+			this->gunaAdvenceButton2->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
+				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaAdvenceButton2->OnHoverBorderColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton2->OnHoverForeColor = System::Drawing::Color::White;
+			this->gunaAdvenceButton2->OnHoverImage = nullptr;
+			this->gunaAdvenceButton2->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
+				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
+			this->gunaAdvenceButton2->OnPressedColor = System::Drawing::Color::Black;
+			this->gunaAdvenceButton2->Radius = 15;
+			this->gunaAdvenceButton2->Size = System::Drawing::Size(161, 42);
+			this->gunaAdvenceButton2->TabIndex = 51;
+			this->gunaAdvenceButton2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->gunaAdvenceButton2->Click += gcnew System::EventHandler(this, &ChangeBookForm::gunaAdvenceButton2_Click);
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
 			// ChangeBookForm
 			// 
@@ -410,6 +451,7 @@ namespace WinFormServer {
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->Controls->Add(this->gunaAdvenceButton2);
 			this->Controls->Add(this->gunaPictureBox1);
 			this->Controls->Add(this->gunaAdvenceButton1);
 			this->Controls->Add(this->gunaTextBox6);
@@ -436,47 +478,122 @@ namespace WinFormServer {
 		}
 #pragma endregion
 
-
-
-private: System::Void gunaPictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void gunaImageButton1_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	string str1;
-	MarshalString(gunaTextBox1->Text, str1);
-	GetProductFile(db, str1, "..\\temp\\x1.png");
-	GetProductFile2(db, str1, "..\\temp\\x2.pdf");
-	Select_Product_API(db, str1);
-	gunaPictureBox1->ImageLocation = "..\\temp\\x1.png";	
-	send_FW(4,str1);
-	String^ bookdescription = gcnew String(str1.c_str());
-	send_FW(5, str1);
-	String^ writer = gcnew String(str1.c_str());
-	send_FW(6, str1);
-	String^ genre = gcnew String(str1.c_str());
-	send_FW(7, str1);
-	String^ score = gcnew String(str1.c_str());
-	send_FW(8, str1);
-	String^ price = gcnew String(str1.c_str());
-	send_FW(1, str1);
-	String^ name = gcnew String(str1.c_str());
-
-
-	gunaTextBox8->Text = name;
-	gunaTextBox2->Text = writer;
-	gunaTextBox3->Text = price;
-	gunaTextBox4->Text = score;
-	gunaTextBox5->Text = genre;
-	gunaTextBox6->Text = bookdescription;
-
-}
-private:
-	void MarshalString(String^ s, string& os)
+	private: System::Void gunaPictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void gunaImageButton1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-	using namespace Runtime::InteropServices;
-	const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
+		string str1;
+		MarshalString(gunaTextBox1->Text, str1);
+		GetProductFile(db, str1, "..\\temp\\x1.png");
+		GetProductFile2(db, str1, "..\\temp\\x2.pdf");
+		pathpicture = "..\\temp\\x1.png";
+		pathfile="..\\temp\\x2.pdf";
+		proc.Start("..\\temp\\x2.pdf");
+		Select_Product_API(db, str1);
+		gunaPictureBox1->ImageLocation = "..\\temp\\x1.png";
+		send_FW(4, str1);
+		String^ bookdescription = gcnew String(str1.c_str());
+		send_FW(5, str1);
+		String^ writer = gcnew String(str1.c_str());
+		send_FW(6, str1);
+		String^ genre = gcnew String(str1.c_str());
+		send_FW(7, str1);
+		String^ score = gcnew String(str1.c_str());
+		send_FW(8, str1);
+		String^ price = gcnew String(str1.c_str());
+		send_FW(1, str1);
+		String^ name = gcnew String(str1.c_str());
+		namebook = gunaTextBox1->Text;
+		gunaTextBox8->Text = name;
+		gunaTextBox2->Text = writer;
+		gunaTextBox3->Text = price;
+		gunaTextBox4->Text = score;
+		gunaTextBox5->Text = genre;
+		gunaTextBox6->Text = bookdescription;
+	
+	}
+	private:
+		void MarshalString(String^ s, string& os)
+		{
+			using namespace Runtime::InteropServices;
+			const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+			os = chars;
+			Marshal::FreeHGlobal(IntPtr((void*)chars));
+		}
+	private: System::Void gunaAdvenceButton2_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		openFileDialog1->Title = "Browse Picture";
+		openFileDialog1->Filter = "png files (*.pdf)|*.pdf";
+		openFileDialog1->Multiselect = false;
+		openFileDialog1->CheckFileExists = true;
+		openFileDialog1->CheckPathExists = true;
+		Browsfile = gcnew Thread(gcnew ThreadStart(this, &ChangeBookForm::BrowsFile));
+		Browsfile->SetApartmentState(ApartmentState::STA);
+		Browsfile->Start();
+		Browsfile->Join();
+		if (dr == System::Windows::Forms::DialogResult::OK)
+		{
+			pathfile = openFileDialog1->FileName;
+		}
+	}
+
+	private: System::Void gunaPictureBox1_Click_1(System::Object^ sender, System::EventArgs^ e)
+	{
+		openFileDialog1->Title = "Browse File";
+		openFileDialog1->Filter = "png files (*.png)|*.png";
+		openFileDialog1->Multiselect = false;
+		openFileDialog1->CheckFileExists = true;
+		openFileDialog1->CheckPathExists = true;
+		browsepicture = gcnew Thread(gcnew ThreadStart(this, &ChangeBookForm::Browspicture));
+		browsepicture->SetApartmentState(ApartmentState::STA);
+		browsepicture->Start();
+		browsepicture->Join();
+		if (dr == System::Windows::Forms::DialogResult::OK)
+		{
+			pathfile = openFileDialog1->FileName;
+		}
+		gunaPictureBox1->ImageLocation = pathpicture;
+	}
+	private:void Browspicture()
+	{
+		dr =openFileDialog1->ShowDialog();
+		if (dr == System::Windows::Forms::DialogResult::OK)
+		{
+			pathpicture= openFileDialog1->FileName;
+		}
+	}
+	private:void BrowsFile()
+	{
+		dr=openFileDialog1->ShowDialog();
+		if (dr == System::Windows::Forms::DialogResult::OK)
+		{
+			pathfile = openFileDialog1->FileName;
+		}
+	}
+	private: System::Void gunaAdvenceButton1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		
+		string str;
+		string str1;
+		string str2;
+		string str3;
+		string str4;
+		string str5;
+		string str6;
+		string str7;
+		string str8;
+		MarshalString(gunaTextBox8->Text, str);
+		MarshalString(gunaTextBox2->Text, str3);
+		MarshalString(gunaTextBox3->Text, str6);
+		MarshalString(gunaTextBox4->Text, str5);
+		MarshalString(gunaTextBox5->Text, str4);
+		MarshalString(gunaTextBox6->Text, str2);
+		MarshalString(pathfile, str1);
+		MarshalString(pathpicture, str7);
+		MarshalString(namebook, str8);
+		int a = GetProductId(db, str8);
+		ReplaceProduct_API(db, a, str, str1, str2, str3, str4, str5, str6, str7);
+
 	}
 };
 }

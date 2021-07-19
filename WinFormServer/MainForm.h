@@ -6,6 +6,21 @@
 
 //#include"SignUpForm.h"
 //#include"SignUpForm1.h"
+
+
+
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+IntPtr CreateObject_API();
+
+
+
+
+
+
+
+
+
+
 namespace WinFormServer {
 
 	using namespace System;
@@ -16,6 +31,7 @@ namespace WinFormServer {
 	using namespace System::Drawing;
 	using namespace System::Threading;
 	using namespace System::Media;
+	using namespace System::Globalization;
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
@@ -23,21 +39,36 @@ namespace WinFormServer {
 	{
 	public:
 		//Insertbook^ form_insertbook;
+		IntPtr db;
 		search^ form_searchpanel;
 		setting^ form_settingpanel;
 		ChangeBookForm^ form_changebookform;
 		Insertbook^ form_insertbook;
-	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton3;
-	public:
-	private: Guna::UI::WinForms::GunaImageButton^ gunaImageButton1;
-	private: System::Windows::Forms::Panel^ panel6;
-	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton5;
-
-
-	public:
-	public:
-
 		System::Media::SoundPlayer^ music = gcnew System::Media::SoundPlayer();
+		PersianCalendar Date_form;
+		DateTime dt = DateTime::Now;
+		Random^ RandString1 = gcnew Random();
+		Random^ RandString2 = gcnew Random();
+		Random^ RandString3 = gcnew Random();
+		Random^ RandString4 = gcnew Random();
+		Random^ RandString5 = gcnew Random();
+		Random^ RandString6 = gcnew Random();
+		Random^ RandString7 = gcnew Random();
+		Random^ RandString8 = gcnew Random();
+		Random^ RandString9 = gcnew Random();
+		Random^ RandString10 = gcnew Random();
+		Random^ RandString11 = gcnew Random();
+		Random^ RandString12 = gcnew Random();
+		Random^ RandString13 = gcnew Random();
+		Random^ RandString14 = gcnew Random();
+		Random^ RandString15 = gcnew Random();
+		Random^ RandString16 = gcnew Random();
+		
+
+
+
+
+	public:
 		MainForm(void)
 		{
 
@@ -46,15 +77,16 @@ namespace WinFormServer {
 			//TODO: Add the constructor code here
 			//
 		//	form_insertbook = gcnew Insertbook(panel5,panel3,label3);
+			db = CreateObject_API();
 			this->flowLayoutPanel1->BackgroundImage = nullptr;
 			this->panel5->Dock = System::Windows::Forms::DockStyle::Fill;
 			form_searchpanel = gcnew search(panel5);
-			form_settingpanel = gcnew setting(panel5, panel3, label3);
-			form_changebookform = gcnew ChangeBookForm(panel5);
-			form_insertbook = gcnew Insertbook(panel5, panel3, label3);
+			form_settingpanel = gcnew setting(panel5, panel3, label3,db);
+			form_changebookform = gcnew ChangeBookForm(panel5,db);
+			form_insertbook = gcnew Insertbook(panel5, panel3, label3,db);
+			timer2->Start();
+			timer3->Start();
 		}
-
-	protected:
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
@@ -66,13 +98,31 @@ namespace WinFormServer {
 			}
 		}
 
-	protected:
-
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar1;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar2;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar3;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar4;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar5;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar6;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar7;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar8;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar9;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar10;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar11;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar12;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar13;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar14;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar15;
+	private: Guna::UI::WinForms::GunaVProgressBar^ gunaVProgressBar16;
+	private: System::Windows::Forms::Panel^ panel4;
+	private: System::Windows::Forms::Timer^ timer3;
+	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton3;
+	private: System::Windows::Forms::Panel^ panel9;
+	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton5;
 	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton1;
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton7;
-
 	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton2;
 	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton3;
 	private: Guna::UI::WinForms::GunaGradientButton^ gunaGradientButton4;
@@ -83,16 +133,17 @@ namespace WinFormServer {
 	private: Guna::UI::WinForms::GunaCircleButton^ gunaCircleButton2;
 	private: Guna::UI::WinForms::GunaTransition^ gunaTransition1;
 	private: System::Windows::Forms::Timer^ timer1;
-	private: Guna::UI::WinForms::GunaAdvenceTileButton^ gunaAdvenceTileButton1;
-
-
 	private: Guna::UI::WinForms::GunaAdvenceTileButton^ gunaAdvenceTileButton2;
 	private: System::Windows::Forms::Panel^ panel5;
-
-
 	private: System::ComponentModel::IContainer^ components;
-
-
+	private: System::Windows::Forms::Timer^ timer2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label4;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -122,17 +173,42 @@ namespace WinFormServer {
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->gunaTransition1 = (gcnew Guna::UI::WinForms::GunaTransition(this->components));
-			this->gunaAdvenceTileButton1 = (gcnew Guna::UI::WinForms::GunaAdvenceTileButton());
 			this->gunaAdvenceTileButton2 = (gcnew Guna::UI::WinForms::GunaAdvenceTileButton());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
 			this->gunaCircleButton3 = (gcnew Guna::UI::WinForms::GunaCircleButton());
-			this->gunaImageButton1 = (gcnew Guna::UI::WinForms::GunaImageButton());
-			this->panel6 = (gcnew System::Windows::Forms::Panel());
+			this->panel9 = (gcnew System::Windows::Forms::Panel());
 			this->gunaCircleButton5 = (gcnew Guna::UI::WinForms::GunaCircleButton());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->gunaVProgressBar1 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar2 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar3 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar4 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar5 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar6 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar7 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar8 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar9 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar10 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar11 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar12 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar13 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar14 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar15 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->gunaVProgressBar16 = (gcnew Guna::UI::WinForms::GunaVProgressBar());
+			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timer3 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->flowLayoutPanel1->SuspendLayout();
 			this->panel3->SuspendLayout();
-			this->panel6->SuspendLayout();
+			this->panel9->SuspendLayout();
+			this->panel4->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// gunaCircleButton1
@@ -441,41 +517,6 @@ namespace WinFormServer {
 			animation1->TransparencyCoeff = 1;
 			this->gunaTransition1->DefaultAnimation = animation1;
 			// 
-			// gunaAdvenceTileButton1
-			// 
-			this->gunaAdvenceTileButton1->AnimationHoverSpeed = 0.07F;
-			this->gunaAdvenceTileButton1->AnimationSpeed = 0.03F;
-			this->gunaAdvenceTileButton1->BackColor = System::Drawing::Color::Transparent;
-			this->gunaAdvenceTileButton1->BaseColor = System::Drawing::Color::Transparent;
-			this->gunaAdvenceTileButton1->BorderColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton1->CheckedBaseColor = System::Drawing::Color::Gray;
-			this->gunaAdvenceTileButton1->CheckedBorderColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton1->CheckedForeColor = System::Drawing::Color::White;
-			this->gunaAdvenceTileButton1->CheckedImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceTileButton1.CheckedImage")));
-			this->gunaAdvenceTileButton1->CheckedLineColor = System::Drawing::Color::DimGray;
-			this->gunaTransition1->SetDecoration(this->gunaAdvenceTileButton1, Guna::UI::Animation::DecorationType::None);
-			this->gunaAdvenceTileButton1->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaAdvenceTileButton1->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaAdvenceTileButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI Light", 15.75F));
-			this->gunaAdvenceTileButton1->ForeColor = System::Drawing::Color::White;
-			this->gunaAdvenceTileButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceTileButton1.Image")));
-			this->gunaAdvenceTileButton1->ImageSize = System::Drawing::Size(52, 52);
-			this->gunaAdvenceTileButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
-				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton1->Location = System::Drawing::Point(775, 43);
-			this->gunaAdvenceTileButton1->Name = L"gunaAdvenceTileButton1";
-			this->gunaAdvenceTileButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
-				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->gunaAdvenceTileButton1->OnHoverBorderColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton1->OnHoverForeColor = System::Drawing::Color::White;
-			this->gunaAdvenceTileButton1->OnHoverImage = nullptr;
-			this->gunaAdvenceTileButton1->OnHoverLineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
-				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton1->OnPressedColor = System::Drawing::Color::Black;
-			this->gunaAdvenceTileButton1->Size = System::Drawing::Size(43, 42);
-			this->gunaAdvenceTileButton1->TabIndex = 24;
-			this->gunaAdvenceTileButton1->Click += gcnew System::EventHandler(this, &MainForm::gunaAdvenceTileButton1_Click);
-			// 
 			// gunaAdvenceTileButton2
 			// 
 			this->gunaAdvenceTileButton2->AnimationHoverSpeed = 0.07F;
@@ -497,7 +538,7 @@ namespace WinFormServer {
 			this->gunaAdvenceTileButton2->ImageSize = System::Drawing::Size(52, 52);
 			this->gunaAdvenceTileButton2->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceTileButton2->Location = System::Drawing::Point(108, 91);
+			this->gunaAdvenceTileButton2->Location = System::Drawing::Point(143, 134);
 			this->gunaAdvenceTileButton2->Name = L"gunaAdvenceTileButton2";
 			this->gunaAdvenceTileButton2->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -546,31 +587,19 @@ namespace WinFormServer {
 			this->gunaCircleButton3->TabIndex = 27;
 			this->gunaCircleButton3->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton3_Click);
 			// 
-			// gunaImageButton1
+			// panel9
 			// 
-			this->gunaTransition1->SetDecoration(this->gunaImageButton1, Guna::UI::Animation::DecorationType::None);
-			this->gunaImageButton1->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->gunaImageButton1->Image = nullptr;
-			this->gunaImageButton1->ImageSize = System::Drawing::Size(64, 64);
-			this->gunaImageButton1->Location = System::Drawing::Point(260, 362);
-			this->gunaImageButton1->Name = L"gunaImageButton1";
-			this->gunaImageButton1->OnHoverImage = nullptr;
-			this->gunaImageButton1->OnHoverImageOffset = System::Drawing::Point(0, 0);
-			this->gunaImageButton1->Size = System::Drawing::Size(64, 64);
-			this->gunaImageButton1->TabIndex = 28;
-			// 
-			// panel6
-			// 
-			this->panel6->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel6.BackgroundImage")));
-			this->panel6->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->panel6->Controls->Add(this->gunaCircleButton5);
-			this->gunaTransition1->SetDecoration(this->panel6, Guna::UI::Animation::DecorationType::None);
-			this->panel6->Location = System::Drawing::Point(35, 449);
-			this->panel6->Name = L"panel6";
-			this->panel6->Size = System::Drawing::Size(41, 143);
-			this->panel6->TabIndex = 30;
-			this->panel6->Visible = false;
-			this->panel6->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel6_Paint_1);
+			this->panel9->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel9.BackgroundImage")));
+			this->panel9->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->panel9->Controls->Add(this->gunaCircleButton5);
+			this->gunaTransition1->SetDecoration(this->panel9, Guna::UI::Animation::DecorationType::None);
+			this->panel9->Location = System::Drawing::Point(35, 449);
+			this->panel9->Name = L"panel9";
+			this->panel9->Size = System::Drawing::Size(41, 143);
+			this->panel9->TabIndex = 32;
+			this->panel9->Visible = false;
+			this->panel9->Click += gcnew System::EventHandler(this, &MainForm::panel9_Click);
+			this->panel9->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel9_Paint);
 			// 
 			// gunaCircleButton5
 			// 
@@ -595,6 +624,368 @@ namespace WinFormServer {
 			this->gunaCircleButton5->OnPressedColor = System::Drawing::Color::Black;
 			this->gunaCircleButton5->Size = System::Drawing::Size(35, 32);
 			this->gunaCircleButton5->TabIndex = 29;
+			this->gunaCircleButton5->Click += gcnew System::EventHandler(this, &MainForm::gunaCircleButton5_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label1, Guna::UI::Animation::DecorationType::None);
+			this->label1->Location = System::Drawing::Point(382, 176);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(35, 13);
+			this->label1->TabIndex = 33;
+			this->label1->Text = L"label1";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label2, Guna::UI::Animation::DecorationType::None);
+			this->label2->Location = System::Drawing::Point(460, 177);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(35, 13);
+			this->label2->TabIndex = 34;
+			this->label2->Text = L"label2";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label4, Guna::UI::Animation::DecorationType::None);
+			this->label4->Location = System::Drawing::Point(541, 177);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(35, 13);
+			this->label4->TabIndex = 35;
+			this->label4->Text = L"label4";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label5, Guna::UI::Animation::DecorationType::None);
+			this->label5->Location = System::Drawing::Point(322, 244);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(35, 13);
+			this->label5->TabIndex = 36;
+			this->label5->Text = L"label5";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label6, Guna::UI::Animation::DecorationType::None);
+			this->label6->Location = System::Drawing::Point(372, 244);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(35, 13);
+			this->label6->TabIndex = 37;
+			this->label6->Text = L"label6";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label7, Guna::UI::Animation::DecorationType::None);
+			this->label7->Location = System::Drawing::Point(436, 244);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(35, 13);
+			this->label7->TabIndex = 38;
+			this->label7->Text = L"label7";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->gunaTransition1->SetDecoration(this->label8, Guna::UI::Animation::DecorationType::None);
+			this->label8->Location = System::Drawing::Point(670, 177);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(35, 13);
+			this->label8->TabIndex = 39;
+			this->label8->Text = L"label8";
+			// 
+			// gunaVProgressBar1
+			// 
+			this->gunaVProgressBar1->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar1->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar1, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar1->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar1->Location = System::Drawing::Point(236, 3);
+			this->gunaVProgressBar1->Name = L"gunaVProgressBar1";
+			this->gunaVProgressBar1->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar1->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar1->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar1->TabIndex = 40;
+			this->gunaVProgressBar1->Value = 80;
+			// 
+			// gunaVProgressBar2
+			// 
+			this->gunaVProgressBar2->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar2->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar2, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar2->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar2->Location = System::Drawing::Point(258, 3);
+			this->gunaVProgressBar2->Name = L"gunaVProgressBar2";
+			this->gunaVProgressBar2->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar2->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar2->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar2->TabIndex = 41;
+			this->gunaVProgressBar2->Value = 40;
+			// 
+			// gunaVProgressBar3
+			// 
+			this->gunaVProgressBar3->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar3->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar3, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar3->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar3->Location = System::Drawing::Point(285, 3);
+			this->gunaVProgressBar3->Name = L"gunaVProgressBar3";
+			this->gunaVProgressBar3->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar3->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar3->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar3->TabIndex = 42;
+			this->gunaVProgressBar3->Value = 60;
+			// 
+			// gunaVProgressBar4
+			// 
+			this->gunaVProgressBar4->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar4->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar4, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar4->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar4->Location = System::Drawing::Point(306, 3);
+			this->gunaVProgressBar4->Name = L"gunaVProgressBar4";
+			this->gunaVProgressBar4->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar4->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar4->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar4->TabIndex = 43;
+			this->gunaVProgressBar4->Value = 90;
+			// 
+			// gunaVProgressBar5
+			// 
+			this->gunaVProgressBar5->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar5->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar5, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar5->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar5->Location = System::Drawing::Point(12, 3);
+			this->gunaVProgressBar5->Name = L"gunaVProgressBar5";
+			this->gunaVProgressBar5->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar5->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar5->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar5->TabIndex = 44;
+			this->gunaVProgressBar5->Value = 47;
+			// 
+			// gunaVProgressBar6
+			// 
+			this->gunaVProgressBar6->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar6->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar6, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar6->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar6->Location = System::Drawing::Point(33, 3);
+			this->gunaVProgressBar6->Name = L"gunaVProgressBar6";
+			this->gunaVProgressBar6->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar6->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar6->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar6->TabIndex = 45;
+			this->gunaVProgressBar6->Value = 89;
+			// 
+			// gunaVProgressBar7
+			// 
+			this->gunaVProgressBar7->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar7->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar7, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar7->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar7->Location = System::Drawing::Point(54, 3);
+			this->gunaVProgressBar7->Name = L"gunaVProgressBar7";
+			this->gunaVProgressBar7->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar7->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar7->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar7->TabIndex = 46;
+			this->gunaVProgressBar7->Value = 98;
+			// 
+			// gunaVProgressBar8
+			// 
+			this->gunaVProgressBar8->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar8->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar8, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar8->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar8->Location = System::Drawing::Point(76, 3);
+			this->gunaVProgressBar8->Name = L"gunaVProgressBar8";
+			this->gunaVProgressBar8->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar8->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar8->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar8->TabIndex = 47;
+			this->gunaVProgressBar8->Value = 28;
+			// 
+			// gunaVProgressBar9
+			// 
+			this->gunaVProgressBar9->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar9->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar9, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar9->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar9->Location = System::Drawing::Point(119, 3);
+			this->gunaVProgressBar9->Name = L"gunaVProgressBar9";
+			this->gunaVProgressBar9->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar9->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar9->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar9->TabIndex = 48;
+			this->gunaVProgressBar9->Value = 64;
+			// 
+			// gunaVProgressBar10
+			// 
+			this->gunaVProgressBar10->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar10->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar10, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar10->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar10->Location = System::Drawing::Point(140, 3);
+			this->gunaVProgressBar10->Name = L"gunaVProgressBar10";
+			this->gunaVProgressBar10->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar10->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar10->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar10->TabIndex = 49;
+			this->gunaVProgressBar10->Value = 100;
+			// 
+			// gunaVProgressBar11
+			// 
+			this->gunaVProgressBar11->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar11->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar11, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar11->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar11->Location = System::Drawing::Point(161, 3);
+			this->gunaVProgressBar11->Name = L"gunaVProgressBar11";
+			this->gunaVProgressBar11->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar11->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar11->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar11->TabIndex = 50;
+			this->gunaVProgressBar11->Value = 59;
+			// 
+			// gunaVProgressBar12
+			// 
+			this->gunaVProgressBar12->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar12->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar12, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar12->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar12->Location = System::Drawing::Point(182, 3);
+			this->gunaVProgressBar12->Name = L"gunaVProgressBar12";
+			this->gunaVProgressBar12->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar12->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar12->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar12->TabIndex = 51;
+			this->gunaVProgressBar12->Value = 100;
+			// 
+			// gunaVProgressBar13
+			// 
+			this->gunaVProgressBar13->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar13->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar13, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar13->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar13->Location = System::Drawing::Point(420, 3);
+			this->gunaVProgressBar13->Name = L"gunaVProgressBar13";
+			this->gunaVProgressBar13->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar13->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar13->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar13->TabIndex = 55;
+			this->gunaVProgressBar13->Value = 100;
+			// 
+			// gunaVProgressBar14
+			// 
+			this->gunaVProgressBar14->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar14->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar14, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar14->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar14->Location = System::Drawing::Point(399, 3);
+			this->gunaVProgressBar14->Name = L"gunaVProgressBar14";
+			this->gunaVProgressBar14->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar14->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar14->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar14->TabIndex = 54;
+			this->gunaVProgressBar14->Value = 59;
+			// 
+			// gunaVProgressBar15
+			// 
+			this->gunaVProgressBar15->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar15->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar15, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar15->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar15->Location = System::Drawing::Point(378, 3);
+			this->gunaVProgressBar15->Name = L"gunaVProgressBar15";
+			this->gunaVProgressBar15->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar15->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar15->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar15->TabIndex = 53;
+			this->gunaVProgressBar15->Value = 100;
+			// 
+			// gunaVProgressBar16
+			// 
+			this->gunaVProgressBar16->BorderColor = System::Drawing::Color::Black;
+			this->gunaVProgressBar16->ColorStyle = Guna::UI::WinForms::ColorStyle::Default;
+			this->gunaTransition1->SetDecoration(this->gunaVProgressBar16, Guna::UI::Animation::DecorationType::None);
+			this->gunaVProgressBar16->IdleColor = System::Drawing::Color::Gainsboro;
+			this->gunaVProgressBar16->Location = System::Drawing::Point(357, 3);
+			this->gunaVProgressBar16->Name = L"gunaVProgressBar16";
+			this->gunaVProgressBar16->ProgressMaxColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar16->ProgressMinColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)),
+				static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->gunaVProgressBar16->Size = System::Drawing::Size(15, 200);
+			this->gunaVProgressBar16->TabIndex = 52;
+			this->gunaVProgressBar16->Value = 64;
+			// 
+			// panel4
+			// 
+			this->panel4->Controls->Add(this->gunaVProgressBar6);
+			this->panel4->Controls->Add(this->gunaVProgressBar13);
+			this->panel4->Controls->Add(this->gunaVProgressBar5);
+			this->panel4->Controls->Add(this->gunaVProgressBar14);
+			this->panel4->Controls->Add(this->gunaVProgressBar7);
+			this->panel4->Controls->Add(this->gunaVProgressBar15);
+			this->panel4->Controls->Add(this->gunaVProgressBar8);
+			this->panel4->Controls->Add(this->gunaVProgressBar16);
+			this->panel4->Controls->Add(this->gunaVProgressBar10);
+			this->panel4->Controls->Add(this->gunaVProgressBar4);
+			this->panel4->Controls->Add(this->gunaVProgressBar12);
+			this->panel4->Controls->Add(this->gunaVProgressBar3);
+			this->panel4->Controls->Add(this->gunaVProgressBar9);
+			this->panel4->Controls->Add(this->gunaVProgressBar2);
+			this->panel4->Controls->Add(this->gunaVProgressBar1);
+			this->panel4->Controls->Add(this->gunaVProgressBar11);
+			this->gunaTransition1->SetDecoration(this->panel4, Guna::UI::Animation::DecorationType::None);
+			this->panel4->Location = System::Drawing::Point(221, 388);
+			this->panel4->Name = L"panel4";
+			this->panel4->Size = System::Drawing::Size(447, 204);
+			this->panel4->TabIndex = 56;
+			this->panel4->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::panel4_Paint);
+			// 
+			// timer2
+			// 
+			this->timer2->Interval = 1000;
+			this->timer2->Tick += gcnew System::EventHandler(this, &MainForm::timer2_Tick);
+			// 
+			// timer3
+			// 
+			this->timer3->Interval = 400;
+			this->timer3->Tick += gcnew System::EventHandler(this, &MainForm::timer3_Tick);
 			// 
 			// MainForm
 			// 
@@ -604,16 +995,22 @@ namespace WinFormServer {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->ClientSize = System::Drawing::Size(900, 624);
-			this->Controls->Add(this->panel6);
-			this->Controls->Add(this->gunaCircleButton3);
-			this->Controls->Add(this->gunaImageButton1);
-			this->Controls->Add(this->gunaAdvenceTileButton2);
 			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->gunaCircleButton1);
 			this->Controls->Add(this->gunaCircleButton2);
 			this->Controls->Add(this->flowLayoutPanel1);
 			this->Controls->Add(this->panel5);
-			this->Controls->Add(this->gunaAdvenceTileButton1);
+			this->Controls->Add(this->panel4);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->gunaAdvenceTileButton2);
+			this->Controls->Add(this->panel9);
+			this->Controls->Add(this->gunaCircleButton3);
 			this->gunaTransition1->SetDecoration(this, Guna::UI::Animation::DecorationType::None);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -623,8 +1020,10 @@ namespace WinFormServer {
 			this->flowLayoutPanel1->ResumeLayout(false);
 			this->panel3->ResumeLayout(false);
 			this->panel3->PerformLayout();
-			this->panel6->ResumeLayout(false);
+			this->panel9->ResumeLayout(false);
+			this->panel4->ResumeLayout(false);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -732,23 +1131,56 @@ namespace WinFormServer {
 
 	{
 		gunaTransition1->HideSync(gunaCircleButton3, false, Guna::UI::Animation::Animation::HorizSlide);
-		gunaTransition1->ShowSync(panel6, false, Guna::UI::Animation::Animation::HorizSlide);
-	}
-	private: System::Void gunaCircleButton4_Click(System::Object^ sender, System::EventArgs^ e) {
+		gunaTransition1->ShowSync(panel9, false, Guna::UI::Animation::Animation::HorizSlide);
 	}
 	
-	private: System::Void panel4_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		gunaTransition1->HideSync(panel6, false, Guna::UI::Animation::Animation::HorizSlide);
-		gunaTransition1->ShowSync(gunaCircleButton3, false, Guna::UI::Animation::Animation::HorizSlide);
-	}
 
-	private: System::Void panel6_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
-	{
-		gunaTransition1->HideSync(panel6, false, Guna::UI::Animation::Animation::HorizSlide);
-		gunaTransition1->ShowSync(gunaCircleButton3, false, Guna::UI::Animation::Animation::HorizSlide);
-	}
-private: System::Void panel6_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+private: System::Void panel9_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	gunaTransition1->HideSync(panel9, false, Guna::UI::Animation::Animation::HorizSlide);
+	gunaTransition1->ShowSync(gunaCircleButton3, false, Guna::UI::Animation::Animation::HorizSlide);
+}
+private: System::Void gunaCircleButton5_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	gunaTransition1->HideSync(panel9, false, Guna::UI::Animation::Animation::HorizSlide);
+	gunaTransition1->ShowSync(gunaCircleButton3, false, Guna::UI::Animation::Animation::HorizSlide);
+}
+
+
+private: System::Void timer2_Tick(System::Object^ sender, System::EventArgs^ e)
+{
+	
+	label1->Text = Date_form.GetYear(DateTime::Now).ToString();
+	label2->Text = Date_form.GetMonth(DateTime::Now).ToString();
+	label4->Text = Date_form.GetDayOfMonth(DateTime::Now).ToString();
+	label5->Text = Date_form.GetDayOfWeek(DateTime::Now).ToString();
+
+}
+private: System::Void panel4_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void timer3_Tick(System::Object^ sender, System::EventArgs^ e) 
+{
+	gunaVProgressBar1->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar2->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar3->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar4->Value = (RandString1->Next(5, 100));
+
+	gunaVProgressBar5->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar6->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar7->Value = (RandString1->Next(5, 100));
+	gunaVProgressBar8->Value = (RandString1->Next(5, 100));
+
+	gunaVProgressBar9->Value =  (RandString2->Next(5, 100));
+	gunaVProgressBar10->Value = (RandString2->Next(5, 100));
+	gunaVProgressBar11->Value = (RandString2->Next(5, 100));
+	gunaVProgressBar12->Value = (RandString2->Next(5, 100));
+
+	gunaVProgressBar13->Value = (RandString2->Next(5, 100));
+	gunaVProgressBar14->Value = (RandString2->Next(5, 100));
+	gunaVProgressBar15->Value = (RandString2->Next(5, 100));
+	gunaVProgressBar16->Value = (RandString2->Next(5, 100));
+}
+private: System::Void panel9_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 };
 }

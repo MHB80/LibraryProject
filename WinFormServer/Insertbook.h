@@ -29,6 +29,9 @@ void InsertProduct_API(IntPtr db, int id, string name, string filename, string b
 void Set_Profile_Picture_API(IntPtr db, string path, string username);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 int GetUsernametRowId_API(IntPtr db,string username);
+[DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
+void KillObject_API(IntPtr db);
+
 
 
 
@@ -53,6 +56,8 @@ namespace WinFormServer {
 	{
 	public:
 		IntPtr db;
+
+	
 		Panel^ mainpanel;
 		Panel^ Error_panel;
 		Thread^ Browsfile;
@@ -67,7 +72,7 @@ namespace WinFormServer {
 	public:
 	public:
 		Label^ ErrorText_panel;
-		Insertbook(Panel^c,Panel^x,Label^ v)
+		Insertbook(Panel^c,Panel^x,Label^ v, IntPtr db_help)
 		{
 			InitializeComponent();
 			//
@@ -75,7 +80,8 @@ namespace WinFormServer {
 			//
 			Error_panel = x;
 			ErrorText_panel = v;
-			db = CreateObject_API();
+			
+			db = db_help;
 			mainpanel = c;
 			
 		}
@@ -580,6 +586,7 @@ private: System::Void Insertbook_Load(System::Object^ sender, System::EventArgs^
 		}
 		else
 		{
+			
 			std::string str1;
 			std::string str2;
 			std::string str3;
@@ -599,6 +606,7 @@ private: System::Void Insertbook_Load(System::Object^ sender, System::EventArgs^
 			MarshalString(gunaTextBox7->Text, str8);
 			MarshalString(address_picture, str9);
 			InsertProduct_API(db, stoi(str8), str2, str1, str7, str3, str6, str5, str4, str9);
+		
 		}
 	}
 	private:
