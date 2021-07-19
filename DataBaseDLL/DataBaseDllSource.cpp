@@ -14,12 +14,21 @@ DataBase* CreateObject_API()
 }
 
 
+void KillObject_API(DataBase* db)
+{
+	delete db;
+
+}
+
 
 void InsertProduct_API(DataBase* db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilpicture)
 {
 	db->InsertProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
 }
-
+void ReplaceProduct_API(DataBase* db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilpicture)
+{
+	db->ReplaceProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
+}
 void Select_Product_API(DataBase* db, string name)
 {
 	db->Select_Product(name);
@@ -32,7 +41,10 @@ void GetProductFile2(DataBase* db, string name, string path)
 {
 	db->GetProductFile2(name, path);
 }
-
+int GetProductId(DataBase* db, string name)
+{
+	return db->GetProductId(name, true);
+}
 #pragma region Insertion_server
 bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path)
 {

@@ -20,15 +20,18 @@ extern "C" UIAPI DataBase * CreateObject_API();
 
 
 
-extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilepicture);
+extern "C" UIAPI void KillObject_API(DataBase * db);
 
+
+extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilepicture);
+extern "C" UIAPI void ReplaceProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilepicture);
 extern "C" UIAPI void Select_Product_API(DataBase * db, string name);
 
 extern "C" UIAPI void GetProductFile(DataBase * db, string name, string path);
 
 extern "C" UIAPI void GetProductFile2(DataBase * db, string name, string path);
 
-
+extern "C" UIAPI int GetProductId(DataBase * db, string name);
 
 #pragma region Insertion_server
 extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path);

@@ -233,13 +233,215 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 	}
 	res = sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
-	UnLock();
 	if (res != SQLITE_DONE && ThrowExc)
 		ThrowError(db);
 
 
 	sqlite3_blob* file = nullptr;
 	res = sqlite3_blob_open(db, "main", "Product", "File", GetProductRowId(id,true), 1, &file);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		ThrowError(SQLITE_OK);
+	}
+	ifstream picture_1(filename, ios::binary);
+	long long int index = 0;
+	const int Buffer_Size = 20 * 1024;
+	if (picture_1.is_open())
+	{
+		while (index < size)
+		{
+			char Buffer[Buffer_Size];
+			long long int read;
+			if (size - index < Buffer_Size)
+			{
+				read = size - index;
+			}
+			else
+			{
+				read = Buffer_Size;
+			}
+			UnLock();
+			Lock();
+			picture_1.read(Buffer, read);
+			int res = sqlite3_blob_write(file, Buffer, read, index);
+			UnLock();
+			index += read;
+			if (res != SQLITE_OK && ThrowExc)
+			{
+				CloseProductFile(file);
+				throw exception("Error");
+			}
+		}
+	}
+	picture_1.close();
+	CloseProductFile(file, true);
+
+
+
+
+
+
+
+	sqlite3_blob* file1 = nullptr;
+	res = sqlite3_blob_open(db, "main", "Product", "PictureFile", GetProductRowId(id, true), 1, &file1);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		ThrowError(SQLITE_OK);
+	}
+	ifstream picture_2(pathfilpicture, ios::binary);
+	long long int index1 = 0;
+	const int Buffer_Size1 = 20 * 1024;
+	if (picture_2.is_open())
+	{
+		while (index1 < size1)
+		{
+			char Buffer1[Buffer_Size1];
+			long long int read1;
+			if (size1 - index1 < Buffer_Size1)
+			{
+				read1 = size1 - index1;
+			}
+			else
+			{
+				read1 = Buffer_Size1;
+			}
+			Lock();
+			picture_2.read(Buffer1, read1);
+			int res = sqlite3_blob_write(file1, Buffer1, read1, index1);
+			UnLock();
+			index1 += read1;
+			if (res != SQLITE_OK && ThrowExc)
+			{
+				CloseProductFile(file);
+				throw exception("Error");
+			}
+		}
+	}
+	picture_2.close();
+	CloseProductFile(file1, true);
+
+}
+
+void DataBase::ReplaceProduct(int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilpicture, bool ThrowExc)
+{
+	ifstream size_file(filename, ios::binary);
+	long long int size = size_file.seekg(0, ios::end).tellg();
+	size_file.seekg(0);
+	size_file.close();
+	ifstream size_picture(pathfilpicture, ios::binary);
+	long long int size1 = size_picture.seekg(0, ios::end).tellg();
+	size_picture.seekg(0);
+	size_picture.close();
+	Lock();
+	const char* sql = "Replace INTO Product (ID,Name,File,FileName,BookDescription,Writer,Genre,Score,Price,SizeFile,PictureFile,PictureFileName,SizeFilePicture)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_int(stmt, 1, id);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 2, name.c_str(), name.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_zeroblob(stmt, 3, size);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 4, filename.c_str(), filename.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 5, bookdescription.c_str(), bookdescription.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 6, writer.c_str(), writer.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 7, genre.c_str(), genre.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 8, score.c_str(), score.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 9, price.c_str(), price.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_int(stmt, 10, size);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_zeroblob(stmt, 11, size1);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 12, pathfilpicture.c_str(), pathfilpicture.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_int(stmt, 13, size1);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	UnLock();
+	if (res != SQLITE_DONE && ThrowExc)
+		ThrowError(db);
+
+
+	sqlite3_blob* file = nullptr;
+	res = sqlite3_blob_open(db, "main", "Product", "File", GetProductRowId(id, true), 1, &file);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		ThrowError(SQLITE_OK);
@@ -342,6 +544,38 @@ int DataBase::GetProductRowId(int id, bool ThrowExc)
 	res = sqlite3_step(stmt);
 	return sqlite3_column_int(stmt, 0);
 }
+
+
+int DataBase::GetProductId(string name, bool ThrowExc )
+{
+	const char* sql = "Select ID from product where Name == ?";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	return sqlite3_column_int(stmt, 0);
+}
+
+
+
+
+
+
+
+
+
 string DataBase::GetProductFileName(int id, bool ThrowExc)
 {
 	const char* sql = "Select filename from product where id == ?";

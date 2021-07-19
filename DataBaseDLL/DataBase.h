@@ -38,7 +38,9 @@ public:
 	void InsertCustomer(int username, int listid, bool ThrowExc = true);
 	void InsertList(int productid, int listid, bool ThrowExc = true);
 	void InsertProduct(int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilpicture, bool ThrowExc);
+	void ReplaceProduct(int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilpicture, bool ThrowExc);
 	int GetProductRowId(int id, bool ThrowExc = true);
+	int GetProductId(string name , bool ThrowExc = true);
 	sqlite3_blob* OpenProductFile(int rowid, bool readonly, bool ThrowExc = true);
 	sqlite3_blob* OpenProductFile2(int rowid, bool readonly, bool ThrowExc = true);
 	void WriteProductFile(sqlite3_blob* file, char* Buffer, long long Size, long long index, bool ThrowExc = true);
