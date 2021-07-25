@@ -38,6 +38,6 @@ void  Recieve(int socketid, char* buffer, int size);
 
 extern "C" UI_ALPI void  Startup(string ip, int port, UIChangeProgress  uiChangeprogress, UINewClient uiNewclient, UINewRecieve  uiNewrecieve);
 extern "C" UI_ALPI void StartDownload( int queueid);
-extern "C" UI_ALPI void sendmessage();
+extern "C" UI_ALPI void sendmessage(string message, string username);
 extern "C" UI_ALPI int SendFile(string path, string username);
 #endif // !SOURCE_H

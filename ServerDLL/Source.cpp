@@ -117,13 +117,10 @@ void  Recieve(int socketid , char* buffer , int size)
 	}
 }
 
-void sendmessage()
+void sendmessage(string message , string username )
 {
-	while (!tcpServer.IsRunning);
+	//while (!tcpServer.IsRunning);
 	
-	cout << "\nEnter your Message : ";
-	string message;
-	getline(cin, message);
 
 	// Packting
 	MessagePacket msp;
@@ -131,13 +128,13 @@ void sendmessage()
 	msp.size = message.length();
 	memcpy(msp.Buffer, message.c_str(), msp.size);
 
-	string username;
+
 	ClientLiatDoor.lock();
-	do
-	{
-		cout << "Enter UserName : ";
-		getline(cin, username);
-	} while (ClientList.find(username) == ClientList.end());
+	
+	
+		
+		
+	 while (ClientList.find(username) == ClientList.end());
 	int ClinetID = ClientList.find(username)->second;
 	ClientLiatDoor.unlock();
 
