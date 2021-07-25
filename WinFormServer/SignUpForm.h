@@ -34,7 +34,7 @@ extern bool Signup_Admin_Username_APi(IntPtr, string username);
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
 extern bool Signup_Admin_Password_API(IntPtr, string password );
 [DllImport("DataBaseDLL.dll", CallingConvention = CallingConvention::Cdecl)]
-bool InsertAdmin_API(IntPtr, std::string, std::string);
+bool InsertAdmin_API(IntPtr, string,string);
 
 
 

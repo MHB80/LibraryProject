@@ -73,7 +73,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChangeBookForm.cpp" />
+    <ClCompile Include="databaseform.cpp" />
     <ClCompile Include="EmailForm.cpp" />
     <ClCompile Include="Insertbook.cpp" />
     <ClCompile Include="MainForm.cpp" />
@@ -143,9 +144,13 @@
     <ClCompile Include="setting.cpp" />
     <ClCompile Include="SignUpForm.cpp" />
     <ClCompile Include="SignUpForm1.cpp" />
+    <ClCompile Include="SocketForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChangeBookForm.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="databaseform.h">
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="EmailForm.h">
@@ -176,10 +181,16 @@
     <ClInclude Include="SignUpForm1.h">
       <FileType>CppControl</FileType>
     </ClInclude>
+    <ClInclude Include="SocketForm.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChangeBookForm.resx">
       <DependentUpon>ChangeBookForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="databaseform.resx">
+      <DependentUpon>databaseform.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmailForm.resx">
       <DependentUpon>EmailForm.h</DependentUpon>
@@ -205,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SignUpForm1.resx">
       <DependentUpon>SignUpForm1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SocketForm.resx">
+      <DependentUpon>SocketForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

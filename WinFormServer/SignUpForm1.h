@@ -44,19 +44,18 @@ namespace WinFormServer {
 		IntPtr ch;
 		IntPtr db1;
 		Panel^ mainpanel;
-
+		static int time = 0;
 		   EmailForm^ form_email;
 	public:
-		SignUpForm1(Panel^a)
+		SignUpForm1(Panel^a,IntPtr db)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 			ch = CreatObject();
-			db1 = CreateObject_API();
+			db1 = db;
 			mainpanel = a;
-			form_email = gcnew EmailForm(a,gunaTextBox1->Text,gunaTextBox2->Text);
 		}
 
 	protected:
@@ -100,8 +99,8 @@ namespace WinFormServer {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			Guna::UI::Animation::Animation^ animation1 = (gcnew Guna::UI::Animation::Animation());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SignUpForm1::typeid));
+			Guna::UI::Animation::Animation^ animation2 = (gcnew Guna::UI::Animation::Animation());
 			this->gunaLabel1 = (gcnew Guna::UI::WinForms::GunaLabel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -138,7 +137,7 @@ namespace WinFormServer {
 			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
 			this->panel1->Controls->Add(this->label3);
 			this->gunaTransition1->SetDecoration(this->panel1, Guna::UI::Animation::DecorationType::None);
-			this->panel1->Location = System::Drawing::Point(226, 3);
+			this->panel1->Location = System::Drawing::Point(229, 18);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(374, 98);
 			this->panel1->TabIndex = 32;
@@ -153,7 +152,7 @@ namespace WinFormServer {
 				static_cast<System::Byte>(178)));
 			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->label3->Location = System::Drawing::Point(66, 26);
+			this->label3->Location = System::Drawing::Point(105, 36);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(70, 31);
 			this->label3->TabIndex = 0;
@@ -175,13 +174,14 @@ namespace WinFormServer {
 			this->gunaTransition1->SetDecoration(this->gunaAdvenceButton1, Guna::UI::Animation::DecorationType::None);
 			this->gunaAdvenceButton1->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->gunaAdvenceButton1->FocusedColor = System::Drawing::Color::Empty;
-			this->gunaAdvenceButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->gunaAdvenceButton1->Font = (gcnew System::Drawing::Font(L"B Nazanin", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(178)));
 			this->gunaAdvenceButton1->ForeColor = System::Drawing::Color::White;
 			this->gunaAdvenceButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"gunaAdvenceButton1.Image")));
 			this->gunaAdvenceButton1->ImageSize = System::Drawing::Size(20, 20);
 			this->gunaAdvenceButton1->LineColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(66)),
 				static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(170)));
-			this->gunaAdvenceButton1->Location = System::Drawing::Point(385, 428);
+			this->gunaAdvenceButton1->Location = System::Drawing::Point(385, 446);
 			this->gunaAdvenceButton1->Name = L"gunaAdvenceButton1";
 			this->gunaAdvenceButton1->OnHoverBaseColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)),
 				static_cast<System::Int32>(static_cast<System::Byte>(143)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
@@ -310,22 +310,27 @@ namespace WinFormServer {
 			// 
 			this->gunaTransition1->AnimationType = Guna::UI::Animation::AnimationType::Scale;
 			this->gunaTransition1->Cursor = nullptr;
-			animation1->AnimateOnlyDifferences = true;
-			animation1->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.BlindCoeff")));
-			animation1->LeafCoeff = 0;
-			animation1->MaxTime = 1;
-			animation1->MinTime = 0;
-			animation1->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicCoeff")));
-			animation1->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.MosaicShift")));
-			animation1->MosaicSize = 0;
-			animation1->Padding = System::Windows::Forms::Padding(0);
-			animation1->RotateCoeff = 0;
-			animation1->RotateLimit = 0;
-			animation1->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.ScaleCoeff")));
-			animation1->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation1.SlideCoeff")));
-			animation1->TimeCoeff = 0;
-			animation1->TransparencyCoeff = 0;
-			this->gunaTransition1->DefaultAnimation = animation1;
+			animation2->AnimateOnlyDifferences = true;
+			animation2->BlindCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.BlindCoeff")));
+			animation2->LeafCoeff = 0;
+			animation2->MaxTime = 1;
+			animation2->MinTime = 0;
+			animation2->MosaicCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicCoeff")));
+			animation2->MosaicShift = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.MosaicShift")));
+			animation2->MosaicSize = 0;
+			animation2->Padding = System::Windows::Forms::Padding(0);
+			animation2->RotateCoeff = 0;
+			animation2->RotateLimit = 0;
+			animation2->ScaleCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.ScaleCoeff")));
+			animation2->SlideCoeff = (cli::safe_cast<System::Drawing::PointF>(resources->GetObject(L"animation2.SlideCoeff")));
+			animation2->TimeCoeff = 0;
+			animation2->TransparencyCoeff = 0;
+			this->gunaTransition1->DefaultAnimation = animation2;
+			// 
+			// timer1
+			// 
+			this->timer1->Interval = 3000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &SignUpForm1::timer1_Tick);
 			// 
 			// SignUpForm1
 			// 
@@ -365,8 +370,25 @@ namespace WinFormServer {
 		MarshalString(gunaTextBox3->Text, str3);
 		bool check_username = Let_Username_API(ch, str1);
 		bool check_password = Let_Username_API(ch, str2);
-		
-		if (check_username == false)
+		if (gunaTextBox1->Text == "")
+		{
+			label3->Text = L"نام کاربری را وارد نمایید";
+			gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+			timer1->Start();
+		}
+		else if (gunaTextBox2->Text == "")
+		{
+			label3->Text = L"رمز عبور را وارد نمایید";
+			gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+			timer1->Start();
+		}
+		else if (gunaTextBox3->Text == "")
+		{
+			label3->Text = L"رمز عبور را وارد نمایید";
+			gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+			timer1->Start();
+		}
+		else if (check_username == false)
 		{
 			label3->Text = L"فرمت نام کاربری اشتباه وارد شده است";
 			gunaTransition1->ShowSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
@@ -392,12 +414,12 @@ namespace WinFormServer {
 		}
 		else
 		{
-			form_email = gcnew EmailForm(mainpanel, gunaTextBox1->Text, gunaTextBox2->Text);
+			form_email = gcnew EmailForm(mainpanel, gunaTextBox1->Text, gunaTextBox2->Text,db1);
 			mainpanel->Controls->Clear();
 			mainpanel->Controls->Add(form_email);
 		}
 
-		gunaTransition1->HideSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+	
 
 
 	}
@@ -414,5 +436,16 @@ private: System::Void gunaLabel1_Click(System::Object^ sender, System::EventArgs
 {
 	mainpanel->Visible = false;
 }
+private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e)
+{
+	time++;
+	if (time == 1)
+	{
+		timer1->Stop();
+		time = 0;
+		gunaTransition1->HideSync(panel1, true, Guna::UI::Animation::Animation::Leaf);
+	}
+}
+
 };
 }
