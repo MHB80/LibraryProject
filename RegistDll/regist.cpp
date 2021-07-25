@@ -16,13 +16,13 @@ bool User::Let(string name)
 }
 bool User::Let_Username(string Username)
 {
-	if (Username.length() < 2)
+	if (Username.length() < 6)
 	{
 		return false;
 	}
 	for (auto achar : Username)//for(int i=0;i<username.lengh;i++)
 	{
-		if (!((achar >= 'A' && achar <= 'Z') || (achar >= 'a' && achar <= 'z')))
+		if (!((achar >= 'A' && achar <= 'Z') || (achar >= 'a' && achar <= 'z')||(achar >= '0' && achar <= '9')|| achar==33|| achar==40|| achar==41|| achar==46|| achar==64))
 		{
 			return false;
 		}
@@ -37,7 +37,7 @@ bool User::Let_Password(string Password)
 	}
 	for (auto achar : Password)
 	{
-		if (!((achar >= 'A' && achar <= 'Z') || (achar >= 'a' && achar <= 'z') || (achar >= '0' && achar <= '9')))
+		if (!((achar >= 'A' && achar <= 'Z') || (achar >= 'a' && achar <= 'z') || (achar >= '0' && achar <= '9') || achar == 33 || achar == 40 || achar == 41 || achar == 46 || achar == 64))
 		{
 			return false;
 		}

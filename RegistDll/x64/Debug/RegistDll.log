@@ -2,14 +2,14 @@
   dllmain.cpp
   regist.cpp
   Source.cpp
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.cpp(8,1): warning C4273: 'CreatObject': inconsistent dll linkage
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.h(15,25): message : see previous definition of 'CreatObject'
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.cpp(13,1): warning C4273: 'Regist_API': inconsistent dll linkage
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.h(16,24): message : see previous definition of 'Regist_API'
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.cpp(20,1): warning C4273: 'Let_Username_API': inconsistent dll linkage
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.h(17,24): message : see previous definition of 'Let_Username_API'
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.cpp(24,1): warning C4273: 'Let_Password_API': inconsistent dll linkage
-C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\RegistDll\Source.h(18,24): message : see previous definition of 'Let_Password_API'
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.cpp(8,1): warning C4273: 'CreatObject': inconsistent dll linkage
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.h(15,25): message : see previous definition of 'CreatObject'
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.cpp(13,1): warning C4273: 'Regist_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.h(16,24): message : see previous definition of 'Regist_API'
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.cpp(20,1): warning C4273: 'Let_Username_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.h(17,24): message : see previous definition of 'Let_Username_API'
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.cpp(24,1): warning C4273: 'Let_Password_API': inconsistent dll linkage
+C:\Users\veniz\Desktop\example\LibraryProject-master\RegistDll\Source.h(18,24): message : see previous definition of 'Let_Password_API'
   Generating Code...
-     Creating library C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.lib and object C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.exp
-  RegistDll.vcxproj -> C:\Users\veniz\Desktop\New folder (5)\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.dll
+     Creating library C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.lib and object C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.exp
+  RegistDll.vcxproj -> C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\x64\Debug\RegistDll.dll
