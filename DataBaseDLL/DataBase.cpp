@@ -2,6 +2,12 @@
 #include "DataBase.h"
 #include <iostream>
 #include"nlohmann/json.hpp"
+#include <string>
+
+#include <codecvt>
+#include <locale>
+
+
 #pragma comment(lib,"sqlite3.lib")
 using json = nlohmann::json;
 
@@ -18,6 +24,14 @@ static int my_special_callback(void* unused, int count, char** data, char** colu
 	printf("\n");
 
 	return 0;
+}
+string DataBase::convert_string_to_wstring(wstring a)
+{
+	return   std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(a);
+}
+wstring DataBase::convert_wstring_to_string(string a)
+{
+	return   wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(a);
 }
 
 
@@ -120,8 +134,17 @@ void DataBase::InsertList(int productid, int listid, bool ThrowExc )
 	if (res != SQLITE_DONE && ThrowExc)
 		ThrowError(db);
 }
-void DataBase::InsertProduct(int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilpicture,bool ThrowExc)
+void DataBase::InsertProduct(int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price,wstring pathfilpicture,bool ThrowExc)
 {
+	std::wstring input_wstr = name;
+	std::string name_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(input_wstr);
+	std::string filename_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(filename);
+	std::string bookdescription_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(bookdescription);
+	std::string writer_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(writer);
+	std::string genre_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(genre);
+	std::string score_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(score);
+	std::string price_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(price);
+	std::string pathfilpicture_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(pathfilpicture);
 	ifstream size_file(filename, ios::binary);
 	long long int size = size_file.seekg(0,ios::end).tellg();
 	size_file.seekg(0);
@@ -147,7 +170,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 2, name.c_str(), name.size() , nullptr);
+	res = sqlite3_bind_text(stmt, 2, name_string.c_str(), name_string.size() , nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -161,42 +184,42 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 4, filename.c_str() , filename.size(),nullptr);
+	res = sqlite3_bind_text(stmt, 4, filename_string.c_str() , filename_string.size(),nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 5, bookdescription.c_str(), bookdescription.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 5, bookdescription_string.c_str(), bookdescription_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 6, writer.c_str(), writer.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 6, writer_string.c_str(), writer_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 7, genre.c_str(), genre.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 7, genre_string.c_str(), genre_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 8, score.c_str(), score.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 8, score_string.c_str(), score_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 9, price.c_str(), price.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 9, price_string.c_str(), price_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -217,7 +240,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 12, pathfilpicture.c_str(), pathfilpicture.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 12, pathfilpicture_string.c_str(), pathfilpicture_string.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -243,7 +266,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 	{
 		ThrowError(SQLITE_OK);
 	}
-	ifstream picture_1(filename, ios::binary);
+	ifstream picture_1(filename_string, ios::binary);
 	long long int index = 0;
 	const int Buffer_Size = 20 * 1024;
 	if (picture_1.is_open())
@@ -288,7 +311,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 	{
 		ThrowError(SQLITE_OK);
 	}
-	ifstream picture_2(pathfilpicture, ios::binary);
+	ifstream picture_2(pathfilpicture_string, ios::binary);
 	long long int index1 = 0;
 	const int Buffer_Size1 = 20 * 1024;
 	if (picture_2.is_open())
@@ -322,7 +345,7 @@ void DataBase::InsertProduct(int id, string name, string filename, string bookde
 
 }
 
-void DataBase::ReplaceProduct(int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilpicture, bool ThrowExc)
+void DataBase::ReplaceProduct(int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price, wstring pathfilpicture, bool ThrowExc)
 {
 	ifstream size_file(filename, ios::binary);
 	long long int size = size_file.seekg(0, ios::end).tellg();
@@ -349,7 +372,7 @@ void DataBase::ReplaceProduct(int id, string name, string filename, string bookd
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 2, name.c_str(), name.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 2, convert_string_to_wstring( name).c_str(), convert_string_to_wstring( name).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -363,42 +386,42 @@ void DataBase::ReplaceProduct(int id, string name, string filename, string bookd
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 4, filename.c_str(), filename.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 4, convert_string_to_wstring(filename).c_str(), convert_string_to_wstring(filename).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 5, bookdescription.c_str(), bookdescription.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 5, convert_string_to_wstring(bookdescription).c_str(), convert_string_to_wstring(bookdescription).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 6, writer.c_str(), writer.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 6, convert_string_to_wstring(writer).c_str(), convert_string_to_wstring(writer).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 7, genre.c_str(), genre.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 7, convert_string_to_wstring(genre).c_str(), convert_string_to_wstring(genre).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 8, score.c_str(), score.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 8, convert_string_to_wstring(score).c_str(), convert_string_to_wstring(score).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 9, price.c_str(), price.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 9, convert_string_to_wstring(price).c_str(), convert_string_to_wstring(price).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -419,7 +442,7 @@ void DataBase::ReplaceProduct(int id, string name, string filename, string bookd
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 12, pathfilpicture.c_str(), pathfilpicture.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 12, convert_string_to_wstring(pathfilpicture).c_str(), convert_string_to_wstring(pathfilpicture).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -546,7 +569,7 @@ int DataBase::GetProductRowId(int id, bool ThrowExc)
 }
 
 
-int DataBase::GetProductId(string name, bool ThrowExc )
+int DataBase::GetProductId(wstring name, bool ThrowExc )
 {
 	const char* sql = "Select ID from product where Name == ?";
 	sqlite3_stmt* stmt;
@@ -557,7 +580,7 @@ int DataBase::GetProductId(string name, bool ThrowExc )
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, convert_string_to_wstring(name).c_str(), convert_string_to_wstring(name).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -628,11 +651,17 @@ void DataBase::WriteProductFile(sqlite3_blob* file, char* Buffer, long long Size
 		throw exception("Error");
 	}
 }
-void DataBase::GetProductFile(string name, string path)
+void DataBase::GetProductFile(wstring name, wstring path)
 {
 //	int rowid = GetProductRowId(id);
-	int rowid=GetUsernameProductRowId(name,true);
-	sqlite3_blob* file = OpenProductFile(rowid, 1);
+	string a = convert_string_to_wstring(name);
+	int rowid=GetUsernameProductRowId(a,true);
+	sqlite3_blob* file = nullptr;
+	int res = sqlite3_blob_open(db, "main", "Product", "PictureFile", rowid, true, &file);
+	if (res != SQLITE_OK && true)
+	{
+		ThrowError(SQLITE_OK);
+	}
 	long long size = sqlite3_blob_bytes(file);
 	long long index = 0;
 	const int buffersize = 20 * 1024;
@@ -651,11 +680,12 @@ void DataBase::GetProductFile(string name, string path)
 	}
 	ofs.close();
 	CloseProductFile(file);
+
 }
-void DataBase::GetProductFile2(string name, string path)
+void DataBase::GetProductFile2(wstring name, wstring path)
 {
 	//	int rowid = GetProductRowId(id);
-	int rowid = GetUsernameProductRowId(name, true);
+	int rowid = GetUsernameProductRowId(convert_string_to_wstring(name), true);
 	sqlite3_blob* file = OpenProductFile2(rowid, 1);
 	long long size = sqlite3_blob_bytes(file);
 	long long index = 0;
@@ -698,6 +728,7 @@ int DataBase::GetUsernameProductRowId(string name, bool ThrowExc)
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
+
 	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
@@ -706,15 +737,18 @@ int DataBase::GetUsernameProductRowId(string name, bool ThrowExc)
 		ThrowError(db);
 	}
 	res = sqlite3_step(stmt);
-	return sqlite3_column_int(stmt, 0);
+	int a = sqlite3_column_int(stmt, 0);
+	sqlite3_finalize(stmt);
+	return a;
+
 
 }
 
 
 #pragma region Select-client
-void DataBase::Select_Product(string name)
+void DataBase::Select_Product(wstring name)
 {
-
+	string name1 = convert_string_to_wstring(name);
 	bool ThrowExc = true;
 	const char* sql = "Select * from Product Where Name == ?";
 	sqlite3_stmt* stmt;
@@ -725,7 +759,7 @@ void DataBase::Select_Product(string name)
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, name.c_str(), name.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, name1.c_str(), name1.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -756,10 +790,72 @@ void DataBase::Select_Product(string name)
 	
 }
 #pragma endregion
+void DataBase::DeleteProduct(wstring name)
+{
+	string name1 = convert_string_to_wstring(name);
+	Lock();
+	sqlite3_stmt* stmt;
+	bool ThrowExc = true;
+	const char* sql = "DELETE FROM Product WHERE Name == ?; ";
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, name1.c_str(), name1.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	UnLock();
+}
 
 
-
-
+bool DataBase::checknamebook(wstring name)
+{
+	std::string name_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(name);
+	Lock();
+	sqlite3_stmt* stmt;
+	bool ThrowExc = true;
+	const char* sql = "Select Name from Product where Name == ?;";
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, name_string.c_str(), name_string.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	if (reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0)) == NULL)
+	{
+		sqlite3_finalize(stmt);
+		UnLock();
+		return false;
+	}
+	else
+	{
+		string username_main = string(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0)));
+		sqlite3_finalize(stmt);
+		UnLock();
+		if (username_main == name_string)
+		{
+			return true;
+		}
+	}
+}
 
 
 
@@ -936,7 +1032,7 @@ bool  DataBase::InsertAdmin(string username, string password,string Email,string
 
 
 		sqlite3_blob* file = nullptr;
-		res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", GetUsernametRowId(username, true), 1, &file);
+		res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", GetUsernametRowId_string(username, true), 1, &file);
 		if (res != SQLITE_OK && ThrowExc)
 		{
 			ThrowError(SQLITE_OK);
@@ -974,49 +1070,6 @@ bool  DataBase::InsertAdmin(string username, string password,string Email,string
 		CloseProductFile(file, true);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		return true;
 	}
 	else
@@ -1024,9 +1077,27 @@ bool  DataBase::InsertAdmin(string username, string password,string Email,string
 		return false;
 	}
 }
-void  DataBase::InsertAdmin_Other(string FirstName, string LastName, string mobilenumber, string address, string postcodehome, bool ThrowExc)
+void  DataBase::InsertAdmin_Other(wstring username ,wstring FirstName, wstring LastName, wstring mobilenumber, wstring address, wstring postcodehome, bool ThrowExc)
 {
-	const char* sql = "INSERT INTO Server (FirstName,LastName,MobileNumber,Address, PostcodeHome)VALUES(?, ?,?,?,?);";
+
+	string username2 = convert_string_to_wstring(username);
+	string FirstName2 = convert_string_to_wstring(FirstName);
+	string LastName2 = convert_string_to_wstring(LastName);
+	string mobilenumber2 = convert_string_to_wstring(mobilenumber);
+	string address2 = convert_string_to_wstring(address);
+	string postcodehome2 = convert_string_to_wstring(postcodehome);
+
+
+
+
+
+
+
+
+
+
+
+	const char* sql = "update Server set FirstName = ?,LastName = ?,MobileNumber = ?,Address = ?, PostcodeHome = ? where Username == ?;";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	if (res != SQLITE_OK && ThrowExc)
@@ -1035,35 +1106,42 @@ void  DataBase::InsertAdmin_Other(string FirstName, string LastName, string mobi
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, FirstName.c_str(), FirstName.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, FirstName2.c_str(), FirstName2.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 2, LastName.c_str(), LastName.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 2, LastName2.c_str(), LastName2.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 3, mobilenumber.c_str(), mobilenumber.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 3, mobilenumber2.c_str(), mobilenumber2.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 4, address.c_str(), address.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 4, address2.c_str(), address2.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 5, postcodehome.c_str(), postcodehome.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 5, postcodehome2.c_str(), postcodehome2.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 6, username2.c_str(), username2.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -1076,8 +1154,31 @@ void  DataBase::InsertAdmin_Other(string FirstName, string LastName, string mobi
 	if (res != SQLITE_DONE && ThrowExc)
 		ThrowError(db);
 }
-int  DataBase::GetUsernametRowId(string username, bool ThrowExc)
+int  DataBase::GetUsernametRowId(wstring username, bool ThrowExc)
 {
+	std::string username_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(username);
+	const char* sql = "Select rowid from Server where Username == ?";
+	sqlite3_stmt* stmt;
+	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_bind_text(stmt, 1, username_string.c_str(), username_string.size(), nullptr);
+	if (res != SQLITE_OK && ThrowExc)
+	{
+		UnLock();
+		sqlite3_finalize(stmt);
+		ThrowError(db);
+	}
+	res = sqlite3_step(stmt);
+	return sqlite3_column_int(stmt, 0);
+}
+int  DataBase::GetUsernametRowId_string(string username, bool ThrowExc)
+{
+	
 	const char* sql = "Select rowid from Server where Username == ?";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
@@ -1111,8 +1212,9 @@ sqlite3_blob* DataBase::OpenProductFileforserver(int rowid, bool readonly, bool 
 #pragma region Update_Server
 void DataBase::UpdateServerUsername(string usernamelast, string usernamenew, bool ThrowExc)
 {
+	
 	Lock();
-	const char* sql = "UPDATE Server set Username = ? where Username = ?;";
+	const char* sql = "UPDATE Server set Username = ? where Username = ? ;";
 	sqlite3_stmt* stmt;
 	int res = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	if (res != SQLITE_OK && ThrowExc)
@@ -1296,7 +1398,7 @@ bool DataBase::Check_Admin_Username(string username,string password ,bool ThrowE
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, username.c_str(), username.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1,username.c_str(),username.size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -1318,7 +1420,7 @@ bool DataBase::Check_Admin_Username(string username,string password ,bool ThrowE
 		
 	}
 }
-bool DataBase::Change_Admin_Password(string passwordlast, string passwordnew, bool ThrowExc)
+bool DataBase::Change_Admin_Password(wstring passwordlast, wstring passwordnew, bool ThrowExc)
 {
 	Lock();
 	const char* sql = "UPDATE Server set Password = ? where Password = ?;";
@@ -1330,14 +1432,14 @@ bool DataBase::Change_Admin_Password(string passwordlast, string passwordnew, bo
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, passwordnew.c_str(), passwordnew.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, convert_string_to_wstring(passwordnew).c_str(), convert_string_to_wstring(passwordnew).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, passwordlast.c_str(), passwordlast.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, convert_string_to_wstring(passwordlast).c_str(), convert_string_to_wstring(passwordlast).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -1352,8 +1454,9 @@ bool DataBase::Change_Admin_Password(string passwordlast, string passwordnew, bo
 }
 #pragma endregion
 #pragma region Profile_Picture
-void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc)
+void  DataBase::Set_Profile_Picture(wstring path, wstring username, bool ThrowExc)
 {
+	
 	ifstream size_file(path, ios::binary);
 	long long int size = size_file.seekg(0, ios::end).tellg();
 	size_file.seekg(0);
@@ -1368,7 +1471,7 @@ void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc)
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 1, username.c_str(), username.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 1, convert_string_to_wstring(username).c_str(), convert_string_to_wstring(username).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -1382,7 +1485,7 @@ void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc)
 		sqlite3_finalize(stmt);
 		ThrowError(db);
 	}
-	res = sqlite3_bind_text(stmt, 3, path.c_str(), path.size(), nullptr);
+	res = sqlite3_bind_text(stmt, 3, convert_string_to_wstring(path).c_str(), convert_string_to_wstring( path).size(), nullptr);
 	if (res != SQLITE_OK && ThrowExc)
 	{
 		UnLock();
@@ -1452,10 +1555,11 @@ void  DataBase::Set_Profile_Picture(string path, string username, bool ThrowExc)
 
 
 }
-void  DataBase::Get_Profile_Picture(string username, string path , bool ThrowExc)
+void  DataBase::Get_Profile_Picture(wstring username, wstring path , bool ThrowExc)
 {
 	int rowid = GetUsernametRowId(username,true);
 	sqlite3_blob* file = nullptr;
+	
 	int res = sqlite3_blob_open(db, "main", "Server", "PictureProfile", GetUsernametRowId(username, true), 1, &file);
 	if (res != SQLITE_OK && ThrowExc)
 	{
@@ -1465,8 +1569,8 @@ void  DataBase::Get_Profile_Picture(string username, string path , bool ThrowExc
 	long long index = 0;
 	const int buffersize = 20 * 1024;
 	char Buffer[buffersize];
-	string Path = path + "\\" + to_string(GetUsernametRowId(username,true));
-	ofstream picture_1(Path, ios::binary);
+;
+	ofstream picture_1(path, ios::binary);
 	if (picture_1.good())
 	{
 		while (index < size)

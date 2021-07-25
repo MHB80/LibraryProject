@@ -1,7 +1,15 @@
+
+#include <string>
+#include <codecvt>
+#include <locale>
 #include "pch.h"
+#include <iostream>
+#include <string>
+#include <locale>
+#include <codecvt>
 #include "DataBaseDllSource.h"
 #pragma comment(lib,"sqlite3.lib")
-
+using namespace std;
 
 DataBase* CreateObject_API()
 {
@@ -21,43 +29,54 @@ void KillObject_API(DataBase* db)
 }
 
 
-void InsertProduct_API(DataBase* db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilpicture)
+void InsertProduct_API(DataBase* db, int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price,wstring pathfilpicture)
 {
 	db->InsertProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
 }
-void ReplaceProduct_API(DataBase* db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilpicture)
+void ReplaceProduct_API(DataBase* db, int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price, wstring pathfilpicture)
 {
 	db->ReplaceProduct(id, name, filename, bookdescription, writer, genre, score, price, pathfilpicture, true);
 }
-void Select_Product_API(DataBase* db, string name)
+void Select_Product_API(DataBase* db, wstring name)
 {
 	db->Select_Product(name);
 }
-void GetProductFile(DataBase* db, string name, string path)
+void GetProductFile(DataBase* db, wstring name, wstring path)
 {
 	db->GetProductFile(name, path);
 }
-void GetProductFile2(DataBase* db, string name, string path)
+void GetProductFile2(DataBase* db, wstring name, wstring path)
 {
 	db->GetProductFile2(name, path);
 }
-int GetProductId(DataBase* db, string name)
+int GetProductId(DataBase* db, wstring name)
 {
 	return db->GetProductId(name, true);
 }
+
+bool checknamebook(DataBase* db, wstring name)
+{
+	return db->checknamebook(name);
+ }
+
+void DeleteProduct(DataBase* db, wstring name)
+{
+	db->DeleteProduct(name);
+}
+
 #pragma region Insertion_server
 bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path)
 {
 	return db->InsertAdmin(username, password,Email,path, true);
 }
-int GetUsernametRowId_API(DataBase* db, string username)
+int GetUsernametRowId_API(DataBase* db, wstring username)
 {
 	
 	return db->GetUsernametRowId(username, true);
 }
-void InsertAdmin_Other_API(DataBase* db, string FirstName, string LastName, string mobilenumber, string address, string postcodehome)
+void InsertAdmin_Other_API(DataBase* db,wstring username, wstring FirstName, wstring LastName, wstring mobilenumber, wstring address, wstring postcodehome)
 {
-	db->InsertAdmin_Other(FirstName, LastName, mobilenumber, address, postcodehome, true);
+	db->InsertAdmin_Other(username ,FirstName, LastName, mobilenumber, address, postcodehome, true);
 }
 #pragma endregion
 #pragma region Update_Server
@@ -85,11 +104,11 @@ bool Check_Admin_Username_API(DataBase* db, string username, string password)
 	return db->Check_Admin_Username(username, password, true);
 }
 #pragma region Profile_Picture
-void Set_Profile_Picture_API(DataBase* db, string path, string username )
+void Set_Profile_Picture_API(DataBase* db, wstring path, wstring username )
 {
 	db->Set_Profile_Picture(path, username,true);
 }
-void Get_Profile_Picture_API(DataBase* db, string username, string path)
+void Get_Profile_Picture_API(DataBase* db, wstring username, wstring path)
 {
 	db->Get_Profile_Picture(username, path, true);
 }
@@ -100,11 +119,17 @@ void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string
 #pragma endregion
 
 //other
-void send_FW(int a,string &str)
+void send_FW(int a,wstring &str)
 {
 	ifstream read("..\\temp.txt");
 	string text;
-	read >> text;
+	
+	while (!read.eof())
+	{
+		char a;
+		read.get(a);
+		text += a;
+	}
 	int start;
 	int end;
 	string str1;
@@ -117,5 +142,7 @@ void send_FW(int a,string &str)
 			str1 = text.substr(start+2, end - start-2);
 		}
 	}
-	str = str1;
+	read.close();
+	DataBase ab;
+	str=ab.convert_wstring_to_string(str1);
 }

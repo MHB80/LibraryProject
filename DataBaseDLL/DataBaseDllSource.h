@@ -1,5 +1,6 @@
 #pragma once
 #pragma once
+
 #include<iostream>
 #include<string>
 #include"DataBase.h"
@@ -23,20 +24,25 @@ extern "C" UIAPI DataBase * CreateObject_API();
 extern "C" UIAPI void KillObject_API(DataBase * db);
 
 
-extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price,string pathfilepicture);
-extern "C" UIAPI void ReplaceProduct_API(DataBase * db, int id, string name, string filename, string bookdescription, string writer, string genre, string score, string price, string pathfilepicture);
-extern "C" UIAPI void Select_Product_API(DataBase * db, string name);
+extern "C" UIAPI void InsertProduct_API(DataBase * db, int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price,wstring pathfilepicture);
+extern "C" UIAPI void ReplaceProduct_API(DataBase * db, int id, wstring name, wstring filename, wstring bookdescription, wstring writer, wstring genre, wstring score, wstring price, wstring pathfilepicture);
+extern "C" UIAPI void Select_Product_API(DataBase * db, wstring name);
 
-extern "C" UIAPI void GetProductFile(DataBase * db, string name, string path);
+extern "C" UIAPI void GetProductFile(DataBase * db, wstring name, wstring path);
 
-extern "C" UIAPI void GetProductFile2(DataBase * db, string name, string path);
+extern "C" UIAPI void GetProductFile2(DataBase * db, wstring name, wstring path);
 
-extern "C" UIAPI int GetProductId(DataBase * db, string name);
+extern "C" UIAPI int GetProductId(DataBase * db, wstring name);
+extern "C" UIAPI bool checknamebook(DataBase * db, wstring name);
+
+
+extern "C" UIAPI void DeleteProduct(DataBase * db, wstring name);
+
 
 #pragma region Insertion_server
 extern "C" UIAPI bool InsertAdmin_API(DataBase* db, string username, string password,string Email, string path);
-extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, string username);
-extern "C" UIAPI void InsertAdmin_Other_API(DataBase * db,string FirstName, string LastName, string mobilenumber, string address, string postcodehome);
+extern "C" UIAPI int GetUsernametRowId_API(DataBase* db, wstring username);
+extern "C" UIAPI void InsertAdmin_Other_API(DataBase * db,wstring username ,wstring FirstName, wstring LastName, wstring mobilenumber, wstring address, wstring postcodehome);
 #pragma endregion
 #pragma region Update_Server
 extern "C" UIAPI void UpdateServerUsername_API(DataBase* db, string usernamelast, string usernamenew);
@@ -48,8 +54,8 @@ extern "C" UIAPI bool Signup_Admin_Password_API(DataBase* db, string password);
 extern "C" UIAPI bool Check_Admin_Username_API(DataBase * db, string username, string password);
 #pragma endregion
 #pragma region Profile_Picture
-extern "C" UIAPI void Set_Profile_Picture_API(DataBase* db, string path, string username);
-extern "C" UIAPI void Get_Profile_Picture_API(DataBase* db, string username, string path);
+extern "C" UIAPI void Set_Profile_Picture_API(DataBase* db, wstring path, wstring username);
+extern "C" UIAPI void Get_Profile_Picture_API(DataBase* db, wstring username, wstring path);
 extern "C" UIAPI void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string username, string filenmaeprofilepicture);
 #pragma endregion
 
@@ -59,7 +65,7 @@ extern "C" UIAPI void Set_Server_FileNmaeProfilePicture_API(DataBase* db, string
 
 
 //other
-extern "C" UIAPI void send_FW(int a,string &str);
+extern "C" UIAPI void send_FW(int a,wstring &str);
 
 
 
