@@ -1,13 +1,42 @@
 ﻿  MainForm.cpp
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\MainForm.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\search.h(1267,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\search.h(1283,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(893,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(901,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(909,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\search.h(1267,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\search.h(1283,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\setting.h(978,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\setting.h(986,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\ChangeBookForm.h(926,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\ChangeBookForm.h(935,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(124,1): warning C4358: '+=': return type of combined delegates is not 'void'; returned value is undefined
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(751,32): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(41,43): warning C4677: 'Event_UIChangeProgress': signature of non-private member contains assembly private type 'UIChangeProgress'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(42,33): warning C4677: 'Event_UINewClient': signature of non-private member contains assembly private type 'UINewClient'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(43,35): warning C4677: 'Event_UINewRecieve': signature of non-private member contains assembly private type 'UINewRecieve'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(1257,77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   MyForm.cpp
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\EmailForm.h(391,22): warning C4101: 'error': unreferenced local variable
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\MainForm.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\search.h(1267,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\search.h(1283,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\MyForm.h(524,23): warning C4101: 'excep': unreferenced local variable
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\EmailForm.h(495,22): warning C4101: 'error': unreferenced local variable
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(893,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(901,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\Insertbook.h(909,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\search.h(1267,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\search.h(1283,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\setting.h(978,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\setting.h(986,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\ChangeBookForm.h(926,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\ChangeBookForm.h(935,10): warning C4244: 'initializing': conversion from 'wchar_t' to 'char', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(124,1): warning C4358: '+=': return type of combined delegates is not 'void'; returned value is undefined
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(751,32): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(41,43): warning C4677: 'Event_UIChangeProgress': signature of non-private member contains assembly private type 'UIChangeProgress'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(42,33): warning C4677: 'Event_UINewClient': signature of non-private member contains assembly private type 'UINewClient'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(43,35): warning C4677: 'Event_UINewRecieve': signature of non-private member contains assembly private type 'UINewRecieve'
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MainForm.h(1257,77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\MyForm.h(583,23): warning C4101: 'excep': unreferenced local variable
+  SocketForm.cpp
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(124,1): warning C4358: '+=': return type of combined delegates is not 'void'; returned value is undefined
+C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\SocketForm.h(751,32): warning C4553: '==': result of expression not used; did you intend '='?
   Generating Code...
   ChangeBookForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  WinFormServer.vcxproj -> C:\Users\veniz\Desktop\LibraryProject-master\WinFormServer\x64\Debug\WinFormServer.exe
+  WinFormServer.vcxproj -> C:\Users\veniz\Desktop\example\LibraryProject-master\WinFormServer\x64\Debug\WinFormServer.exe

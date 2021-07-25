@@ -1,4 +1,5 @@
   WinFormServer.ChangeBookForm.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.databaseform.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.EmailForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.Insertbook.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.MainForm.resources - Embedded, ContainedInManifestFile, 
@@ -7,6 +8,7 @@
   WinFormServer.setting.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.SignUpForm.resources - Embedded, ContainedInManifestFile, 
   WinFormServer.SignUpForm1.resources - Embedded, ContainedInManifestFile, 
+  WinFormServer.SocketForm.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly WinFormServer, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -42,12 +44,24 @@ Assembly AxInterop.AcroPDFLib.1.0, Version=1.0.*, Culture=Invariant Language (In
 	hash=None, flags=None
 Class WinFormServer.ChangeBookForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
+    IntPtr db : Public
     System.Windows.Forms.Panel mainpanel : Public
+    System.Diagnostics.Process proc IsByValue : Public, InitOnly
+    System.String pathfile : Public
+    System.String pathpicture : Public
+    System.Threading.Thread Browsfile : Public
+    System.Threading.Thread browsepicture : Public
+    System.Windows.Forms.DialogResult dr : Public
+    System.String namebook : Public
+    Int32 time : Public, Static
+Class WinFormServer.databaseform: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class WinFormServer.EmailForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel, System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, System.String, System.String, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.String username : Public
     System.String password : Public
@@ -55,9 +69,10 @@ Class WinFormServer.EmailForm: AutoLayout, AnsiClass, Class, Public, BeforeField
     System.String code1 : Public
     IntPtr db1 : Public
     System.String pathpicture : Public
+    Int32 time : Public, Static
 Class WinFormServer.Insertbook: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel, System.Windows.Forms.Panel, System.Windows.Forms.Label): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     IntPtr db : Public
     System.Windows.Forms.Panel mainpanel : Public
@@ -67,6 +82,7 @@ Class WinFormServer.Insertbook: AutoLayout, AnsiClass, Class, Public, BeforeFiel
     System.String address_file : Public
     System.String address_picture : Public
     System.Windows.Forms.Label ErrorText_panel : Public
+    Int32 time : Public, Static
 Class WinFormServer.search: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -74,29 +90,67 @@ Class WinFormServer.search: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     System.Windows.Forms.Panel mainpanel : Public
 Class WinFormServer.setting: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel, System.Windows.Forms.Panel, System.Windows.Forms.Label): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, IntPtr, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     IntPtr db : Public
     System.Windows.Forms.Panel mainpanel : Public
-    System.Windows.Forms.Panel Error_panel : Public
-    System.Windows.Forms.Label ErrorText_panel : Public
+    System.String usernamepast : Public
+    IntPtr rg : Public
+    Int32 timer : Public, Static
+Class WinFormServer.SocketForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Rigster(): PrivateScope, Public, HideBySig
 Class WinFormServer.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
+    UIChangeProgress Event_UIChangeProgress : Public
+    UINewClient Event_UINewClient : Public
+    UINewRecieve Event_UINewRecieve : Public
+    IntPtr db : Public
     WinFormServer.search form_searchpanel : Public
     WinFormServer.setting form_settingpanel : Public
     WinFormServer.ChangeBookForm form_changebookform : Public
     WinFormServer.Insertbook form_insertbook : Public
-    System.Media.SoundPlayer music : Public
+    System.Media.SoundPlayer music1 : Public
+    System.Media.SoundPlayer music2 : Public
+    System.Globalization.PersianCalendar Date_form IsByValue : Public, InitOnly
+    System.DateTime dt : Public
+    System.String year : Public
+    System.String mounth : Public
+    System.String day : Public
+    Boolean IsRunning : Public
+    Boolean IsTransfer : Public
+    System.String username : Public
+    WinFormServer.SocketForm form_socket : Public
+    System.Random RandString1 : Public
+    System.Random RandString2 : Public
+    System.Random RandString3 : Public
+    System.Random RandString4 : Public
+    System.Random RandString5 : Public
+    System.Random RandString6 : Public
+    System.Random RandString7 : Public
+    System.Random RandString8 : Public
+    System.Random RandString9 : Public
+    System.Random RandString10 : Public
+    System.Random RandString11 : Public
+    System.Random RandString12 : Public
+    System.Random RandString13 : Public
+    System.Random RandString14 : Public
+    System.Random RandString15 : Public
+    System.Random RandString16 : Public
+    Int32 time : Public, Static
 Class WinFormServer.SignUpForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
-    Void .ctor(System.Windows.Forms.Panel): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Windows.Forms.Panel, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class WinFormServer.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     IntPtr db : Public
+    IntPtr db1 : Public
 Class WinFormServer.SignUpForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
